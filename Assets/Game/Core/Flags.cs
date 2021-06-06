@@ -9,5 +9,3 @@ public enum EntityFlag
     Passive,
     PassiveAggressive
 }
-
-
