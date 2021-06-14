@@ -5,29 +5,27 @@ using UnityEngine.AI;
 
 public class Entity : MonoBehaviour
 {
+    [Header("Base")]
     public string Name = "";
     public EntityFlag Flag = EntityFlag.Friendly;
+    [Header("Attributes")]
+    public Health Health;
 
-    NavMeshAgent entityAgent;
-    CapsuleCollider entityCollider;
-    Animator entityAnimator;
+    protected NavMeshAgent entityAgent;
+    protected Animator entityAnimator;
 
     Vector3 lastPosition;
     float speed;
 
     void Awake()
     {
-        entityCollider = GetComponent<CapsuleCollider>();
         entityAgent = GetComponent<NavMeshAgent>();
         entityAnimator = GetComponent<Animator>();
-
-        entityAnimator.SetInteger("WeaponType_int", 0);
-        entityAnimator.SetInteger("MeleeType_int", 0);
     }
 
     void Update()
     {
-        entityAnimator.SetFloat("Speed_f", GetSpeed());
+
     }
 
     public float GetSpeed()

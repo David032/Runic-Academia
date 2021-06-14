@@ -9,3 +9,11 @@ public enum EntityFlag
     Passive,
     PassiveAggressive
 }
+
+public enum WeaponType
+{
+    Melee1H,
+    Melee2H,
+    Bow,
+    Staff
+}
