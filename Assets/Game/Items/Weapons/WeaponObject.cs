@@ -2,22 +2,33 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponObject : MonoBehaviour
+public abstract class WeaponObject : MonoBehaviour
 {
     public new string name = "";
     public WeaponType Type = WeaponType.Melee1H;
     public int damage = 1;
-    public float cooldown = 1f;
+    public float cooldown = 1.5f;
+    public float attackDuration = 1;
 
-    // Start is called before the first frame update
-    void Start()
+    protected Animator entityAnimator;
+
+    private void Awake()
     {
-        
+        entityAnimator = GetComponentInParent<Animator>();
+    }
+    protected IEnumerator AttackSequence()
+    {
+        AttackStart();
+        yield return new WaitForSeconds(attackDuration);
+        AttackEnd();
+        yield return new WaitForSeconds(cooldown);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Attack() 
     {
-
+        StartCoroutine(AttackSequence());
     }
+    protected abstract void AttackStart();
+    protected abstract void AttackEnd();
+
 }

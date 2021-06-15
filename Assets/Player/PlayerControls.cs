@@ -14,6 +14,7 @@ public class PlayerControls : MonoBehaviour
     //Components & Systems
     Animator characterAnimator;
     CharacterController characterController;
+    WeaponObject characterWeapon;
     //Control Bits
     public Transform playerRoot;
     Vector2 look;
@@ -28,14 +29,15 @@ public class PlayerControls : MonoBehaviour
     public bool isWalking = false;
     //Objects
     public GameObject followTarget;
+    public GameObject equippedWeapon;
 
 
     void Awake()
     {
-        Cursor.lockState = CursorLockMode.Locked;
         characterAnimator = GetComponent<Animator>();
         characterController = GetComponent<CharacterController>();
-
+        equippedWeapon = GetComponentInChildren<WeaponObject>().gameObject;
+        characterWeapon = equippedWeapon.GetComponent<WeaponObject>();
     }
 
 
@@ -167,8 +169,8 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
+        characterWeapon.Attack();
     }
-
     public void OnInteract(InputAction.CallbackContext context)
     {
         if (context.performed)

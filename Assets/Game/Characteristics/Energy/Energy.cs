@@ -5,7 +5,7 @@ public abstract class Energy : MonoBehaviour
 {
     public int current
     {
-        get { return Mathf.Min(current, max); }
+        get { return current; }
         set
         {
             bool emptyBefore = current == 0;
