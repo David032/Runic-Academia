@@ -11,17 +11,22 @@ public abstract class WeaponObject : MonoBehaviour
     public float attackDuration = 1;
 
     protected Animator entityAnimator;
-
+    protected bool canAttack = true;
     private void Awake()
     {
         entityAnimator = GetComponentInParent<Animator>();
     }
     protected IEnumerator AttackSequence()
     {
-        AttackStart();
-        yield return new WaitForSeconds(attackDuration);
-        AttackEnd();
-        yield return new WaitForSeconds(cooldown);
+        if (canAttack)
+        {
+            canAttack = !canAttack;
+            AttackStart();
+            yield return new WaitForSeconds(attackDuration);
+            AttackEnd();
+            yield return new WaitForSeconds(cooldown);
+            canAttack = true;
+        }
     }
 
     public void Attack() 

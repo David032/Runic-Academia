@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     Animator characterAnimator;
     CharacterController characterController;
     WeaponObject characterWeapon;
+    Rigidbody characterRigid;
     //Control Bits
     public Transform playerRoot;
     Vector2 look;
@@ -35,7 +36,7 @@ public class PlayerControls : MonoBehaviour
     void Awake()
     {
         characterAnimator = GetComponent<Animator>();
-        characterController = GetComponent<CharacterController>();
+        characterRigid = GetComponent<Rigidbody>();
         equippedWeapon = GetComponentInChildren<WeaponObject>().gameObject;
         characterWeapon = equippedWeapon.GetComponent<WeaponObject>();
     }
@@ -43,7 +44,7 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        characterAnimator.SetFloat("Speed_f", GetSpeed());
+        characterAnimator.SetFloat("Speed_f", characterRigid.velocity.magnitude);
         Look(look);
         Move(move);
         Interact();
@@ -78,7 +79,8 @@ public class PlayerControls : MonoBehaviour
         float angle = Mathf.Atan2(heading.x, heading.z) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-        characterController.Move(heading);
+        characterRigid.velocity = new Vector3(MoveDirection.x, 
+            characterRigid.velocity.y, MoveDirection.z);
     }
 
     private void Look(Vector2 direction)

@@ -22,6 +22,10 @@ public class Health : Energy
         }
     }
 
+    public new void Awake()
+    {
+        base.Awake();
+    }
     public override int max
     {
         get
