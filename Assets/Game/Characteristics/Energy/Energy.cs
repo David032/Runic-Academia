@@ -3,16 +3,7 @@ using UnityEngine.Events;
 
 public abstract class Energy : MonoBehaviour
 {
-    public int current
-    {
-        get { return current; }
-        set
-        {
-            bool emptyBefore = current == 0;
-            current = Mathf.Clamp(value, 0, max);
-            if (current == 0 && !emptyBefore) onEmpty.Invoke();
-        }
-    }
+    public int current = 0;
     public abstract int max { get; }
     public bool spawnFull = true;
 
