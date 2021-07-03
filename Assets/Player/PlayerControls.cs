@@ -18,9 +18,10 @@ public class PlayerControls : MonoBehaviour
     Rigidbody characterRigid;
     //Control Bits
     public Transform playerRoot;
+    public bool isSprinting = false;
     Vector2 look;
     float rotationPower = 0.5f;
-    public float moveSpeed = 3f;
+    float moveSpeed = 3f;
     Vector3 lastPosition;
     float speed;
     Vector2 move;
@@ -79,8 +80,17 @@ public class PlayerControls : MonoBehaviour
         float angle = Mathf.Atan2(heading.x, heading.z) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
-        characterRigid.velocity = new Vector3(MoveDirection.x, 
-            characterRigid.velocity.y, MoveDirection.z);
+        if (isSprinting)
+        {
+            characterRigid.velocity = new Vector3(MoveDirection.x, 
+                characterRigid.velocity.y, MoveDirection.z) * 2;
+        }
+        else
+        {
+            characterRigid.velocity = new Vector3(MoveDirection.x,
+                characterRigid.velocity.y, MoveDirection.z);
+        }
+
     }
 
     private void Look(Vector2 direction)
@@ -183,6 +193,15 @@ public class PlayerControls : MonoBehaviour
         {
             isInteracting = false;
         }
+    }
+
+    public void OnSprintToggle(InputAction.CallbackContext context) 
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+        isSprinting = !isSprinting;
     }
     #endregion
 

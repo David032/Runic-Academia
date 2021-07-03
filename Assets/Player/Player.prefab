@@ -1171,6 +1171,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 55531df4-b8d8-40d5-8655-c118ab77ae24
     m_ActionName: Player/Attack[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8821901428976844252}
+        m_TargetAssemblyTypeName: PlayerControls, Assembly-CSharp
+        m_MethodName: OnSprintToggle
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 426232fd-d2aa-4c85-8d8b-1a4d20a6f535
+    m_ActionName: Player/New action
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1189,7 +1205,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRoot: {fileID: 8825242295058406063}
-  moveSpeed: 3
+  isSprinting: 0
   isInteracting: 0
   isWalking: 0
   followTarget: {fileID: 6365474528797996220}
@@ -1221,6 +1237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687d73646860ab44781fa2ae780e52d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  current: 0
   spawnFull: 1
   onEmpty:
     m_PersistentCalls:
