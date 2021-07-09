@@ -17,7 +17,7 @@ public class DialogueController : MonoBehaviour
                 (InteractionTypes.Person);
             transform.LookAt(other.transform);
             //Do dialogue things here?
-            //Set text
+            DialogueManager.Instance.SetDialogue(Dialogue.Contents);
             //Set icon
             //Show
         }
