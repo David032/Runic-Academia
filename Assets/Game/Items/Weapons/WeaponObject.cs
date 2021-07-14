@@ -21,10 +21,12 @@ public abstract class WeaponObject : MonoBehaviour
         if (canAttack)
         {
             canAttack = !canAttack;
+            GetComponent<Collider>().isTrigger = true;
             AttackStart();
             yield return new WaitForSeconds(attackDuration);
             AttackEnd();
             yield return new WaitForSeconds(cooldown);
+            GetComponent<Collider>().isTrigger = false;
             canAttack = true;
         }
     }
@@ -35,5 +37,13 @@ public abstract class WeaponObject : MonoBehaviour
     }
     protected abstract void AttackStart();
     protected abstract void AttackEnd();
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.GetComponent<Health>())
+        {
+            other.GetComponent<Health>().current -= damage;
+        } 
+    }
 
 }

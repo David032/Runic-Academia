@@ -29,6 +29,7 @@ public class PlayerControls : MonoBehaviour
     //States
     public bool isInteracting = false;
     public bool isWalking = false;
+    public bool canAct = true;
     //Objects
     public GameObject followTarget;
     public GameObject equippedWeapon;
@@ -157,12 +158,10 @@ public class PlayerControls : MonoBehaviour
     {
         move = context.ReadValue<Vector2>();
     }
-
     public void OnLook(InputAction.CallbackContext context)
     {
         look = context.ReadValue<Vector2>();
     }
-
     public void OnJump(InputAction.CallbackContext context)
     {
         if (!isGrounded)
@@ -171,7 +170,6 @@ public class PlayerControls : MonoBehaviour
         }
         StartCoroutine(jump());
     }
-
     IEnumerator jump()
     {
         characterAnimator.SetBool("Jump_b", true);
@@ -181,7 +179,10 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        characterWeapon.Attack();
+        if (canAct)
+        {
+            characterWeapon.Attack();
+        }
     }
     public void OnInteract(InputAction.CallbackContext context)
     {

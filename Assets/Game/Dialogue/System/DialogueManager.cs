@@ -10,14 +10,41 @@ public class DialogueManager : MonoSingleton<DialogueManager>
     public GameObject DialogueWindow;
     public TextMeshProUGUI DialogueText;
     public Image DialogueIcon;
+    public GameObject CharacterFrame;
+    public Button DialogueButton;
 
-    public void SetDialogue(string Dialogue) 
+    DialogueObject NextUp;
+
+    void Start()
     {
-        DialogueText.text = Dialogue;
+        CharacterFrame.SetActive(false);
+        DialogueWindow.SetActive(false);
     }
-    public void SetDialogue(string Dialogue, Sprite DialogueImage)
-    {
 
+    public void ConfigureDialogue(DialogueObject @object) 
+    {
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
+            .canAct = false;
+        DialogueText.text = @object.Contents;
+        if (@object.Graphic != null)
+        {
+            DialogueIcon.sprite = @object.Graphic;
+            CharacterFrame.SetActive(true);
+        }
+        else
+        {
+            CharacterFrame.SetActive(false);
+        }
+
+        if (@object.NextMessage != null)
+        {
+            NextUp = @object.NextMessage;
+            DialogueButton.onClick.AddListener(ShowNextObject);
+        }
+        else
+        {
+            DialogueButton.onClick.AddListener(HideWindow);
+        }
     }
 
     public void ToggleWindow() 
@@ -27,6 +54,18 @@ public class DialogueManager : MonoSingleton<DialogueManager>
 
     public void ShowWindow() 
     {
-        
+        DialogueWindow.SetActive(true);
+    }
+
+    public void HideWindow() 
+    {
+        DialogueWindow.SetActive(false);
+        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
+            .canAct = true;
+    }
+
+    void ShowNextObject() 
+    {
+        ConfigureDialogue(NextUp);
     }
 }

@@ -9,11 +9,6 @@ public class Melee1hWeapon : WeaponObject
         entityAnimator.SetInteger("WeaponType_int", 12);
         entityAnimator.SetInteger("MeleeType_int", 1);
     }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
     protected override void AttackEnd()
     {
         entityAnimator.SetInteger("WeaponType_int", 0);
