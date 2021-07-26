@@ -12,6 +12,7 @@ public abstract class WeaponObject : MonoBehaviour
 
     protected Animator entityAnimator;
     protected bool canAttack = true;
+    protected Vector3 holderLocation;
     private void Awake()
     {
         entityAnimator = GetComponentInParent<Animator>();
@@ -44,6 +45,11 @@ public abstract class WeaponObject : MonoBehaviour
         {
             other.GetComponent<Health>().current -= damage;
         } 
+    }
+
+    private void Update()
+    {
+        holderLocation = entityAnimator.gameObject.transform.position;
     }
 
 }

@@ -46,8 +46,6 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        print(characterRigid.velocity.sqrMagnitude);
-        print(characterRigid.velocity.magnitude);
         characterAnimator.SetFloat("Speed_f", characterRigid.velocity.magnitude);
         Look(look);
         Move(move);
