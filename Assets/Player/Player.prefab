@@ -3669,6 +3669,7 @@ MonoBehaviour:
   isSprinting: 0
   isInteracting: 0
   isWalking: 0
+  canAct: 1
   followTarget: {fileID: 6365474528797996220}
   equippedWeapon: {fileID: 0}
 --- !u!114 &4806045908749895606
@@ -3719,7 +3720,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5200026862311547556
 CapsuleCollider:

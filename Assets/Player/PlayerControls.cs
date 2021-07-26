@@ -21,7 +21,7 @@ public class PlayerControls : MonoBehaviour
     public bool isSprinting = false;
     Vector2 look;
     float rotationPower = 0.5f;
-    float moveSpeed = 3f;
+    float moveSpeed = 6f;
     Vector3 lastPosition;
     float speed;
     Vector2 move;
@@ -46,6 +46,8 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
+        print(characterRigid.velocity.sqrMagnitude);
+        print(characterRigid.velocity.magnitude);
         characterAnimator.SetFloat("Speed_f", characterRigid.velocity.magnitude);
         Look(look);
         Move(move);
@@ -84,12 +86,12 @@ public class PlayerControls : MonoBehaviour
         if (isSprinting)
         {
             characterRigid.velocity = new Vector3(MoveDirection.x, 
-                characterRigid.velocity.y, MoveDirection.z) * 2;
+                characterRigid.velocity.y, MoveDirection.z) * 4;
         }
         else
         {
             characterRigid.velocity = new Vector3(MoveDirection.x,
-                characterRigid.velocity.y, MoveDirection.z);
+                characterRigid.velocity.y, MoveDirection.z) * 2;
         }
 
     }
@@ -203,6 +205,15 @@ public class PlayerControls : MonoBehaviour
             return;
         }
         isSprinting = !isSprinting;
+    }
+
+    public void OnWalkToggle(InputAction.CallbackContext context)
+    {
+        if (!context.performed)
+        {
+            return;
+        }
+        isWalking = !isWalking;
     }
     #endregion
 
