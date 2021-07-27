@@ -12,10 +12,12 @@ public abstract class WeaponObject : MonoBehaviour
 
     protected Animator entityAnimator;
     protected bool canAttack = true;
-    protected Vector3 holderLocation;
+    protected Transform holder;
     private void Awake()
     {
         entityAnimator = GetComponentInParent<Animator>();
+        holder = entityAnimator.gameObject.transform;
+
     }
     protected IEnumerator AttackSequence()
     {
@@ -47,9 +49,5 @@ public abstract class WeaponObject : MonoBehaviour
         } 
     }
 
-    private void Update()
-    {
-        holderLocation = entityAnimator.gameObject.transform.position;
-    }
-
+    public Transform FetchWielder() { return holder; }
 }
