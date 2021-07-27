@@ -27,6 +27,7 @@ public class BowWeapon : WeaponObject
     void SpawnArrow() 
     {
         GameObject spawnedArrow = Instantiate(projectile);
+        spawnedArrow.GetComponent<Projectile>().sourceEntity = root;
         spawnedArrow.GetComponent<Arrow>().bow = this;
         spawnedArrow.transform.position = gameObject.transform.position + holder.forward;
         spawnedArrow.transform.rotation = holder.rotation;

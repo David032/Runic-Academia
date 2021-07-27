@@ -5,13 +5,20 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     public int damage = 1;
-    public float startSpeed = 1;
-
-    private void Awake()
+    public float startSpeed = 98.1f;
+    public GameObject sourceEntity;
+    Vector3 direction;
+    void Awake() 
     {
-        GetComponent<Rigidbody>().AddRelativeForce(startSpeed,0,0);
+        StartCoroutine(DelayedFire());
     }
 
+    IEnumerator DelayedFire() 
+    {
+        yield return new WaitForSeconds(0.15f);
+        GetComponent<Rigidbody>().velocity =
+            (sourceEntity.transform.forward.normalized * startSpeed); 
+    }
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.GetComponent<Health>())

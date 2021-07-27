@@ -13,11 +13,12 @@ public abstract class WeaponObject : MonoBehaviour
     protected Animator entityAnimator;
     protected bool canAttack = true;
     protected Transform holder;
+    protected GameObject root;
     private void Awake()
     {
         entityAnimator = GetComponentInParent<Animator>();
         holder = entityAnimator.gameObject.transform;
-
+        root = holder.GetComponentInChildren<EntityOrigin>().gameObject;
     }
     protected IEnumerator AttackSequence()
     {
