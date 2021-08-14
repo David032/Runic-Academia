@@ -17,3 +17,12 @@ public enum WeaponType
     Bow,
     Staff
 }
+public enum ItemType
+{
+    Weapon,
+    Armour,
+    Accessory,
+    Pocket,
+    Food,
+    QuestItem,
+}

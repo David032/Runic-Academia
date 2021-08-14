@@ -55,14 +55,14 @@ namespace Cardinal.AI.World
                 switch (RequiredState)
                 {
                     case Requirement.GreaterThan:
-                        if (OpinionLevelRequired >= ControllerNPC.opinion)
+                        if (OpinionLevelRequired <= ControllerNPC.opinion)
                         {
                             ExecuteChange();
                             hasFired = true;
                         }
                         break;
                     case Requirement.LessThan:
-                        if (OpinionLevelRequired <= ControllerNPC.opinion)
+                        if (OpinionLevelRequired >= ControllerNPC.opinion)
                         {
                             ExecuteChange();
                             hasFired = true;
