@@ -85,13 +85,13 @@ namespace Cardinal.AI.NPC
                     {
                         GetComponent<CapsuleCollider>().enabled = false;
                         GetComponent<NPCHearing>().enabled = false;
-                        GetComponent<NPCperspective>().enabled = false;
+                        GetComponent<NPCPerspective>().enabled = false;
                     }
                     else if (Vector3.Distance(this.transform.position, homeplace.transform.position) > 5f)
                     {
                         GetComponent<CapsuleCollider>().enabled = true;
                         GetComponent<NPCHearing>().enabled = true;
-                        GetComponent<NPCperspective>().enabled = true;
+                        GetComponent<NPCPerspective>().enabled = true;
                     }
 
                     break;

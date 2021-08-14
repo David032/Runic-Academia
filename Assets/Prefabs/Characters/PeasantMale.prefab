@@ -464,6 +464,12 @@ GameObject:
   - component: {fileID: 2755393216170755245}
   - component: {fileID: 1898483125160897767}
   - component: {fileID: 7635649366041678449}
+  - component: {fileID: 7335419195346178119}
+  - component: {fileID: 4580526473969620922}
+  - component: {fileID: 5270018818477448864}
+  - component: {fileID: 8060641538351441651}
+  - component: {fileID: 8658996237267026565}
+  - component: {fileID: 5757033162570976697}
   m_Layer: 0
   m_Name: PeasantMale
   m_TagString: Untagged
@@ -570,6 +576,98 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &7335419195346178119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b2cb72990db454499c33ce9490b8a6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableDebug: 0
+  detectionRate: 1
+  fieldOfView: 25
+  viewDistance: 25
+--- !u!114 &4580526473969620922
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bedf4dbec85affd4393acca7997c0557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &5270018818477448864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e0a957461118ec459590ad6a18e3d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8060641538351441651
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c781b714a98434641b81586929577a0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableDebug: 0
+  likes: 070000000c000000
+  dislikes: 
+  events: []
+  unforgettableEvents: []
+  eventMemories: []
+  interactedNPCS: []
+  opinion: 0
+  mood: 1
+  memoryReliability: 0.95
+  FactionId: 0
+--- !u!135 &8658996237267026565
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2
+  m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5757033162570976697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2231406381990683605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5390ea1786856d848bf849c689f54e14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enableDebug: 1
+  detectionRate: 1
+  amInteracting: 0
+  canInteract: 1
 --- !u!1 &2231406381990684647
 GameObject:
   m_ObjectHideFlags: 0

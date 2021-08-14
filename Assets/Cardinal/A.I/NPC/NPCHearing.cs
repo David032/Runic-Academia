@@ -29,10 +29,14 @@ namespace Cardinal.AI.NPC
                 {
                     if (other.gameObject.tag == "NPC")
                     {
-                        if (other.gameObject.GetComponent<NPCMentalModel>().events.Capacity != 0)
+                        if (other.gameObject.GetComponent<NPCMentalModel>()
+                            .events.Capacity != 0)
                         {
                             amInteracting = true;
-                            GetComponent<InteractionSystem>().ShareEvent(MentalModel, other.GetComponent<NPCMentalModel>(), MentalModel.mood);
+                            GetComponent<InteractionSystem>()
+                                .ShareEvent(MentalModel, 
+                                other.GetComponent<NPCMentalModel>(), 
+                                MentalModel.mood);
                             amInteracting = false;
                         }
                     }

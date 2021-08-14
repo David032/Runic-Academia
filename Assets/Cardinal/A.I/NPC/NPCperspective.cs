@@ -7,7 +7,7 @@ using Event = Cardinal.AI.Events.Event;
 
 namespace Cardinal.AI.NPC
 {
-    public class NPCperspective : Sense
+    public class NPCPerspective : Sense
     {
         public int fieldOfView = 25;
         public int viewDistance = 25;
