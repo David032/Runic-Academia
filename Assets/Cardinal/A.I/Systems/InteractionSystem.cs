@@ -174,15 +174,23 @@ namespace Cardinal.AI
 
             if (trustVal > commChance)
             {
-                Event eventToShare = npcA.events[Random.Range(0, (npcA.events.Capacity))];
+                Event eventToShare;
+                if (npcA.events.Count == 0 && npcB.events.Count != 0)
+                {
+                    print(npcA.gameObject + " events 0! Force sharing!");
+                    eventToShare = npcB.events[0];
+                    npcA.events.Add(eventToShare);
+                    npcA.eventMemories.Add(new NPCEventMemory(eventToShare));                        //Instantiate(spawnables.NPCSharingIcon, npcB.transform);
+                    return;
+                }
+                eventToShare = npcA.events[Random.Range(0, npcA.events.Count)];
 
                 if (npcA.memoryReliability > reliabilityChance)
                 {
                     if (!npcB.events.Contains(eventToShare))
                     {
                         npcB.events.Add(eventToShare);
-                        npcB.eventMemories.Add(new NPCEventMemory(eventToShare));
-                        //Instantiate(spawnables.NPCSharingIcon, npcB.transform);
+                        npcB.eventMemories.Add(new NPCEventMemory(eventToShare));                        //Instantiate(spawnables.NPCSharingIcon, npcB.transform);
                     }
                 }
                 else if (npcA.memoryReliability < reliabilityChance)

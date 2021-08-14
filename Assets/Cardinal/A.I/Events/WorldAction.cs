@@ -14,6 +14,10 @@ namespace Cardinal.AI.Events
         public DialogueObject CompletionMessage;
         private void OnTriggerStay(Collider other)
         {
+            if (!other.CompareTag("Player"))
+            {
+                return;
+            }
             if (other.GetComponent<PlayerControls>().isInteracting)
             {
                 other.GetComponent<PlayerControls>().Interact

@@ -996,7 +996,7 @@ GameObject:
   - component: {fileID: 2531385153643062280}
   m_Layer: 0
   m_Name: PeasantFemale
-  m_TagString: Untagged
+  m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

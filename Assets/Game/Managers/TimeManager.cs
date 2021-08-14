@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Events;
 
 public enum Cycle
 {
@@ -35,7 +36,8 @@ public class TimeManager : MonoSingleton<TimeManager>
     public int timeRate = 1;
 
     public Cycle timeCycle = Cycle.Day;
-    public Passage timePassage = Passage.AM; 
+    public Passage timePassage = Passage.AM;
+    public UnityEvent DayChange = new UnityEvent(); 
 
     void Update()
     {
@@ -48,6 +50,7 @@ public class TimeManager : MonoSingleton<TimeManager>
         {
             days += 1;
             timer -= 600;
+            DayChange.Invoke();
         }
 
         updateDisplay();
