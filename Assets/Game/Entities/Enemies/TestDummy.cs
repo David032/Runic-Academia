@@ -11,7 +11,7 @@ public class TestDummy : BaseEnemy
     // Start is called before the first frame update
     void Start()
     {
-        if (GetComponentInChildren<WeaponObject>().gameObject)
+        if (GetComponentInChildren<WeaponObject>())
         {
             equippedWeaponObject = GetComponentInChildren<WeaponObject>().gameObject;
             equippedWeapon = equippedWeaponObject.GetComponent<WeaponObject>();

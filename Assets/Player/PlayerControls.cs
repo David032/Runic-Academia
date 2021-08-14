@@ -13,7 +13,6 @@ public class PlayerControls : MonoBehaviour
 {
     //Components & Systems
     Animator characterAnimator;
-    CharacterController characterController;
     WeaponObject characterWeapon;
     Rigidbody characterRigid;
     //Control Bits
@@ -39,8 +38,11 @@ public class PlayerControls : MonoBehaviour
     {
         characterAnimator = GetComponent<Animator>();
         characterRigid = GetComponent<Rigidbody>();
-        equippedWeapon = GetComponentInChildren<WeaponObject>().gameObject;
-        characterWeapon = equippedWeapon.GetComponent<WeaponObject>();
+        if (GetComponentInChildren<WeaponObject>()) //This needs to be replaced
+        {
+            equippedWeapon = GetComponentInChildren<WeaponObject>().gameObject;
+            characterWeapon = equippedWeapon.GetComponent<WeaponObject>();
+        }
     }
 
 
@@ -179,7 +181,7 @@ public class PlayerControls : MonoBehaviour
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        if (canAct)
+        if (canAct && equippedWeapon != null)
         {
             characterWeapon.Attack();
         }
