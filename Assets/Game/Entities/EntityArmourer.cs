@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntityArmourer : MonoBehaviour
+namespace Runic.Entities
 {
-    public GameObject rightHand;
-    public GameObject leftHand;
+    public class EntityArmourer : MonoBehaviour
+    {
+        public GameObject rightHand;
+        public GameObject leftHand;
+    }
 }
+

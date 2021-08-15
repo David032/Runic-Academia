@@ -2,30 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Runic.Managers;
+using Runic.Entities;
 
-public class CharacterDisplay : MonoBehaviour
+namespace Runic.UI
 {
-    CharacterManager CharacterManager;
-    public TextMeshProUGUI CharacterName;
-
-    // Start is called before the first frame update
-    void Start()
+    public class CharacterDisplay : MonoBehaviour
     {
-        CharacterManager = CharacterManager.Instance;
-    }
+        CharacterManager CharacterManager;
+        public TextMeshProUGUI CharacterName;
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (CharacterManager.SelectedEntity != null)
+        // Start is called before the first frame update
+        void Start()
         {
-            CharacterName.text = CharacterManager.SelectedEntity.
-                GetComponent<Entity>().Name;
-        }
-        if (CharacterManager.SelectedEntity == null)
-        {
-            CharacterName.text = "";
+            CharacterManager = CharacterManager.Instance;
         }
 
+        // Update is called once per frame
+        void Update()
+        {
+            if (CharacterManager.SelectedEntity != null)
+            {
+                CharacterName.text = CharacterManager.SelectedEntity.
+                    GetComponent<Entity>().Name;
+            }
+            if (CharacterManager.SelectedEntity == null)
+            {
+                CharacterName.text = "";
+            }
+
+        }
     }
+
 }

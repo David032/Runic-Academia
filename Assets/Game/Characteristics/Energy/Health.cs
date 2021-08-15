@@ -2,41 +2,45 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IHealthBonus
+namespace Runic.Characteristics
 {
-    int GetHealthBonus(int baseHealth);
-    int GetHealthRecoveryBonus();
-}
-
-public class Health : Energy
-{
-    public int baseHealth = 100;
-    public int bonus = 0;
-
-    IHealthBonus[] _bonusComponents;
-    IHealthBonus[] bonusComponents
+    public interface IHealthBonus
     {
-        get 
-        { 
-            return _bonusComponents ??= GetComponents<IHealthBonus>(); 
-        }
+        int GetHealthBonus(int baseHealth);
+        int GetHealthRecoveryBonus();
     }
 
-    public new void Awake()
+    public class Health : Energy
     {
-        base.Awake();
-    }
-    public override int max
-    {
-        get
+        public int baseHealth = 100;
+        public int bonus = 0;
+
+        IHealthBonus[] _bonusComponents;
+        IHealthBonus[] bonusComponents
         {
-            int baseThisLevel = baseHealth;
-            int bonus = 0;
-            for (int i = 0; i < bonusComponents.Length; ++i)
-            {
-                bonus += bonusComponents[i].GetHealthBonus(baseThisLevel);
+            get 
+            { 
+                return _bonusComponents ??= GetComponents<IHealthBonus>(); 
             }
-            return baseThisLevel + bonus;
+        }
+
+        public new void Awake()
+        {
+            base.Awake();
+        }
+        public override int max
+        {
+            get
+            {
+                int baseThisLevel = baseHealth;
+                int bonus = 0;
+                for (int i = 0; i < bonusComponents.Length; ++i)
+                {
+                    bonus += bonusComponents[i].GetHealthBonus(baseThisLevel);
+                }
+                return baseThisLevel + bonus;
+            }
         }
     }
 }
+

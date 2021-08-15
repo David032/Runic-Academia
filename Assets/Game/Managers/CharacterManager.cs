@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterManager : MonoSingleton<CharacterManager>
+namespace Runic.Managers
 {
-    public GameObject SelectedEntity;
+    public class CharacterManager : MonoSingleton<CharacterManager>
+    {
+        public GameObject SelectedEntity;
+    }
 }
+

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cardinal.AI.NPC;
+using Runic.Managers;
 
 namespace Cardinal.AI.World
 {

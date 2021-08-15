@@ -1,19 +1,24 @@
+using Runic.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Entity
+namespace Runic.Entities.Player
 {
-    public List<Item> Inventory;
-    // Start is called before the first frame update
-    void Start()
+    public class Player : Entity
     {
+        public List<Item> Inventory;
+        // Start is called before the first frame update
+        void Start()
+        {
         
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+        
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

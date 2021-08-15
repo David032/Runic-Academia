@@ -1,4 +1,5 @@
 ﻿using Cardinal.AI.NPC;
+using Runic;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

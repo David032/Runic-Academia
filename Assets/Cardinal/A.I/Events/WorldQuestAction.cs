@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Cardinal.AI.World;
+using Runic.Dialogue;
+using Runic.Items;
+using Runic.Entities.Player;
+using Runic;
 
 namespace Cardinal.AI.Events
 {

@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 using Cardinal.AI.Events;
 using Cardinal.AI.NPC;
 using Event = Cardinal.AI.Events.Event;
+using Runic.Managers;
 
 namespace Cardinal.AI
 {

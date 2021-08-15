@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Weapon", menuName = "Runic/Item/Weapon", order = 1)]
-public class Weapon : Item
+namespace Runic.Items
 {
-    public int WeaponMod = 0;
+    [CreateAssetMenu(fileName = "Weapon", menuName = "Runic/Item/Weapon", order = 1)]
+    public class Weapon : Item
+    {
+        public int WeaponMod = 0;
+    }
 }
+

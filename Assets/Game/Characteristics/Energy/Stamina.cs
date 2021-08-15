@@ -2,34 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEnduranceBonus
+namespace Runic.Characteristics
 {
-    int GetEnduranceBonus(int baseEndurance);
-}
-
-public class Stamina : Energy
-{
-    public int baseEndurance = 10;
-
-    IEnduranceBonus[] _bonusComponents;
-    IEnduranceBonus[] bonusComponents
+    public interface IEnduranceBonus
     {
-        get 
-        { 
-            return _bonusComponents ??= GetComponents<IEnduranceBonus>(); 
-        }
+        int GetEnduranceBonus(int baseEndurance);
     }
 
-    public override int max
+    public class Stamina : Energy
     {
-        get
+        public int baseEndurance = 10;
+
+        IEnduranceBonus[] _bonusComponents;
+        IEnduranceBonus[] bonusComponents
         {
-            int bonus = 0;
-            for (int i = 0; i < bonusComponents.Length; ++i)
-            {
-                bonus += bonusComponents[i].GetEnduranceBonus(baseEndurance);
+            get 
+            { 
+                return _bonusComponents ??= GetComponents<IEnduranceBonus>(); 
             }
-            return baseEndurance + bonus;
+        }
+
+        public override int max
+        {
+            get
+            {
+                int bonus = 0;
+                for (int i = 0; i < bonusComponents.Length; ++i)
+                {
+                    bonus += bonusComponents[i].GetEnduranceBonus(baseEndurance);
+                }
+                return baseEndurance + bonus;
+            }
         }
     }
 }
+

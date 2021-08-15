@@ -1,13 +1,9 @@
+using Runic;
+using Runic.Weapons;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public enum InteractionTypes
-{
-    Chest,
-    Person
-}
 
 public class PlayerControls : MonoBehaviour
 {

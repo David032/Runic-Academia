@@ -1,37 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public interface IManaBonus
-{
-    int GetManaBonus(int baseMana);
-    int GetManaRecoveryBonus();
-}
 
-public class Mana : Energy
+namespace Runic.Characteristics
 {
-    public int baseMana = 100;
-
-    IManaBonus[] _bonusComponents;
-    IManaBonus[] bonusComponents
+    public interface IManaBonus
     {
-        get 
-        {
-            return _bonusComponents ??= GetComponents<IManaBonus>(); 
-        }
+        int GetManaBonus(int baseMana);
+        int GetManaRecoveryBonus();
     }
 
-    // calculate max
-    public override int max
+    public class Mana : Energy
     {
-        get
+        public int baseMana = 100;
+
+        IManaBonus[] _bonusComponents;
+        IManaBonus[] bonusComponents
         {
-            int baseThisLevel = baseMana;
-            int bonus = 0;
-            for (int i = 0; i < bonusComponents.Length; ++i)
+            get 
             {
-                bonus += bonusComponents[i].GetManaBonus(baseThisLevel);
+                return _bonusComponents ??= GetComponents<IManaBonus>(); 
             }
-            return baseThisLevel + bonus;
+        }
+
+        // calculate max
+        public override int max
+        {
+            get
+            {
+                int baseThisLevel = baseMana;
+                int bonus = 0;
+                for (int i = 0; i < bonusComponents.Length; ++i)
+                {
+                    bonus += bonusComponents[i].GetManaBonus(baseThisLevel);
+                }
+                return baseThisLevel + bonus;
+            }
         }
     }
 }
+

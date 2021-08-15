@@ -1,31 +1,37 @@
+using Runic.Entities.Player;
+using Runic.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(BoxCollider))]
-public class ChestController : MonoBehaviour
+namespace Runic.Interactions
 {
-    public List<Item> itemsInChest = new List<Item>();
-    private void Awake()
+    [RequireComponent(typeof(BoxCollider))]
+    public class ChestController : MonoBehaviour
     {
-        GetComponent<BoxCollider>().isTrigger = true;
-    }
-
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag != "Player")
+        public List<Item> itemsInChest = new List<Item>();
+        private void Awake()
         {
-            return;
+            GetComponent<BoxCollider>().isTrigger = true;
         }
 
-        if (other.GetComponent<PlayerControls>().isInteracting)
+        private void OnTriggerStay(Collider other)
         {
-            other.GetComponent<PlayerControls>().Interact(InteractionTypes.Chest);
-            foreach (var item in itemsInChest)
+            if (other.tag != "Player")
             {
-                other.GetComponent<Player>().Inventory.Add(item);
+                return;
             }
-            itemsInChest.Clear();
+
+            if (other.GetComponent<PlayerControls>().isInteracting)
+            {
+                other.GetComponent<PlayerControls>().Interact(InteractionTypes.Chest);
+                foreach (var item in itemsInChest)
+                {
+                    other.GetComponent<Player>().Inventory.Add(item);
+                }
+                itemsInChest.Clear();
+            }
         }
     }
 }
+

@@ -1,18 +1,23 @@
+using Runic.Characteristics;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : Projectile
+namespace Runic.Weapons
 {
-    public BowWeapon bow;
-
-
-    new void OnCollisionEnter(Collision collision)
+    public class Arrow : Projectile
     {
-        if (collision.gameObject.GetComponent<Health>())
+        public BowWeapon bow;
+
+
+        new void OnCollisionEnter(Collision collision)
         {
-            collision.gameObject.GetComponent<Health>().current -= bow.damage;
-            base.OnCollisionEnter(collision);
+            if (collision.gameObject.GetComponent<Health>())
+            {
+                collision.gameObject.GetComponent<Health>().current -= bow.damage;
+                base.OnCollisionEnter(collision);
+            }
         }
     }
+
 }

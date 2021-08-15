@@ -5,67 +5,71 @@ using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
-public class DialogueManager : MonoSingleton<DialogueManager>
+namespace Runic.Dialogue
 {
-    public GameObject DialogueWindow;
-    public TextMeshProUGUI DialogueText;
-    public Image DialogueIcon;
-    public GameObject CharacterFrame;
-    public Button DialogueButton;
-
-    DialogueObject NextUp;
-
-    void Start()
+    public class DialogueManager : MonoSingleton<DialogueManager>
     {
-        CharacterFrame.SetActive(false);
-        DialogueWindow.SetActive(false);
-    }
+        public GameObject DialogueWindow;
+        public TextMeshProUGUI DialogueText;
+        public Image DialogueIcon;
+        public GameObject CharacterFrame;
+        public Button DialogueButton;
 
-    public void ConfigureDialogue(DialogueObject @object) 
-    {
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
-            .canAct = false;
-        DialogueText.text = @object.Contents;
-        if (@object.Graphic != null)
-        {
-            DialogueIcon.sprite = @object.Graphic;
-            CharacterFrame.SetActive(true);
-        }
-        else
+        DialogueObject NextUp;
+
+        void Start()
         {
             CharacterFrame.SetActive(false);
+            DialogueWindow.SetActive(false);
         }
 
-        if (@object.NextMessage != null)
+        public void ConfigureDialogue(DialogueObject @object) 
         {
-            NextUp = @object.NextMessage;
-            DialogueButton.onClick.AddListener(ShowNextObject);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
+                .canAct = false;
+            DialogueText.text = @object.Contents;
+            if (@object.Graphic != null)
+            {
+                DialogueIcon.sprite = @object.Graphic;
+                CharacterFrame.SetActive(true);
+            }
+            else
+            {
+                CharacterFrame.SetActive(false);
+            }
+
+            if (@object.NextMessage != null)
+            {
+                NextUp = @object.NextMessage;
+                DialogueButton.onClick.AddListener(ShowNextObject);
+            }
+            else
+            {
+                DialogueButton.onClick.AddListener(HideWindow);
+            }
         }
-        else
+
+        public void ToggleWindow() 
         {
-            DialogueButton.onClick.AddListener(HideWindow);
+            DialogueWindow.SetActive(!DialogueWindow.activeSelf);
+        }
+
+        public void ShowWindow() 
+        {
+            DialogueWindow.SetActive(true);
+        }
+
+        public void HideWindow() 
+        {
+            DialogueWindow.SetActive(false);
+            GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
+                .canAct = true;
+        }
+
+        void ShowNextObject() 
+        {
+            ConfigureDialogue(NextUp);
         }
     }
 
-    public void ToggleWindow() 
-    {
-        DialogueWindow.SetActive(!DialogueWindow.activeSelf);
-    }
-
-    public void ShowWindow() 
-    {
-        DialogueWindow.SetActive(true);
-    }
-
-    public void HideWindow() 
-    {
-        DialogueWindow.SetActive(false);
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerControls>()
-            .canAct = true;
-    }
-
-    void ShowNextObject() 
-    {
-        ConfigureDialogue(NextUp);
-    }
 }

@@ -2,23 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueController : MonoBehaviour
+namespace Runic.Dialogue
 {
-    public DialogueObject Dialogue;
-    private void OnTriggerStay(Collider other)
+    public class DialogueController : MonoBehaviour
     {
-        if (!other.CompareTag("Player"))
+        public DialogueObject Dialogue;
+        private void OnTriggerStay(Collider other)
         {
-            return;
-        }
-        if (other.GetComponent<PlayerControls>().isInteracting)
-        {
-            other.GetComponent<PlayerControls>().Interact
-                (InteractionTypes.Person);
-            transform.LookAt(other.transform);
-            //Do dialogue things here?
-            DialogueManager.Instance.ConfigureDialogue(Dialogue);
-            DialogueManager.Instance.ShowWindow();
+            if (!other.CompareTag("Player"))
+            {
+                return;
+            }
+            if (other.GetComponent<PlayerControls>().isInteracting)
+            {
+                other.GetComponent<PlayerControls>().Interact
+                    (InteractionTypes.Person);
+                transform.LookAt(other.transform);
+                //Do dialogue things here?
+                DialogueManager.Instance.ConfigureDialogue(Dialogue);
+                DialogueManager.Instance.ShowWindow();
+            }
         }
     }
+
 }

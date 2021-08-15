@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
+using Runic.Dialogue;
+using Runic;
 
 namespace Cardinal.AI.Events
 {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Runic.Managers;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,14 +8,14 @@ namespace Cardinal.AI.NPC
 {
     public enum Behaviour
     {
-        Traveller,
-        Trader,
-        Wanderer,
-        Guard,
-        Patroller
+        Traveller, //Travel between 2 geographical different regions
+        Trader, //Spends their day at a shop location, and night at home
+        Wanderer, //Wander around the location they were placed
+        Guard, //Stationary
+        Patroller //Move between a specified list of points
     }
 
-    public class NPCbehaviour : MonoBehaviour
+    public class NPCBehaviour : MonoBehaviour
     {
         public Behaviour NPCBehaviourModel = Behaviour.Guard;
         NavMeshAgent agent;

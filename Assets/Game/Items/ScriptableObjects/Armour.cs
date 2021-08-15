@@ -2,12 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Armour", menuName = "Runic/Item/Armour", order = 3)]
-
-public class Armour : Item
+namespace Runic.Items
 {
-    public int DefenseMod;
-    public int HealthMod;
+    [CreateAssetMenu(fileName = "Armour", menuName = "Runic/Item/Armour", order = 3)]
 
-    public int GetDefenseMod() { return DefenseMod; }
+    public class Armour : Item
+    {
+        public int DefenseMod;
+        public int HealthMod;
+
+        public int GetDefenseMod() { return DefenseMod; }
+    }
 }
