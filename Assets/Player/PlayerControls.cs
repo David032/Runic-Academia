@@ -15,6 +15,7 @@ public class PlayerControls : MonoBehaviour
     Animator characterAnimator;
     WeaponObject characterWeapon;
     Rigidbody characterRigid;
+    CharacterController characterController;
     //Control Bits
     public Transform playerRoot;
     public bool isSprinting = false;
@@ -38,6 +39,8 @@ public class PlayerControls : MonoBehaviour
     {
         characterAnimator = GetComponent<Animator>();
         characterRigid = GetComponent<Rigidbody>();
+        characterController = GetComponent<CharacterController>();
+
         if (GetComponentInChildren<WeaponObject>()) //This needs to be replaced
         {
             equippedWeapon = GetComponentInChildren<WeaponObject>().gameObject;
@@ -48,7 +51,7 @@ public class PlayerControls : MonoBehaviour
 
     void Update()
     {
-        characterAnimator.SetFloat("Speed_f", characterRigid.velocity.magnitude);
+        characterAnimator.SetFloat("Speed_f", GetSpeed());
         Look(look);
         Move(move);
         Interact();
@@ -83,16 +86,31 @@ public class PlayerControls : MonoBehaviour
         float angle = Mathf.Atan2(heading.x, heading.z) * Mathf.Rad2Deg;
 
         transform.rotation = Quaternion.AngleAxis(angle, Vector3.up);
+
+        #region Character Controller Based
         if (isSprinting)
         {
-            characterRigid.velocity = new Vector3(MoveDirection.x, 
-                characterRigid.velocity.y, MoveDirection.z) * 4;
+            characterController.Move(heading);
+
         }
         else
         {
-            characterRigid.velocity = new Vector3(MoveDirection.x,
-                characterRigid.velocity.y, MoveDirection.z) * 2;
+            characterController.Move(heading);
         }
+        #endregion
+        #region Physics Based
+        //if (isSprinting)
+        //{
+        //    characterRigid.velocity = new Vector3(MoveDirection.x,
+        //        characterRigid.velocity.y, MoveDirection.z) * 4;
+        //}
+        //else
+        //{
+        //    characterRigid.velocity = new Vector3(MoveDirection.x,
+        //        characterRigid.velocity.y, MoveDirection.z) * 2;
+        //}
+        #endregion
+
 
     }
 
