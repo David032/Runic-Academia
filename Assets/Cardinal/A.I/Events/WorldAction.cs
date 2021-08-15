@@ -7,7 +7,7 @@ using UnityEngine.AI;
 namespace Cardinal.AI.Events
 {
     /// <summary>
-    /// Actions where interacting within range creates event
+    /// Action where interacting within range creates event
     /// </summary>
     public class WorldAction : BaseEvent
     {

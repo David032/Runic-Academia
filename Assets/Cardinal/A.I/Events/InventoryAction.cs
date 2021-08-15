@@ -9,13 +9,14 @@ namespace Cardinal.AI.Events
     /// Actions where the player having something and interacting with an NPC creates an event
     /// </summary>
     /// 
-    [RequireComponent(typeof(NPCDialogue))]
     public class InventoryAction : BaseEvent
     {
-        public int requiredItem;
-        bool playerHasRequiredItem;
+        public DialogueObject Request;
+        public DialogueObject ThanksMessage;
+        public DialogueObject RepeatDialogueOption;
+        public Item requiredItem;
+        bool isComplete = false;
 
-        public string questCompletedMessage;
 
         // Start is called before the first frame update
         void Start()
@@ -26,33 +27,47 @@ namespace Cardinal.AI.Events
         // Update is called once per frame
         void Update()
         {
-            //if (player.GetComponent<PlayerInventory>().Inventory.Capacity != 0)
-            //{
-            //    foreach (Item thing in player.GetComponent<PlayerInventory>().Inventory)
-            //    {
-            //        if (thing.getId() == requiredItem)
-            //        {
-            //            playerHasRequiredItem = true;
-            //        }
-            //    }
-            //}
 
         }
 
-        private void OnMouseDown()
+        private void OnTriggerStay(Collider other)
         {
-            if (playerHasRequiredItem && CalculateDistance())
+            if (!other.CompareTag("Player"))
             {
-                GetComponent<NPCDialogue>().enabled = false;
-                spawnDialogue(questCompletedMessage);
-                CreateEvent();
+                return;
+            }
+            if (other.GetComponent<PlayerControls>().isInteracting)
+            {
+                other.GetComponent<PlayerControls>().Interact
+                    (InteractionTypes.Person);
+                transform.LookAt(other.transform);
+                if (!other.GetComponent<Player>().Inventory.Contains(requiredItem) 
+                    && !isComplete)
+                {
+                    DialogueManager.Instance.ConfigureDialogue(Request);
+                    DialogueManager.Instance.ShowWindow();
+                }
+                else if (!isComplete 
+                    && other.GetComponent<Player>().Inventory.Contains(requiredItem))
+                {
+                    DialogueManager.Instance.ConfigureDialogue(ThanksMessage);
+                    DialogueManager.Instance.ShowWindow();
+                    CreateEvent();
+                    Event @event = GetComponent<EventObject>().LinkedEvent;
+                    MentalModel.events.Add(@event);
+                    MentalModel.eventMemories.Add(new NPCEventMemory(@event));
+                    isComplete = true;
+                    other.GetComponent<Player>().Inventory.Remove(requiredItem);
+                }
+                else
+                {
+                    DialogueManager.Instance.ConfigureDialogue(RepeatDialogueOption);
+                    DialogueManager.Instance.ShowWindow();
+                }
 
-                Event eventBeingAdded = GetComponent<EventObject>().LinkedEvent;
-                MentalModel.events.Add(eventBeingAdded);
 
-                MentalModel.eventMemories.Add(new NPCEventMemory(eventBeingAdded));
-                //Instantiate(spawnables.NPCLearningIcon, this.gameObject.transform);
             }
         }
+
     }
 }

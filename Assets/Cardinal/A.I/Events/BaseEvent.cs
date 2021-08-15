@@ -98,12 +98,10 @@ namespace Cardinal.AI.Events
         {
             Manager = EventManager.Instance;
             player = GameObject.FindGameObjectWithTag("Player");
-            //dialogueSpot = GameObject.FindGameObjectWithTag("dialogueSpot");
-            //dialogueWindow = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpawnableController>().dialogueWindow;
-            //spawnables = GameObject.FindGameObjectWithTag("GameController").GetComponent<SpawnableController>();
             MentalModel = GetComponent<NPCMentalModel>();
         }
 
+        //These should soon be removed! ------------------------------
         public void spawnDialogue(string message)
         {
             player.GetComponent<NavMeshAgent>().enabled = false;
@@ -114,35 +112,6 @@ namespace Cardinal.AI.Events
             //spawnedDialogue.GetComponent<DialogueInstance>().button.GetComponent<Button>().onClick.AddListener(OnDialogueEnd);
         }
 
-        public void spawnDialogue(string message, bool createEvent)
-        {
-            player.GetComponent<NavMeshAgent>().enabled = false;
-            spawnedDialogue = Instantiate(dialogueWindow, dialogueSpot.transform);
-            spawnedDialogue.GetComponent<RectTransform>().localPosition.Set(0, 0, 0);
-            //spawnedDialogue.GetComponent<DialogueInstance>().NewDialogueInstance(false, true, message, player);
-            //spawnedDialogue.GetComponent<DialogueInstance>().button.GetComponent<Button>().onClick.RemoveAllListeners();
-            //spawnedDialogue.GetComponent<DialogueInstance>().button.GetComponent<Button>().onClick.AddListener(OnEventEnd);
-        }
-
-        public void OnDialogueEnd()
-        {
-            player.GetComponent<NavMeshAgent>().enabled = true;
-            CreateEvent();
-            Destroy(spawnedDialogue);
-        }
-
-        public void OnDialogueEnd(ObjectType type)
-        {
-            player.GetComponent<NavMeshAgent>().enabled = true;
-            CreateEvent(type);
-            Destroy(spawnedDialogue);
-        }
-
-        public void OnEventEnd()
-        {
-            player.GetComponent<NavMeshAgent>().enabled = true;
-            Destroy(spawnedDialogue);
-        }
 
         public bool CalculateDistance()
         {

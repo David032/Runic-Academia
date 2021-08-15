@@ -1,48 +1,46 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cardinal.AI.World;
 
 namespace Cardinal.AI.Events
 {
-
+    /// <summary>
+    /// Action where interacting within range 
+    /// & having the required object creates event & a physical world change
+    /// </summary>
     public class WorldQuestAction : BaseEvent
     {
-        public int requiredItem;
-        bool playerHasRequiredItem;
-        bool isCompleted = false;
-
-        public string questCompletedMessage;
-
-        // Start is called before the first frame update
-        void Start()
+        public DialogueObject InteractionMessage;
+        public DialogueObject CompletionMessage;
+        public Item RequiredItem;
+        bool hasCompleted = false;
+        [Header("World Objects to change")]
+        public GameObject DefaultState;
+        public GameObject ChangedState;
+        private void OnTriggerStay(Collider other)
         {
-            AssignElements();
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-            //if (player.GetComponent<PlayerInventory>().Inventory.Capacity != 0)
-            //{
-            //    foreach (Item thing in player.GetComponent<PlayerInventory>().Inventory)
-            //    {
-            //        if (thing.getId() == requiredItem)
-            //        {
-            //            playerHasRequiredItem = true;
-            //        }
-            //    }
-            //}
-
-        }
-
-        private void OnMouseDown()
-        {
-            if (playerHasRequiredItem && CalculateDistance())
+            if (!other.CompareTag("Player"))
             {
-                if (!isCompleted)
+                return;
+            }
+            if (other.GetComponent<PlayerControls>().isInteracting && !hasCompleted)
+            {
+                if (!other.GetComponent<Player>().Inventory.Contains(RequiredItem))
                 {
-                    spawnDialogue(questCompletedMessage);
-                    CreateEvent(ObjectType.Visual);
+                    DialogueManager.Instance.ConfigureDialogue(InteractionMessage);
+                    DialogueManager.Instance.ShowWindow();
+                }
+                else
+                {
+                    other.GetComponent<PlayerControls>().Interact
+                        (InteractionTypes.Person);
+                    DialogueManager.Instance.ConfigureDialogue(CompletionMessage);
+                    DialogueManager.Instance.ShowWindow();
+                    CreateEvent();
+                    other.GetComponent<Player>().Inventory.Remove(RequiredItem);
+                    DefaultState.SetActive(false);
+                    ChangedState.SetActive(true);
                 }
 
             }
