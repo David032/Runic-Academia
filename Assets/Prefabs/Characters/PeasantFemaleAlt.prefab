@@ -2124,6 +2124,7 @@ GameObject:
   - component: {fileID: -5463649082341590587}
   - component: {fileID: 9128374762044245460}
   - component: {fileID: 2981531071841651909}
+  - component: {fileID: -6996971118117441316}
   m_Layer: 0
   m_Name: PeasantFemaleAlt
   m_TagString: Untagged
@@ -2332,6 +2333,21 @@ MonoBehaviour:
   detectionRate: 1
   fieldOfView: 25
   viewDistance: 25
+--- !u!114 &-6996971118117441316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2285111942222414069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284d35b9b10cfa54586438428f58306f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Flag: 0
+  Health: {fileID: 0}
 --- !u!1 &2285115289939442163
 GameObject:
   m_ObjectHideFlags: 0

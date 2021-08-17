@@ -994,6 +994,7 @@ GameObject:
   - component: {fileID: 7541311124454831103}
   - component: {fileID: 3642026436691910894}
   - component: {fileID: 2531385153643062280}
+  - component: {fileID: 5301769118427618692}
   m_Layer: 0
   m_Name: PeasantFemale
   m_TagString: NPC
@@ -1207,6 +1208,21 @@ MonoBehaviour:
   _data:
     _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
+--- !u!114 &5301769118427618692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117392301366472465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 284d35b9b10cfa54586438428f58306f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  Flag: 0
+  Health: {fileID: 0}
 --- !u!1 &7117392301366473049
 GameObject:
   m_ObjectHideFlags: 0

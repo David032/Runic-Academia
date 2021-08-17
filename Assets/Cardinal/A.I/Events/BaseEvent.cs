@@ -28,10 +28,7 @@ namespace Cardinal.AI.Events
         public ObjectType EventType = ObjectType.Visual;
 
         protected GameObject spawnedDialogue;
-        public GameManager spawnables;
         protected NPCMentalModel MentalModel;
-
-        public float accessRange;
 
         // Start is called before the first frame update
         void Start()
@@ -100,31 +97,6 @@ namespace Cardinal.AI.Events
             Manager = EventManager.Instance;
             player = GameObject.FindGameObjectWithTag("Player");
             MentalModel = GetComponent<NPCMentalModel>();
-        }
-
-        //These should soon be removed! ------------------------------
-        public void spawnDialogue(string message)
-        {
-            player.GetComponent<NavMeshAgent>().enabled = false;
-            spawnedDialogue = Instantiate(dialogueWindow, dialogueSpot.transform);
-            spawnedDialogue.GetComponent<RectTransform>().localPosition.Set(0, 0, 0);
-            //spawnedDialogue.GetComponent<DialogueInstance>().NewDialogueInstance(false, true, message, player);
-            //spawnedDialogue.GetComponent<DialogueInstance>().button.GetComponent<Button>().onClick.RemoveAllListeners();
-            //spawnedDialogue.GetComponent<DialogueInstance>().button.GetComponent<Button>().onClick.AddListener(OnDialogueEnd);
-        }
-
-
-        public bool CalculateDistance()
-        {
-            float distanceBetween = Vector3.Distance(player.transform.position, transform.position);
-            if (distanceBetween < accessRange)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }
