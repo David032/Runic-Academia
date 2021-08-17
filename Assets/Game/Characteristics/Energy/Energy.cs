@@ -3,6 +3,12 @@ using UnityEngine.Events;
 
 namespace Runic.Characteristics
 {
+    public enum EnergyType
+    {
+        Health,
+        Mana,
+        Stamina
+    }
     public abstract class Energy : MonoBehaviour
     {
         public int current = 0;

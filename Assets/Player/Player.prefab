@@ -410,6 +410,7 @@ GameObject:
   - component: {fileID: 476240836083407707}
   - component: {fileID: 6523255784856707438}
   - component: {fileID: 4770366799668357066}
+  - component: {fileID: 977787998693261319}
   m_Layer: 5
   m_Name: StaminaSlider
   m_TagString: Untagged
@@ -527,6 +528,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &977787998693261319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2833503817330242439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2191f6b4c24aa4fba5606d5c741c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnergyType: 2
 --- !u!1 &2842752486739698873
 GameObject:
   m_ObjectHideFlags: 0
@@ -749,6 +763,7 @@ GameObject:
   - component: {fileID: 3588952545233063483}
   - component: {fileID: 4399530390136235971}
   - component: {fileID: 5132642179025135636}
+  - component: {fileID: 6960384162712166323}
   m_Layer: 5
   m_Name: HealthSlider
   m_TagString: Untagged
@@ -866,6 +881,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &6960384162712166323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3882350687516634524}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2191f6b4c24aa4fba5606d5c741c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnergyType: 0
 --- !u!1 &4485920195085160588
 GameObject:
   m_ObjectHideFlags: 0
@@ -3066,6 +3094,7 @@ GameObject:
   - component: {fileID: 3478217709378355049}
   - component: {fileID: 8180752564912196750}
   - component: {fileID: 6542632911890577087}
+  - component: {fileID: 150235732012643328}
   m_Layer: 5
   m_Name: ManaSlider
   m_TagString: Untagged
@@ -3183,6 +3212,19 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &150235732012643328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8708584318526622407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab2191f6b4c24aa4fba5606d5c741c97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnergyType: 1
 --- !u!1 &8749547959115559084
 GameObject:
   m_ObjectHideFlags: 0
