@@ -6,7 +6,7 @@ namespace Cardinal.AI.NPC
 {
     public class NPCOpinionRenderer : MonoBehaviour
     {
-        TextMeshProUGUI opinionDiskNumber;
+        public TextMeshProUGUI opinionDiskNumber;
         SpriteRenderer opinionDisk;
 
         Transform playerTransform;
@@ -14,7 +14,6 @@ namespace Cardinal.AI.NPC
         {
             playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             opinionDisk = gameObject.GetComponentInChildren<SpriteRenderer>();
-            opinionDiskNumber = gameObject.GetComponentInChildren<TextMeshProUGUI>();
         }
 
         public void UpdateDisplay(float opinion)

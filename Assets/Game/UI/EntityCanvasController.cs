@@ -10,6 +10,7 @@ namespace Runic.UI
     public class EntityCanvasController : MonoBehaviour
     {
         public GameObject NamePlate;
+        public TextMeshProUGUI EntityNameText;
         Transform cameraLocation;
         Entity Entity;
         void Start()
@@ -18,8 +19,7 @@ namespace Runic.UI
             Entity = GetComponentInParent<Entity>();
             if (Entity.Name != null)
             {
-                NamePlate.GetComponentInChildren<TextMeshProUGUI>().text 
-                    = Entity.Name;
+                EntityNameText.text = Entity.Name;
             }
             else
             {

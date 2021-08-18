@@ -196,7 +196,7 @@ GameObject:
   - component: {fileID: 6287003938845133179}
   - component: {fileID: 4727985075661898340}
   m_Layer: 30
-  m_Name: Text (TMP)
+  m_Name: OpinionValue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

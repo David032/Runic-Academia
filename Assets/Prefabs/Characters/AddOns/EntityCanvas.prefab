@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NamePlate: {fileID: 4048725809745351280}
+  EntityNameText: {fileID: 4048725809414463642}
 --- !u!1 &4048725808817622744
 GameObject:
   m_ObjectHideFlags: 0

@@ -2002,6 +2002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e0a957461118ec459590ad6a18e3d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  opinionDiskNumber: {fileID: 1264494719161097806}
 --- !u!114 &4642818065026225289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4961,3 +4962,14 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4708438473446811237, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
   m_PrefabInstance: {fileID: 5769478767598197802}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1264494719161097806 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4727985075661898340, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
+  m_PrefabInstance: {fileID: 5769478767598197802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
