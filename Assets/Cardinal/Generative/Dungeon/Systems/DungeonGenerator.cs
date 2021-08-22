@@ -23,7 +23,7 @@ namespace Cardinal.Generative.Dungeon
         // Start is called before the first frame update
         void Start()
         {
-        
+            GenerateMainPath();
         }
 
         // Update is called once per frame
@@ -73,12 +73,12 @@ namespace Cardinal.Generative.Dungeon
 
             GenerateStartingRoom();
             currentMainNode = 
-                GenerateAndReturnRoom(GetMainPathStart().GetNextRoomSpawnLocation()); //Spawn room off of starting room
-            for (int i = 0; i < (int)DungeonSize / 2; i++)
+                GenerateAndReturnRoom(GetMainPathStart().transform); //Spawn room off of starting room
+            for (int i = 0; i < ((int)DungeonSize / 2) + 1; i++)
             {
                 currentDoor = GetRandomDoorway(currentMainNode.GetComponent<Room>());
                 currentMainNode = GenerateAndReturnRoom
-                    (currentDoor.GetNextRoomSpawnLocation());
+                    (currentDoor.transform);
             }
         }
 
@@ -114,7 +114,18 @@ namespace Cardinal.Generative.Dungeon
 
         public GameObject GenerateAndReturnRoom(Vector3 position)
         {
-            List<GameObject> validrooms = RoomList.RoomsToUse;
+            List<GameObject> validrooms = new List<GameObject>();
+
+            //Find Valid Rooms
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                List<RoomFlags> thisRoomsFlags = item.GetComponent<Room>().RoomFlags;
+                if (!thisRoomsFlags.Contains(RoomFlags.BossRoom) ||
+                    !thisRoomsFlags.Contains(RoomFlags.StartingRoom))
+                {
+                    validrooms.Add(item);
+                }
+            }
 
             //Select Room to Spawn
             int randomSelection = Random.Range(0, validrooms.Count);
@@ -123,6 +134,31 @@ namespace Cardinal.Generative.Dungeon
             GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
         }
+
+        public GameObject GenerateAndReturnRoom(Transform placing)
+        {
+            List<GameObject> validrooms = new List<GameObject>();
+
+            //Find Valid Rooms
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                List<RoomFlags> thisRoomsFlags = item.GetComponent<Room>().RoomFlags;
+                if (!thisRoomsFlags.Contains(RoomFlags.BossRoom) ||
+                    !thisRoomsFlags.Contains(RoomFlags.StartingRoom))
+                {
+                    validrooms.Add(item);
+                }
+            }
+
+            //Select Room to Spawn
+            int randomSelection = Random.Range(0, validrooms.Count);
+            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
+            roomToSpawn.transform.position = placing.position;
+            roomToSpawn.transform.rotation = placing.rotation;
+            GeneratedRooms.Add(roomToSpawn);
+            return roomToSpawn;
+        }
+
 
     }
 }

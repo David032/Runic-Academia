@@ -8,6 +8,7 @@ namespace Cardinal.Generative.Dungeon
     {
         public GameObject Door;
         public GameObject Wall;
+        public GameObject roomPoint;
 
         Vector3 nextLocation;
 
@@ -23,7 +24,8 @@ namespace Cardinal.Generative.Dungeon
         
         }
 
-        public Vector3 GetNextRoomSpawnLocation() { return nextLocation; }
+        public Vector3 GetNextRoomSpawnLocation() 
+            { return transform.forward * -25; }
 
 
     #if UNITY_EDITOR
