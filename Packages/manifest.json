@@ -12,6 +12,7 @@
     "com.unity.mathematics": "1.2.1",
     "com.unity.recorder": "2.5.5",
     "com.unity.render-pipelines.universal": "11.0.0",
+    "com.unity.selection-groups": "0.4.2-preview",
     "com.unity.test-framework": "1.1.29",
     "com.unity.textmeshpro": "3.0.6",
     "com.unity.timeline": "1.5.6",
