@@ -14,6 +14,7 @@ namespace Cardinal.Generative.Dungeon
         public TypeOfDungeon DungeonType = TypeOfDungeon.Branching;
         [Header("Data Objects")]
         public RoomList RoomList;
+        public RoomList StarterRooms;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
         int RoomsGenerated = 0;
@@ -23,7 +24,7 @@ namespace Cardinal.Generative.Dungeon
         // Start is called before the first frame update
         void Start()
         {
-            GenerateMainPath();
+
         }
 
         // Update is called once per frame
@@ -31,134 +32,138 @@ namespace Cardinal.Generative.Dungeon
         {
         
         }
-
-        public void GenerateStartingRoom() 
+        public void GenerateSpawnRoom() 
         {
-            List<GameObject> validrooms = new List<GameObject>();
-            Vector3 location = Vector3.zero;
-
-            //Find Valid Rooms
-            foreach (GameObject item in RoomList.RoomsToUse)
-            {
-                if (item.GetComponent<Room>().RoomFlags.Contains
-                    (RoomFlags.StartingRoom))
-                {
-                    validrooms.Add(item);
-                }
-            }
-            //Select Room to Spawn
-            int randomSelection = Random.Range(0, validrooms.Count);
-            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
-            roomToSpawn.transform.position = location;
-            GeneratedRooms.Add(roomToSpawn);
+            GameObject roomToSpawn = Instantiate(GetRandomRoom
+                (StarterRooms.RoomsToUse));
+            roomToSpawn.transform.position = Vector3.zero;
             SpawnRoom = roomToSpawn;
+            GeneratedRooms.Add(roomToSpawn);
         }
-
-        public Doorway GetMainPathStart() 
+        public void GenerateMainPath() 
         {
-            Room startingRoom = SpawnRoom.GetComponent<Room>();
-            int randomDoorSelection = Random.Range(0, startingRoom.doorways.Count);
-            return startingRoom.doorways[randomDoorSelection];
-        }
-
-        public Doorway GetRandomDoorway(Room room) 
-        {
-            int randomDoorSelection = Random.Range(0, room.doorways.Count);
-            return room.doorways[randomDoorSelection];
-        }
-        void GenerateMainPath() 
-        {
-            GameObject currentMainNode;
-            Doorway currentDoor;
-
-            GenerateStartingRoom();
-            currentMainNode = 
-                GenerateAndReturnRoom(GetMainPathStart().transform); //Spawn room off of starting room
-            for (int i = 0; i < ((int)DungeonSize / 2) + 1; i++)
+            Doorway currentDoor = GetRandomDoor(SpawnRoom.GetComponent<Room>());
+            for (int i = 0; i < (int)DungeonSize/2; i++)
             {
-                currentDoor = GetRandomDoorway(currentMainNode.GetComponent<Room>());
-                currentMainNode = GenerateAndReturnRoom
-                    (currentDoor.transform);
+                GameObject SpawnedRoom = GenerateAndReturnSuitableRoom(currentDoor, 2);
+                currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
             }
         }
 
-        public void GenerateRoom(List<RoomFlags> roomFlags, Vector3 position) 
-        {
-            List<GameObject> validrooms = new List<GameObject>();
 
-            //Find Valid Rooms
-            foreach (GameObject item in RoomList.RoomsToUse)
+
+
+        #region Door Functions
+            public Doorway GetMainPathStart() 
             {
-                if (item.GetComponent<Room>().RoomFlags == roomFlags)
-                {
-                    validrooms.Add(item);
-                }
+                Room startingRoom = SpawnRoom.GetComponent<Room>();
+                int randomDoorSelection = Random.Range(0, startingRoom.doorways.Count);
+                return startingRoom.doorways[randomDoorSelection];
             }
-            //Select Room to Spawn
-            int randomSelection = Random.Range(0, validrooms.Count);
-            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
-            roomToSpawn.transform.position = position;
-            GeneratedRooms.Add(roomToSpawn);
-        }
 
-        public void GenerateRoom(Vector3 position)
-        {
-            List<GameObject> validrooms = RoomList.RoomsToUse;
-
-            //Select Room to Spawn
-            int randomSelection = Random.Range(0, validrooms.Count);
-            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
-            roomToSpawn.transform.position = position;
-            GeneratedRooms.Add(roomToSpawn);
-        }
-
-        public GameObject GenerateAndReturnRoom(Vector3 position)
-        {
-            List<GameObject> validrooms = new List<GameObject>();
-
-            //Find Valid Rooms
-            foreach (GameObject item in RoomList.RoomsToUse)
+            public Doorway GetRandomDoorway(Room room) 
             {
-                List<RoomFlags> thisRoomsFlags = item.GetComponent<Room>().RoomFlags;
-                if (!thisRoomsFlags.Contains(RoomFlags.BossRoom) ||
-                    !thisRoomsFlags.Contains(RoomFlags.StartingRoom))
+                int randomDoorSelection = Random.Range(0, room.doorways.Count);
+                return room.doorways[randomDoorSelection];
+            }
+
+            public Heading InvertDoorDirection(Heading heading) 
+            {
+                switch (heading)
                 {
-                    validrooms.Add(item);
+                    case Heading.North:
+                        return Heading.South;
+                    case Heading.East:
+                        return Heading.West;
+                    case Heading.South:
+                        return Heading.North;
+                    case Heading.West:
+                        return Heading.East;
+                    default:
+                        Debug.LogError("Returned a non-existant door!");
+                        return Heading.North;
                 }
             }
 
-            //Select Room to Spawn
-            int randomSelection = Random.Range(0, validrooms.Count);
-            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
-            roomToSpawn.transform.position = position;
-            GeneratedRooms.Add(roomToSpawn);
+        #endregion
+
+        #region DeterminationFunctions     
+        public GameObject GetRandomRoom(List<GameObject> candidateRooms) 
+        {
+            int randomSelection = Random.Range(0, candidateRooms.Count);
+            return candidateRooms[randomSelection];
+        }
+
+        public Doorway GetRandomDoor(Room room) 
+        {
+            int randomSelection = Random.Range(0, room.doorways.Count);
+            return room.doorways[randomSelection];
+        }
+
+        #endregion
+
+        #region GenerativeFunctions
+        //0 criteria
+        public void GenerateSuitableRoom(Doorway connection) 
+        {
+            Heading connectionSide = connection.Facing;
+            List<GameObject> suitableRooms = new List<GameObject>();
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                var RoomRef = item.GetComponent<Room>();
+                if (RoomRef.doorways.Any(D => D.Facing == connectionSide))
+                {
+                    suitableRooms.Add(item);
+                }
+            }
+
+            GameObject roomToSpawn = Instantiate
+                (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            roomToSpawn.transform.parent = null;         
+        }
+
+        //Number of Doors criteria
+        public void GenerateSuitableRoom(Doorway connection, int minimumDoorNumber)
+        {
+            Heading connectionSide = connection.Facing;
+            List<GameObject> suitableRooms = new List<GameObject>();
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                var RoomRef = item.GetComponent<Room>();
+                if ((RoomRef.doorways.Any(D => D.Facing == connectionSide)) 
+                    && (RoomRef.doorways.Count >= minimumDoorNumber))
+                {
+                    suitableRooms.Add(item);
+                }
+            }
+
+            GameObject roomToSpawn = Instantiate
+                (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            roomToSpawn.transform.parent = null;
+        }
+
+        //Number of Doors criteria, Returns GO
+        public GameObject GenerateAndReturnSuitableRoom(Doorway connection, int minimumDoorNumber)
+        {
+            Heading connectionSide = connection.Facing;
+            List<GameObject> suitableRooms = new List<GameObject>();
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                var RoomRef = item.GetComponent<Room>();
+                if ((RoomRef.doorways.Any(D => D.Facing == connectionSide))
+                    && (RoomRef.doorways.Count >= minimumDoorNumber))
+                {
+                    suitableRooms.Add(item);
+                }
+            }
+
+            GameObject roomToSpawn = Instantiate
+                (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            roomToSpawn.transform.parent = null;
             return roomToSpawn;
         }
 
-        public GameObject GenerateAndReturnRoom(Transform placing)
-        {
-            List<GameObject> validrooms = new List<GameObject>();
-
-            //Find Valid Rooms
-            foreach (GameObject item in RoomList.RoomsToUse)
-            {
-                List<RoomFlags> thisRoomsFlags = item.GetComponent<Room>().RoomFlags;
-                if (!thisRoomsFlags.Contains(RoomFlags.BossRoom) ||
-                    !thisRoomsFlags.Contains(RoomFlags.StartingRoom))
-                {
-                    validrooms.Add(item);
-                }
-            }
-
-            //Select Room to Spawn
-            int randomSelection = Random.Range(0, validrooms.Count);
-            GameObject roomToSpawn = Instantiate(validrooms[randomSelection]);
-            roomToSpawn.transform.position = placing.position;
-            roomToSpawn.transform.rotation = placing.rotation;
-            GeneratedRooms.Add(roomToSpawn);
-            return roomToSpawn;
-        }
-
+        #endregion
 
     }
 }

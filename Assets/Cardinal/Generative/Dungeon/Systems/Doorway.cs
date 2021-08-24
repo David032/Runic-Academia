@@ -9,13 +9,11 @@ namespace Cardinal.Generative.Dungeon
         public GameObject Door;
         public GameObject Wall;
         public GameObject roomPoint;
-
-        Vector3 nextLocation;
+        public Heading Facing = Heading.North;
 
         // Start is called before the first frame update
         void Start()
         {
-            nextLocation = transform.forward * -10;
         }
 
         // Update is called once per frame
@@ -24,9 +22,7 @@ namespace Cardinal.Generative.Dungeon
         
         }
 
-        public Vector3 GetNextRoomSpawnLocation() 
-            { return transform.forward * -25; }
-
+        public Transform GetNextRoomPlace() { return roomPoint.transform; }
 
     #if UNITY_EDITOR
         private void OnDrawGizmos()

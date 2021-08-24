@@ -16,12 +16,19 @@ namespace Cardinal.Generative
         Branching,
         Special
     }
-
     public enum RoomFlags
     {
         StartingRoom,
         BossRoom,
         SpecialRoom,
         PuzzleRoom
+    }
+
+    public enum Heading
+    {
+        North,
+        East,
+        South,
+        West
     }
 }
