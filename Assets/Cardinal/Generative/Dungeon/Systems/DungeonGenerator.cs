@@ -44,7 +44,7 @@ namespace Cardinal.Generative.Dungeon
         public void GenerateMainPath() 
         {
             Doorway currentDoor = GetRandomDoor(SpawnRoom.GetComponent<Room>());
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < (int)DungeonSize/2; i++)
             {
                 GameObject SpawnedRoom = GenerateAndReturnSuitableRoom(currentDoor, 2);
                 currentDoor.IsUsed = true;
@@ -173,12 +173,6 @@ namespace Cardinal.Generative.Dungeon
                     suitableRooms.Add(item);
                 }
             }
-            print("The following rooms were deemed suitable: ");
-            foreach (var item in suitableRooms)
-            {
-                print(item);
-            }
-
             GameObject roomToSpawn = Instantiate
                 (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
             print("Spawned " + roomToSpawn + "!");
