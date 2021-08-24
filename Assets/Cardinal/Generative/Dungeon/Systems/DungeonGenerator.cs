@@ -24,7 +24,8 @@ namespace Cardinal.Generative.Dungeon
         // Start is called before the first frame update
         void Start()
         {
-
+            GenerateSpawnRoom();
+            GenerateMainPath();
         }
 
         // Update is called once per frame
@@ -46,6 +47,7 @@ namespace Cardinal.Generative.Dungeon
             for (int i = 0; i < (int)DungeonSize/2; i++)
             {
                 GameObject SpawnedRoom = GenerateAndReturnSuitableRoom(currentDoor, 2);
+                currentDoor.IsUsed = true;
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
             }
         }
@@ -96,8 +98,41 @@ namespace Cardinal.Generative.Dungeon
 
         public Doorway GetRandomDoor(Room room) 
         {
-            int randomSelection = Random.Range(0, room.doorways.Count);
-            return room.doorways[randomSelection];
+            List<Doorway> validDoors = new List<Doorway>();
+            foreach (var item in room.doorways)
+            {
+                if (!item.IsUsed)
+                {
+                    validDoors.Add(item);
+                }
+            }
+            int randomSelection = Random.Range(0, validDoors.Count);
+            return validDoors[randomSelection];
+        }
+
+        public Doorway GetRandomUnobstructedDoor(Room room) 
+        {
+            Doorway doorToReturn;
+            List<Doorway> validDoors = new List<Doorway>();
+            foreach (var item in room.doorways)
+            {
+                if (!item.IsUsed)
+                {
+                    validDoors.Add(item);
+                }
+            }
+            int randomSelection = Random.Range(0, validDoors.Count);
+            Collider[] hits = Physics.OverlapBox(validDoors[randomSelection]
+                .GetNextRoomPlace().position, Vector3.one);
+            if (!hits.Contains(null))
+            {
+                doorToReturn = GetRandomUnobstructedDoor(room);
+            }
+            else
+            {
+                doorToReturn = validDoors[randomSelection];
+            }
+            return doorToReturn;
         }
 
         #endregion
@@ -157,9 +192,14 @@ namespace Cardinal.Generative.Dungeon
                 }
             }
 
+
+
+
+
             GameObject roomToSpawn = Instantiate
                 (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
             roomToSpawn.transform.parent = null;
+            GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
         }
 

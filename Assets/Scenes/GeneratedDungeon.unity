@@ -156,7 +156,7 @@ MonoBehaviour:
   DungeonSize: 16
   DungeonType: 1
   RoomList: {fileID: 11400000, guid: 656bcc04ee56add498adad75a3d8b5fa, type: 2}
-  StarterRooms: {fileID: 0}
+  StarterRooms: {fileID: 11400000, guid: e2e79cf79fe814542ad705bf1d49d0ee, type: 2}
   GeneratedRooms: []
 --- !u!4 &42656570
 Transform:

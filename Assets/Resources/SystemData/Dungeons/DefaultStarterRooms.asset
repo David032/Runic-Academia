@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00424af72387fb04da9120f85f8fe056, type: 3}
   m_Name: DefaultStarterRooms
   m_EditorClassIdentifier: 
-  RoomsToUse: []
+  RoomsToUse:
+  - {fileID: 2819326594541008438, guid: 43ed3d22bd14f1749ac135ce3a96b954, type: 3}
+  - {fileID: 832926296948040979, guid: 5031289c9b4e4e848a9db74af85dd832, type: 3}
+  - {fileID: 2904490055247478389, guid: ed115470e84688b40b9093be4f89b875, type: 3}
+  - {fileID: 6980081941619595373, guid: 8eec3cfd1b5c86d4187878be01dccfb7, type: 3}

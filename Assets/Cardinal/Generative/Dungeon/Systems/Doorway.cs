@@ -10,6 +10,7 @@ namespace Cardinal.Generative.Dungeon
         public GameObject Wall;
         public GameObject roomPoint;
         public Heading Facing = Heading.North;
+        public bool IsUsed = false;
 
         // Start is called before the first frame update
         void Start()
