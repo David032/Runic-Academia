@@ -44,7 +44,7 @@ namespace Cardinal.Generative.Dungeon
         public void GenerateMainPath() 
         {
             Doorway currentDoor = GetRandomDoor(SpawnRoom.GetComponent<Room>());
-            for (int i = 0; i < (int)DungeonSize/2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 GameObject SpawnedRoom = GenerateAndReturnSuitableRoom(currentDoor, 2);
                 currentDoor.IsUsed = true;
@@ -110,31 +110,6 @@ namespace Cardinal.Generative.Dungeon
             return validDoors[randomSelection];
         }
 
-        public Doorway GetRandomUnobstructedDoor(Room room) 
-        {
-            Doorway doorToReturn;
-            List<Doorway> validDoors = new List<Doorway>();
-            foreach (var item in room.doorways)
-            {
-                if (!item.IsUsed)
-                {
-                    validDoors.Add(item);
-                }
-            }
-            int randomSelection = Random.Range(0, validDoors.Count);
-            Collider[] hits = Physics.OverlapBox(validDoors[randomSelection]
-                .GetNextRoomPlace().position, Vector3.one);
-            if (!hits.Contains(null))
-            {
-                doorToReturn = GetRandomUnobstructedDoor(room);
-            }
-            else
-            {
-                doorToReturn = validDoors[randomSelection];
-            }
-            return doorToReturn;
-        }
-
         #endregion
 
         #region GenerativeFunctions
@@ -178,27 +153,49 @@ namespace Cardinal.Generative.Dungeon
         }
 
         //Number of Doors criteria, Returns GO
-        public GameObject GenerateAndReturnSuitableRoom(Doorway connection, int minimumDoorNumber)
+        public GameObject GenerateAndReturnSuitableRoom
+            (Doorway connection, int minimumDoorNumber)
         {
             Heading connectionSide = connection.Facing;
+            print("Generating a room connected to "
+                + connection.GetComponentInParent<Room>().gameObject + " on it's "
+                + connectionSide + " side");
             List<GameObject> suitableRooms = new List<GameObject>();
             foreach (GameObject item in RoomList.RoomsToUse)
             {
                 var RoomRef = item.GetComponent<Room>();
-                if ((RoomRef.doorways.Any(D => D.Facing == connectionSide))
-                    && (RoomRef.doorways.Count >= minimumDoorNumber))
+                if ((RoomRef.doorways.Any
+                    (D => D.Facing == InvertDoorDirection(connectionSide))
+                    && (RoomRef.doorways.Count >= minimumDoorNumber)))
                 {
+                    print(item + " has a door facing the correct way, and more than "
+                        + minimumDoorNumber + " doors");
                     suitableRooms.Add(item);
                 }
             }
-
-
-
-
+            print("The following rooms were deemed suitable: ");
+            foreach (var item in suitableRooms)
+            {
+                print(item);
+            }
 
             GameObject roomToSpawn = Instantiate
                 (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            print("Spawned " + roomToSpawn + "!");
             roomToSpawn.transform.parent = null;
+
+            print("As it connected on the " + connectionSide +
+                ", the door on the " + InvertDoorDirection(connectionSide) 
+                + " side, should be set to false");
+
+            foreach (Doorway item in roomToSpawn.GetComponent<Room>().doorways)
+            {
+                if (item.Facing == InvertDoorDirection(connectionSide))
+                {
+                    print("Set " + item + " to false");
+                    item.IsUsed = true;
+                }
+            }
             GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
         }

@@ -10,7 +10,9 @@ namespace Cardinal.Generative.Dungeon
         public GameObject Wall;
         public GameObject roomPoint;
         public Heading Facing = Heading.North;
+
         public bool IsUsed = false;
+        bool isSet = false;
 
         // Start is called before the first frame update
         void Start()
@@ -21,6 +23,24 @@ namespace Cardinal.Generative.Dungeon
         void Update()
         {
         
+        }
+
+        void DoorCheck() 
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, transform.forward * -10, out hit))
+            {
+                if (hit.collider.GetComponent<Doorway>())
+                {
+                    Wall.SetActive(false);
+                    hit.collider.GetComponent<Doorway>().Wall.SetActive(false);
+                }
+                if (hit.collider.GetComponentInParent<Doorway>())
+                {
+                    Wall.SetActive(false);
+                    hit.collider.GetComponentInParent<Doorway>().Wall.SetActive(false);
+                }
+            }
         }
 
         public Transform GetNextRoomPlace() { return roomPoint.transform; }
