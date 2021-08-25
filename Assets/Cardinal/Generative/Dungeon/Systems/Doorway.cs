@@ -43,6 +43,12 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
+        public void ActivateDoor() 
+        {
+            Wall.SetActive(false);
+            Door.SetActive(false);
+        }
+
         public Transform GetNextRoomPlace() { return roomPoint.transform; }
 
     #if UNITY_EDITOR

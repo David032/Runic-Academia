@@ -9,6 +9,7 @@ namespace Cardinal.Generative.Dungeon
         public List<Doorway> doorways;
         public List<RoomFlags> RoomFlags;
         public bool isDone = false;
+        public bool isBroken = false;
 
         // Start is called before the first frame update
         void Start()
