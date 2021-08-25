@@ -54,14 +54,22 @@ namespace Cardinal.Generative.Dungeon
                     GenerateAndReturnSuitableRoom(currentDoor, 2);
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
             }
+
+            #region Error Checking
             GeneratedRooms.Reverse();
+            List<GameObject> DeactivatedRooms = new List<GameObject>();
+
+            //Identify Overlapping Rooms
             foreach (GameObject item in GeneratedRooms)
             {
                 List<GameObject> roomsTocheck = GeneratedRooms;
                 foreach (GameObject room in roomsTocheck)
                 {
                     if (Vector3.Distance(item.transform.position,
-                        room.transform.position) < 5 && !(item == room))
+                        room.transform.position) < 5 
+                        && !(item == room) 
+                        && !(item.GetComponent<Room>()
+                            .RoomFlags.Contains(RoomFlags.StartingRoom)))
                     {
                         print(item + " and " + room + " appear to be overlapping at " 
                             + room.transform.position);
@@ -69,26 +77,26 @@ namespace Cardinal.Generative.Dungeon
                             Vector3.Distance(item.transform.position,
                             room.transform.position));
                         item.SetActive(false);
+                        DeactivatedRooms.Add(item);
                     }
                 }
             }
-            bool toggle = false;
-            foreach (GameObject room in GeneratedRooms)
-            {
-                if (!room.activeSelf)
-                {
-                    if (!toggle)
-                    {
-                        room.SetActive(true);
-                        toggle = true;
-                    }
-                    else
-                    {
-                        toggle = false;
-                    }
 
+            bool toggle = false;
+            foreach (GameObject item in DeactivatedRooms)
+            {
+                if (!toggle)
+                {
+                    item.SetActive(true);
+                    toggle = true;
+                }
+                else
+                {
+                    toggle = false;
                 }
             }
+            #endregion
+
         }
 
         #region Door Functions
