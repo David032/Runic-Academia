@@ -17,14 +17,14 @@ namespace Cardinal.Generative.Dungeon
         [Header("Data Objects")]
         public RoomList RoomList;
         public RoomList StarterRooms;
+        public RoomList BossRooms;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
         int RoomsGenerated = 0;
-        GameObject SpawnRoom;
 
         [Header("Internals")]
-        GameObject priorRoom;
-
+        GameObject SpawnRoom;
+        GameObject BossRoom;
 
         // Start is called before the first frame update
         void Start()
@@ -54,6 +54,11 @@ namespace Cardinal.Generative.Dungeon
                 GameObject SpawnedRoom = 
                     GenerateAndReturnSuitableRoom(currentDoor, 2);
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
+            }
+
+            if (RequiresBoss)
+            {
+                BossRoom = GenerateSpecialRoom(currentDoor, BossRooms);
             }
 
             #region Error Checking
@@ -343,6 +348,39 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
+        //Special Room Generation
+        public GameObject GenerateSpecialRoom
+            (Doorway connection, RoomList specialRoomList)
+        {
+            Heading connectionSide = connection.Facing;
+            List<GameObject> suitableRooms = new List<GameObject>();
+            foreach (GameObject item in specialRoomList.RoomsToUse)
+            {
+                var RoomRef = item.GetComponent<Room>();
+                if (RoomRef.doorways.Any(D => D.Facing == connectionSide))
+                {
+                    suitableRooms.Add(item);
+                }
+            }
+
+            GameObject roomToSpawn = Instantiate
+                (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            roomToSpawn.transform.parent = null;
+            roomToSpawn.transform.rotation.eulerAngles.Set(0, 0, 0);
+            roomToSpawn.transform.rotation = Quaternion.EulerAngles(0, 0, 0);
+
+            //This bit doesn't work!
+            foreach (Doorway item in roomToSpawn.GetComponent<Room>().doorways)
+            {
+                if (item.Facing == InvertDoorDirection(connectionSide))
+                {
+                    item.IsUsed = true;
+                }
+            }
+            // :(
+            GeneratedRooms.Add(roomToSpawn);
+            return roomToSpawn;
+        }
         #endregion
 
     }
