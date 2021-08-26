@@ -20,7 +20,6 @@ namespace Cardinal.Generative.Dungeon
         public RoomList BossRooms;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
-        int RoomsGenerated = 0;
 
         [Header("Internals")]
         GameObject SpawnRoom;
@@ -34,6 +33,9 @@ namespace Cardinal.Generative.Dungeon
             {
                 GenerateSpawnRoom();
                 GenerateMainPath();
+                //Generate Special Rooms
+                //Generate Puzzle Rooms
+                GenerateSecondaryRooms();
             }
 
         }
@@ -52,14 +54,14 @@ namespace Cardinal.Generative.Dungeon
             GeneratedRooms.Add(roomToSpawn);
             priorRoom = SpawnRoom;
         }
-        public void GenerateMainPath() 
+        public void GenerateMainPath()
         {
             Doorway currentDoor = GetRandomDoor(SpawnRoom.GetComponent<Room>());
             currentDoor.ActivateDoorway();
             currentDoor.IsUsed = true;
-            for (int i = 0; i < ((int)DungeonSize/2)-1; i++)
+            for (int i = 0; i < ((int)DungeonSize / 2) - 1; i++)
             {
-                GameObject SpawnedRoom = 
+                GameObject SpawnedRoom =
                     GenerateAndReturnSuitableRoom(currentDoor, 2);
                 priorRoom = SpawnedRoom;
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
@@ -71,7 +73,11 @@ namespace Cardinal.Generative.Dungeon
                 //Don't update prior room as it's end of line
             }
 
-            #region Error Checking
+            CheckForGenerationErrors();
+        }
+
+        private void CheckForGenerationErrors()
+        {
             GeneratedRooms.Reverse();
             List<GameObject> DeactivatedRooms = new List<GameObject>();
 
@@ -83,16 +89,16 @@ namespace Cardinal.Generative.Dungeon
                 {
                     Room thisRoom = item.GetComponent<Room>();
                     bool isStartOrEnd = thisRoom.RoomFlags.Contains
-                        (RoomFlags.StartingRoom) || 
+                        (RoomFlags.StartingRoom) ||
                         thisRoom.RoomFlags.Contains(RoomFlags.BossRoom);
 
                     if (Vector3.Distance(item.transform.position,
-                        room.transform.position) < 5 
+                        room.transform.position) < 5
                         && !(item == room) && !(isStartOrEnd))
                     {
-                        print(item + " and " + room + " appear to be overlapping at " 
+                        print(item + " and " + room + " appear to be overlapping at "
                             + room.transform.position);
-                        print("With a spacing of " + 
+                        print("With a spacing of " +
                             Vector3.Distance(item.transform.position,
                             room.transform.position));
                         item.SetActive(false);
@@ -114,11 +120,66 @@ namespace Cardinal.Generative.Dungeon
                     toggle = false;
                 }
             }
-            #endregion
         }
-        public void GenerateSecondaryPaths() 
+
+        public void GenerateSecondaryRooms() 
         {
-            List<Doorway> AvailableDoors;
+            List<GameObject> SecondaryRooms = new List<GameObject>();
+            priorRoom = null;
+            int roomBudget = (int)DungeonSize - GeneratedRooms.Count;
+            print("Generating " + roomBudget + " rooms");
+            for (int i = 0; i < roomBudget; i++)
+            {
+                //Find potential doors
+                List<Doorway> doorways = new List<Doorway>();
+                foreach (GameObject room in GeneratedRooms)
+                {
+                    Room roomData = room.GetComponent<Room>();
+                    foreach (Doorway item in roomData.doorways)
+                    {
+                        if (!item.IsUsed)
+                        {
+                            doorways.Add(item);
+                        }
+                    }
+                }
+                //check if there's any left
+                if (doorways.Count == 0)
+                {
+                    break;
+                }
+
+                //Select a doorway
+                Doorway doorTobuildOffOf = GetRandomDoorFromList(doorways);
+                //Build a new room
+                GameObject secondaryRoom = GenerateAndReturnRoom(doorTobuildOffOf);
+                if (Vector3.Distance(secondaryRoom.transform.position,
+                    SpawnRoom.transform.position) < 5)
+                {
+                    GeneratedRooms.Remove(secondaryRoom);
+                    secondaryRoom.SetActive(false);
+                    print("Overlapped with spawn, removing!");
+                }
+                priorRoom = secondaryRoom;
+                SecondaryRooms.Add(secondaryRoom);
+            }
+
+            foreach (GameObject roomToTest in SecondaryRooms)
+            {
+                List<GameObject> RoomsTocheckAgainst = GeneratedRooms;
+                RoomsTocheckAgainst.Remove(roomToTest);
+                foreach (GameObject Room in RoomsTocheckAgainst)
+                {
+                    float DistanceBetweenRooms = Vector3.Distance
+                        (roomToTest.transform.position, Room.transform.position);
+                    if (DistanceBetweenRooms < 5)
+                    {
+                        roomToTest.SetActive(false);
+                        print("Set " + roomToTest + " to false as it overlapped with " + Room);
+                    }
+                }
+            }
+            //CheckForGenerationErrors();
         }
 
         #region Door Functions
@@ -232,6 +293,12 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
+        public Doorway GetRandomDoorFromList(List<Doorway> potentialDoors) 
+        {
+            int randomSelection = Random.Range(0, potentialDoors.Count);
+            return potentialDoors[randomSelection];
+        }
+
         #endregion
 
         #region GenerativeFunctions
@@ -243,7 +310,8 @@ namespace Cardinal.Generative.Dungeon
             foreach (GameObject item in RoomList.RoomsToUse)
             {
                 var RoomRef = item.GetComponent<Room>();
-                if (RoomRef.doorways.Any(D => D.Facing == connectionSide))
+                if (RoomRef.doorways.Any
+                    (D => D.Facing == InvertDoorDirection(connectionSide)))
                 {
                     suitableRooms.Add(item);
                 }
@@ -251,7 +319,69 @@ namespace Cardinal.Generative.Dungeon
 
             GameObject roomToSpawn = Instantiate
                 (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
-            roomToSpawn.transform.parent = null;         
+            roomToSpawn.transform.parent = null;
+            roomToSpawn.transform.rotation.eulerAngles.Set(0, 0, 0);
+            roomToSpawn.transform.rotation = Quaternion.EulerAngles(0, 0, 0);
+
+            Room roomToSpawnData = roomToSpawn.GetComponent<Room>();
+            foreach (Doorway item in roomToSpawnData.doorways)
+            {
+                if (item.Facing == InvertDoorDirection(connectionSide))
+                {
+                    item.IsUsed = true;
+                    item.DisableDoor();
+                    connection.IsUsed = true;
+                    if (!priorRoom.GetComponent<Room>().RoomFlags
+                        .Contains(RoomFlags.StartingRoom))
+                    {
+                        connection.DisableDoor();
+                    }
+                }
+            }
+            GeneratedRooms.Add(roomToSpawn);
+        }
+
+        //0 Criteria, returns GO
+        public GameObject GenerateAndReturnRoom(Doorway connection)
+        {
+            Heading connectionSide = connection.Facing;
+            List<GameObject> suitableRooms = new List<GameObject>();
+            foreach (GameObject item in RoomList.RoomsToUse)
+            {
+                var RoomRef = item.GetComponent<Room>();
+                if (RoomRef.doorways.Any
+                    (D => D.Facing == InvertDoorDirection(connectionSide)))
+                {
+                    suitableRooms.Add(item);
+                }
+            }
+            GameObject roomToSpawn = Instantiate
+                (GetRandomRoom(suitableRooms), connection.GetNextRoomPlace());
+            roomToSpawn.transform.parent = null;
+            roomToSpawn.transform.rotation.eulerAngles.Set(0, 0, 0);
+            roomToSpawn.transform.rotation = Quaternion.EulerAngles(0, 0, 0);
+
+            Room roomToSpawnData = roomToSpawn.GetComponent<Room>();
+            foreach (Doorway item in roomToSpawnData.doorways)
+            {
+                if (item.Facing == InvertDoorDirection(connectionSide))
+                {
+                    if (priorRoom == null)
+                    {
+                        break;
+                    }
+                    item.IsUsed = true;
+                    item.DisableDoor();
+                    connection.IsUsed = true;
+                    if (!priorRoom.GetComponent<Room>().RoomFlags
+                        .Contains(RoomFlags.StartingRoom))
+                    {
+                        connection.DisableDoor();
+                    }
+                }
+            }
+            GeneratedRooms.Add(roomToSpawn);
+            return roomToSpawn;
         }
 
         //Number of Doors criteria
