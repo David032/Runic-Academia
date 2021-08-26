@@ -12,6 +12,8 @@ namespace Cardinal.Generative.Dungeon
         public SizeOfDungeon DungeonSize = SizeOfDungeon.Small;
         //Type determines how it'll generate
         public TypeOfDungeon DungeonType = TypeOfDungeon.Branching;
+        //Do we want a boss room?
+        public bool RequiresBoss = true;
         [Header("Data Objects")]
         public RoomList RoomList;
         public RoomList StarterRooms;
@@ -27,7 +29,6 @@ namespace Cardinal.Generative.Dungeon
         // Start is called before the first frame update
         void Start()
         {
-            GetComponent<DungeonGridManager>().InitGrid((int)DungeonSize);
             GenerateSpawnRoom();
             GenerateMainPath();
         }
@@ -65,11 +66,14 @@ namespace Cardinal.Generative.Dungeon
                 List<GameObject> roomsTocheck = GeneratedRooms;
                 foreach (GameObject room in roomsTocheck)
                 {
+                    Room thisRoom = item.GetComponent<Room>();
+                    bool isStartOrEnd = thisRoom.RoomFlags.Contains
+                        (RoomFlags.StartingRoom) || 
+                        thisRoom.RoomFlags.Contains(RoomFlags.BossRoom);
+
                     if (Vector3.Distance(item.transform.position,
                         room.transform.position) < 5 
-                        && !(item == room) 
-                        && !(item.GetComponent<Room>()
-                            .RoomFlags.Contains(RoomFlags.StartingRoom)))
+                        && !(item == room) && !(isStartOrEnd))
                     {
                         print(item + " and " + room + " appear to be overlapping at " 
                             + room.transform.position);
