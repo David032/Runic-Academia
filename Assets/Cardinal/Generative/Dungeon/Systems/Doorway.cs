@@ -43,10 +43,16 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
-        public void ActivateDoor() 
+        public void DisableDoor() 
         {
             Wall.SetActive(false);
-            Door.SetActive(false);
+            Door.SetActive(false);         
+        }
+
+        public void ActivateDoorway() 
+        {
+            Wall.SetActive(false);
+            Door.SetActive(true);
         }
 
         public Transform GetNextRoomPlace() { return roomPoint.transform; }

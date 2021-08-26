@@ -25,12 +25,17 @@ namespace Cardinal.Generative.Dungeon
         [Header("Internals")]
         GameObject SpawnRoom;
         GameObject BossRoom;
+        GameObject priorRoom;
 
         // Start is called before the first frame update
         void Start()
         {
-            GenerateSpawnRoom();
-            GenerateMainPath();
+            if (DungeonType == TypeOfDungeon.Branching)
+            {
+                GenerateSpawnRoom();
+                GenerateMainPath();
+            }
+
         }
 
         // Update is called once per frame
@@ -45,14 +50,18 @@ namespace Cardinal.Generative.Dungeon
             roomToSpawn.transform.position = Vector3.zero;
             SpawnRoom = roomToSpawn;
             GeneratedRooms.Add(roomToSpawn);
+            priorRoom = SpawnRoom;
         }
         public void GenerateMainPath() 
         {
             Doorway currentDoor = GetRandomDoor(SpawnRoom.GetComponent<Room>());
-            for (int i = 0; i < (int)DungeonSize/2; i++)
+            currentDoor.ActivateDoorway();
+            currentDoor.IsUsed = true;
+            for (int i = 0; i < ((int)DungeonSize/2)-1; i++)
             {
                 GameObject SpawnedRoom = 
                     GenerateAndReturnSuitableRoom(currentDoor, 2);
+                priorRoom = SpawnedRoom;
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
             }
 
@@ -105,7 +114,10 @@ namespace Cardinal.Generative.Dungeon
                 }
             }
             #endregion
-
+        }
+        public void GenerateSecondaryPaths() 
+        {
+            List<Doorway> AvailableDoors;
         }
 
         #region Door Functions
@@ -119,6 +131,8 @@ namespace Cardinal.Generative.Dungeon
             public Doorway GetRandomDoorway(Room room) 
             {
                 int randomDoorSelection = Random.Range(0, room.doorways.Count);
+                room.doorways[randomDoorSelection].DisableDoor();
+                room.doorways[randomDoorSelection].IsUsed = true;
                 return room.doorways[randomDoorSelection];
             }
 
@@ -281,15 +295,21 @@ namespace Cardinal.Generative.Dungeon
             roomToSpawn.transform.rotation.eulerAngles.Set(0, 0, 0);
             roomToSpawn.transform.rotation = Quaternion.EulerAngles(0, 0, 0);
 
-            //This bit doesn't work!
-            foreach (Doorway item in roomToSpawn.GetComponent<Room>().doorways)
+            Room roomToSpawnData = roomToSpawn.GetComponent<Room>();
+            foreach (Doorway item in roomToSpawnData.doorways)
             {
                 if (item.Facing == InvertDoorDirection(connectionSide))
                 {
                     item.IsUsed = true;
+                    item.DisableDoor();
+                    connection.IsUsed = true;
+                    if (!priorRoom.GetComponent<Room>().RoomFlags
+                        .Contains(RoomFlags.StartingRoom))
+                    {
+                        connection.DisableDoor();
+                    }
                 }
             }
-            // :(
             GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
         }
@@ -357,7 +377,8 @@ namespace Cardinal.Generative.Dungeon
             foreach (GameObject item in specialRoomList.RoomsToUse)
             {
                 var RoomRef = item.GetComponent<Room>();
-                if (RoomRef.doorways.Any(D => D.Facing == connectionSide))
+                if (RoomRef.doorways.Any
+                    (D => D.Facing == InvertDoorDirection(connectionSide)))
                 {
                     suitableRooms.Add(item);
                 }
@@ -369,15 +390,15 @@ namespace Cardinal.Generative.Dungeon
             roomToSpawn.transform.rotation.eulerAngles.Set(0, 0, 0);
             roomToSpawn.transform.rotation = Quaternion.EulerAngles(0, 0, 0);
 
-            //This bit doesn't work!
-            foreach (Doorway item in roomToSpawn.GetComponent<Room>().doorways)
+            Room roomToSpawnData = roomToSpawn.GetComponent<Room>();
+            foreach (Doorway item in roomToSpawnData.doorways)
             {
                 if (item.Facing == InvertDoorDirection(connectionSide))
                 {
                     item.IsUsed = true;
+                    item.ActivateDoorway();
                 }
             }
-            // :(
             GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
         }
