@@ -68,6 +68,7 @@ namespace Cardinal.Generative.Dungeon
             if (RequiresBoss)
             {
                 BossRoom = GenerateSpecialRoom(currentDoor, BossRooms);
+                //Don't update prior room as it's end of line
             }
 
             #region Error Checking
@@ -397,6 +398,8 @@ namespace Cardinal.Generative.Dungeon
                 {
                     item.IsUsed = true;
                     item.ActivateDoorway();
+                    connection.IsUsed = true;
+                    connection.ActivateDoorway();
                 }
             }
             GeneratedRooms.Add(roomToSpawn);
