@@ -14,10 +14,24 @@ namespace Cardinal.Generative.Dungeon
         public TypeOfDungeon DungeonType = TypeOfDungeon.Branching;
         //Do we want a boss room?
         public bool RequiresBoss = true;
-        [Header("Data Objects")]
+        //Puzzle Rooms?
+        [Range(0, 4)]
+        public int NumberOfPuzzleRooms = 0;
+        //Special Rooms?
+        [Range(0, 4)]
+        public int NumberOfSpecialRooms = 0;
+        //Harvestable resources
+        public ResourceAvailability ResourceNodeSpread = ResourceAvailability.Regular;
+        //Lootable Objects
+        public ResourceAvailability LootNodeSpread = ResourceAvailability.Regular;
+        [Header("Data Lists")]
         public RoomList RoomList;
         public RoomList StarterRooms;
         public RoomList BossRooms;
+        public RoomList PuzzleRooms;
+        public RoomList SpecialRooms;
+        public LootableList ResourceNodes;
+        public LootableList LootNodes;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
 
@@ -26,25 +40,54 @@ namespace Cardinal.Generative.Dungeon
         GameObject BossRoom;
         GameObject priorRoom;
 
+        List<GameObject> spawnedLoot;
+        List<GameObject> spawnedNodes;
+
         // Start is called before the first frame update
         void Start()
         {
-            if (DungeonType == TypeOfDungeon.Branching)
-            {
-                GenerateSpawnRoom();
-                GenerateMainPath();
-                //Generate Special Rooms
-                //Generate Puzzle Rooms
-                GenerateSecondaryRooms();
-            }
-
+            StartCoroutine(LoadDungeon());
         }
 
-        // Update is called once per frame
-        void Update()
+        IEnumerator LoadDungeon() 
         {
-        
+            GenerateDungeon();
+            yield return new WaitForSeconds(5f);
+            SpreadObjects(LootNodes, LootNodeSpread, MarkerType.Loot);
+            yield return new WaitForSeconds(5f);
+            SpreadObjects(ResourceNodes, ResourceNodeSpread, MarkerType.Resource);
         }
+
+        public void GenerateDungeon() 
+        {
+            switch (DungeonType)
+            {
+                case TypeOfDungeon.Linear:
+                    break;
+                case TypeOfDungeon.Branching:
+                    GenerateSpawnRoom();
+                    GenerateMainPath();
+                    if (NumberOfSpecialRooms != 0)
+                    {
+                        GenerateSpecialRooms();
+                    }
+                    if (NumberOfPuzzleRooms != 0)
+                    {
+                        GeneratePuzzleRooms();
+                    }
+                    GenerateSecondaryRooms();
+                    DoorCheck();
+                    break;
+                case TypeOfDungeon.Special:
+                    break;
+                default:
+                    break;
+            }
+        }
+
+
+
+        #region PhysicalGeneration
         public void GenerateSpawnRoom() 
         {
             GameObject roomToSpawn = Instantiate(GetRandomRoom
@@ -69,7 +112,7 @@ namespace Cardinal.Generative.Dungeon
 
             if (RequiresBoss)
             {
-                BossRoom = GenerateSpecialRoom(currentDoor, BossRooms);
+                BossRoom = GenerateNonGenericRoom(currentDoor, BossRooms);
                 //Don't update prior room as it's end of line
             }
 
@@ -182,39 +225,191 @@ namespace Cardinal.Generative.Dungeon
             //CheckForGenerationErrors();
         }
 
-        #region Door Functions
-            public Doorway GetMainPathStart() 
+        public void GeneratePuzzleRooms()
+        {
+            List<GameObject> SecondaryRooms = new List<GameObject>();
+            priorRoom = null;
+            for (int i = 0; i < NumberOfPuzzleRooms; i++)
             {
-                Room startingRoom = SpawnRoom.GetComponent<Room>();
-                int randomDoorSelection = Random.Range(0, startingRoom.doorways.Count);
-                return startingRoom.doorways[randomDoorSelection];
-            }
-
-            public Doorway GetRandomDoorway(Room room) 
-            {
-                int randomDoorSelection = Random.Range(0, room.doorways.Count);
-                room.doorways[randomDoorSelection].DisableDoor();
-                room.doorways[randomDoorSelection].IsUsed = true;
-                return room.doorways[randomDoorSelection];
-            }
-
-            public Heading InvertDoorDirection(Heading heading) 
-            {
-                switch (heading)
+                //Find potential doors
+                List<Doorway> doorways = new List<Doorway>();
+                foreach (GameObject room in GeneratedRooms)
                 {
-                    case Heading.North:
-                        return Heading.South;
-                    case Heading.East:
-                        return Heading.West;
-                    case Heading.South:
-                        return Heading.North;
-                    case Heading.West:
-                        return Heading.East;
-                    default:
-                        Debug.LogError("Returned a non-existant door!");
-                        return Heading.North;
+                    Room roomData = room.GetComponent<Room>();
+                    foreach (Doorway item in roomData.doorways)
+                    {
+                        if (!item.IsUsed)
+                        {
+                            doorways.Add(item);
+                        }
+                    }
+                }
+                //check if there's any left
+                if (doorways.Count == 0)
+                {
+                    break;
+                }
+
+                //Select a doorway
+                Doorway doorTobuildOffOf = GetRandomDoorFromList(doorways);
+                //Build a new room
+                GameObject secondaryRoom = GenerateNonGenericRoom(doorTobuildOffOf, 
+                    PuzzleRooms);
+                if (Vector3.Distance(secondaryRoom.transform.position,
+                    SpawnRoom.transform.position) < 5)
+                {
+                    GeneratedRooms.Remove(secondaryRoom);
+                    secondaryRoom.SetActive(false);
+                    print("Overlapped with spawn, removing!");
+                }
+                priorRoom = secondaryRoom;
+                SecondaryRooms.Add(secondaryRoom);
+            }
+
+            foreach (GameObject roomToTest in SecondaryRooms)
+            {
+                List<GameObject> RoomsTocheckAgainst = GeneratedRooms;
+                RoomsTocheckAgainst.Remove(roomToTest);
+                foreach (GameObject Room in RoomsTocheckAgainst)
+                {
+                    float DistanceBetweenRooms = Vector3.Distance
+                        (roomToTest.transform.position, Room.transform.position);
+                    if (DistanceBetweenRooms < 5)
+                    {
+                        roomToTest.SetActive(false);
+                        print("Set " + roomToTest + " to false as it overlapped with " + Room);
+                    }
                 }
             }
+            //CheckForGenerationErrors();
+        }
+
+        public void GenerateSpecialRooms()
+        {
+            List<GameObject> SecondaryRooms = new List<GameObject>();
+            priorRoom = null;
+            for (int i = 0; i < NumberOfPuzzleRooms; i++)
+            {
+                //Find potential doors
+                List<Doorway> doorways = new List<Doorway>();
+                foreach (GameObject room in GeneratedRooms)
+                {
+                    Room roomData = room.GetComponent<Room>();
+                    foreach (Doorway item in roomData.doorways)
+                    {
+                        if (!item.IsUsed)
+                        {
+                            doorways.Add(item);
+                        }
+                    }
+                }
+                //check if there's any left
+                if (doorways.Count == 0)
+                {
+                    break;
+                }
+
+                //Select a doorway
+                Doorway doorTobuildOffOf = GetRandomDoorFromList(doorways);
+                //Build a new room
+                GameObject secondaryRoom = GenerateNonGenericRoom(doorTobuildOffOf,
+                    SpecialRooms);
+                if (Vector3.Distance(secondaryRoom.transform.position,
+                    SpawnRoom.transform.position) < 5)
+                {
+                    GeneratedRooms.Remove(secondaryRoom);
+                    secondaryRoom.SetActive(false);
+                    print("Overlapped with spawn, removing!");
+                }
+                priorRoom = secondaryRoom;
+                SecondaryRooms.Add(secondaryRoom);
+            }
+
+            foreach (GameObject roomToTest in SecondaryRooms)
+            {
+                List<GameObject> RoomsTocheckAgainst = GeneratedRooms;
+                RoomsTocheckAgainst.Remove(roomToTest);
+                foreach (GameObject Room in RoomsTocheckAgainst)
+                {
+                    float DistanceBetweenRooms = Vector3.Distance
+                        (roomToTest.transform.position, Room.transform.position);
+                    if (DistanceBetweenRooms < 5)
+                    {
+                        roomToTest.SetActive(false);
+                        print("Set " + roomToTest + " to false as it overlapped with " + Room);
+                    }
+                }
+            }
+            //CheckForGenerationErrors();
+        }
+        #endregion
+
+        #region Door Functions
+        public Doorway GetMainPathStart() 
+        {
+            Room startingRoom = SpawnRoom.GetComponent<Room>();
+            int randomDoorSelection = Random.Range(0, startingRoom.doorways.Count);
+            return startingRoom.doorways[randomDoorSelection];
+        }
+
+        public Doorway GetRandomDoorway(Room room) 
+        {
+            int randomDoorSelection = Random.Range(0, room.doorways.Count);
+            room.doorways[randomDoorSelection].DisableDoor();
+            room.doorways[randomDoorSelection].IsUsed = true;
+            return room.doorways[randomDoorSelection];
+        }
+
+        public Heading InvertDoorDirection(Heading heading) 
+        {
+            switch (heading)
+            {
+                case Heading.North:
+                    return Heading.South;
+                case Heading.East:
+                    return Heading.West;
+                case Heading.South:
+                    return Heading.North;
+                case Heading.West:
+                    return Heading.East;
+                default:
+                    Debug.LogError("Returned a non-existant door!");
+                    return Heading.North;
+            }
+        }
+
+        public void DoorCheck()
+        {
+            //find doors that think they're unused
+            List<Doorway> doorsTocheck = new List<Doorway>();
+            foreach (GameObject RoomObject in GeneratedRooms)
+            {
+                Room RoomData = RoomObject.GetComponent<Room>();
+                foreach (Doorway Door in RoomData.doorways)
+                {
+                    if (!Door.IsUsed)
+                    {
+                        doorsTocheck.Add(Door);
+                    }
+                }
+            }
+
+            //Check if they are
+            foreach (Doorway door in doorsTocheck)
+            {
+                RaycastHit hit;
+                if (Physics.Raycast(door.gameObject.transform.position + Vector3.up,
+                    door.gameObject.transform.forward * -1, out hit))
+                {
+                    if (hit.transform != null)
+                    {
+                        door.IsUsed = true;
+                        door.DisableDoor();
+                        //hit.transform.gameObject.SetActive(false);
+                    }
+                }
+            }
+        }
 
         #endregion
 
@@ -499,8 +694,8 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
-        //Special Room Generation
-        public GameObject GenerateSpecialRoom
+        //Non-Standard Room Generation
+        public GameObject GenerateNonGenericRoom
             (Doorway connection, RoomList specialRoomList)
         {
             Heading connectionSide = connection.Facing;
@@ -534,6 +729,66 @@ namespace Cardinal.Generative.Dungeon
             }
             GeneratedRooms.Add(roomToSpawn);
             return roomToSpawn;
+        }
+        #endregion
+
+        #region ContentGeneration
+        public void SpreadObjects(LootableList sourceObjects,
+            ResourceAvailability availability, MarkerType type)
+        {
+            GameObject holder = new GameObject();
+            holder.name = type.ToString();
+
+            spawnedLoot = new List<GameObject>();
+            for (int i = 0; i < AvailablityCount(availability); i++)
+            {
+                List<GameObject> potentialLocations = new List<GameObject>();
+                GameObject[] markers = GameObject.FindGameObjectsWithTag("NodeMarker");
+
+                foreach (var item in markers)
+                {
+                    NodeMarker thisMarker = item.GetComponent<NodeMarker>();
+                    if (!thisMarker.isUsed && thisMarker.type == type)
+                    {
+                        potentialLocations.Add(item);
+                    }
+                }
+
+                int RandomLootSelection = Random.Range(0, sourceObjects.LootNodes.Count);
+                int RandomPlaceSelection = Random.Range(0, potentialLocations.Count);
+                if (potentialLocations.Count == 0)
+                {
+                    break;
+                }
+                GameObject LocationToSpawn = potentialLocations[RandomPlaceSelection];
+                GameObject LootToSpawn = Instantiate
+                    (sourceObjects.LootNodes[RandomLootSelection],
+                    LocationToSpawn.transform);
+                LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
+                LootToSpawn.transform.parent = holder.transform;
+
+                spawnedLoot.Add(LootToSpawn);
+            }
+
+        }
+
+        int AvailablityCount(ResourceAvailability resource)
+        {
+            switch (resource)
+            {
+                case ResourceAvailability.None:
+                    return 0;
+                case ResourceAvailability.Sparse:
+                    return (int)DungeonSize / 4;
+                case ResourceAvailability.Regular:
+                    return (int)DungeonSize / 2;
+                case ResourceAvailability.Abundant:
+                    return ((int)DungeonSize / 4) * 3;
+                case ResourceAvailability.Overflowing:
+                    return (int)DungeonSize;
+                default:
+                    return (int)DungeonSize / 2;
+            }
         }
         #endregion
 

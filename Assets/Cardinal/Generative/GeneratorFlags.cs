@@ -23,7 +23,6 @@ namespace Cardinal.Generative
         SpecialRoom,
         PuzzleRoom
     }
-
     public enum Heading
     {
         North,
@@ -31,4 +30,22 @@ namespace Cardinal.Generative
         South,
         West
     }
+
+    public enum ResourceAvailability //How many to activate out of the available number
+    {
+        None, //None
+        Sparse, //Quarter
+        Regular, //Half
+        Abundant, // 3/4s
+        Overflowing //All
+    }
+
+    public enum MarkerType
+    {
+        Loot,
+        Enemy,
+        Resource
+    }
+
+
 }

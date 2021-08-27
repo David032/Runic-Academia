@@ -133,7 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 42656570}
   - component: {fileID: 42656567}
-  - component: {fileID: 42656568}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -157,24 +156,18 @@ MonoBehaviour:
   DungeonSize: 16
   DungeonType: 1
   RequiresBoss: 1
+  NumberOfPuzzleRooms: 1
+  NumberOfSpecialRooms: 0
+  ResourceNodeSpread: 2
+  LootNodeSpread: 2
   RoomList: {fileID: 11400000, guid: 656bcc04ee56add498adad75a3d8b5fa, type: 2}
   StarterRooms: {fileID: 11400000, guid: e2e79cf79fe814542ad705bf1d49d0ee, type: 2}
   BossRooms: {fileID: 11400000, guid: c3ebcf55a7ac1bf488099976794965d2, type: 2}
+  PuzzleRooms: {fileID: 11400000, guid: 0a51342a0a9612749ae104610a8f9047, type: 2}
+  SpecialRooms: {fileID: 11400000, guid: facff07bd766d4e43a5b5b39f0739852, type: 2}
+  ResourceNodes: {fileID: 11400000, guid: 460909fad8f1be747976837a0b8c0788, type: 2}
+  LootNodes: {fileID: 11400000, guid: b295a41876e6be3478c6cbb4fd9eaa8e, type: 2}
   GeneratedRooms: []
---- !u!114 &42656568
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 42656566}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c6c10f7cc777be48bf3a3575c872454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GridPoints: []
-  MarkerObj: {fileID: 4055498339325862629, guid: 258090727ad965840a99ebdbbf0c3bc7, type: 3}
 --- !u!4 &42656570
 Transform:
   m_ObjectHideFlags: 0
