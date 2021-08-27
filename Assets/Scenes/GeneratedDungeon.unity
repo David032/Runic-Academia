@@ -167,6 +167,7 @@ MonoBehaviour:
   SpecialRooms: {fileID: 11400000, guid: facff07bd766d4e43a5b5b39f0739852, type: 2}
   ResourceNodes: {fileID: 11400000, guid: 460909fad8f1be747976837a0b8c0788, type: 2}
   LootNodes: {fileID: 11400000, guid: b295a41876e6be3478c6cbb4fd9eaa8e, type: 2}
+  EnemyList: {fileID: 11400000, guid: 68ace4a35b1ce65428358a7a6f28a034, type: 2}
   GeneratedRooms: []
 --- !u!4 &42656570
 Transform:

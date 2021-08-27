@@ -32,6 +32,7 @@ namespace Cardinal.Generative.Dungeon
         public RoomList SpecialRooms;
         public LootableList ResourceNodes;
         public LootableList LootNodes;
+        public EnemyList EnemyList;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
 
@@ -52,10 +53,12 @@ namespace Cardinal.Generative.Dungeon
         IEnumerator LoadDungeon() 
         {
             GenerateDungeon();
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2.5f);
             SpreadObjects(LootNodes, LootNodeSpread, MarkerType.Loot);
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(2.5f);
             SpreadObjects(ResourceNodes, ResourceNodeSpread, MarkerType.Resource);
+            yield return new WaitForSeconds(2.5f);
+            SpawnEnemies(EnemyList, ResourceNodeSpread, MarkerType.Enemy);
         }
 
         public void GenerateDungeon() 
@@ -763,6 +766,45 @@ namespace Cardinal.Generative.Dungeon
                 GameObject LocationToSpawn = potentialLocations[RandomPlaceSelection];
                 GameObject LootToSpawn = Instantiate
                     (sourceObjects.LootNodes[RandomLootSelection],
+                    LocationToSpawn.transform);
+                LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
+                LootToSpawn.transform.parent = holder.transform;
+
+                spawnedLoot.Add(LootToSpawn);
+            }
+
+        }
+
+        public void SpawnEnemies(EnemyList sourceObjects,
+            ResourceAvailability availability, MarkerType type)
+        {
+            GameObject holder = new GameObject();
+            holder.name = type.ToString();
+
+            spawnedLoot = new List<GameObject>();
+            for (int i = 0; i < AvailablityCount(availability); i++)
+            {
+                List<GameObject> potentialLocations = new List<GameObject>();
+                GameObject[] markers = GameObject.FindGameObjectsWithTag("NodeMarker");
+
+                foreach (var item in markers)
+                {
+                    NodeMarker thisMarker = item.GetComponent<NodeMarker>();
+                    if (!thisMarker.isUsed && thisMarker.type == type)
+                    {
+                        potentialLocations.Add(item);
+                    }
+                }
+
+                int RandomLootSelection = Random.Range(0, sourceObjects.AvailableEnemies.Count);
+                int RandomPlaceSelection = Random.Range(0, potentialLocations.Count);
+                if (potentialLocations.Count == 0)
+                {
+                    break;
+                }
+                GameObject LocationToSpawn = potentialLocations[RandomPlaceSelection];
+                GameObject LootToSpawn = Instantiate
+                    (sourceObjects.AvailableEnemies[RandomLootSelection],
                     LocationToSpawn.transform);
                 LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
                 LootToSpawn.transform.parent = holder.transform;
