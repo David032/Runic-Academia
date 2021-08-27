@@ -160,6 +160,7 @@ MonoBehaviour:
   NumberOfSpecialRooms: 0
   ResourceNodeSpread: 2
   LootNodeSpread: 2
+  EnemyAmount: 2
   RoomList: {fileID: 11400000, guid: 656bcc04ee56add498adad75a3d8b5fa, type: 2}
   StarterRooms: {fileID: 11400000, guid: e2e79cf79fe814542ad705bf1d49d0ee, type: 2}
   BossRooms: {fileID: 11400000, guid: c3ebcf55a7ac1bf488099976794965d2, type: 2}
@@ -168,6 +169,7 @@ MonoBehaviour:
   ResourceNodes: {fileID: 11400000, guid: 460909fad8f1be747976837a0b8c0788, type: 2}
   LootNodes: {fileID: 11400000, guid: b295a41876e6be3478c6cbb4fd9eaa8e, type: 2}
   EnemyList: {fileID: 11400000, guid: 68ace4a35b1ce65428358a7a6f28a034, type: 2}
+  BossList: {fileID: 11400000, guid: 09daf1cc1b3f8334c95dee4fe67454d0, type: 2}
   GeneratedRooms: []
 --- !u!4 &42656570
 Transform:

@@ -24,6 +24,8 @@ namespace Cardinal.Generative.Dungeon
         public ResourceAvailability ResourceNodeSpread = ResourceAvailability.Regular;
         //Lootable Objects
         public ResourceAvailability LootNodeSpread = ResourceAvailability.Regular;
+        //How many enemies to spawn?
+        public ResourceAvailability EnemyAmount = ResourceAvailability.Regular;
         [Header("Data Lists")]
         public RoomList RoomList;
         public RoomList StarterRooms;
@@ -33,6 +35,7 @@ namespace Cardinal.Generative.Dungeon
         public LootableList ResourceNodes;
         public LootableList LootNodes;
         public EnemyList EnemyList;
+        public EnemyList BossList;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
 
@@ -58,7 +61,7 @@ namespace Cardinal.Generative.Dungeon
             yield return new WaitForSeconds(2.5f);
             SpreadObjects(ResourceNodes, ResourceNodeSpread, MarkerType.Resource);
             yield return new WaitForSeconds(2.5f);
-            SpawnEnemies(EnemyList, ResourceNodeSpread, MarkerType.Enemy);
+            SpawnEnemies(EnemyList, EnemyAmount, MarkerType.Enemy);
         }
 
         public void GenerateDungeon() 
@@ -116,7 +119,7 @@ namespace Cardinal.Generative.Dungeon
             if (RequiresBoss)
             {
                 BossRoom = GenerateNonGenericRoom(currentDoor, BossRooms);
-                //Don't update prior room as it's end of line
+                SpawnBoss();
             }
 
             CheckForGenerationErrors();
@@ -831,6 +834,23 @@ namespace Cardinal.Generative.Dungeon
                 default:
                     return (int)DungeonSize / 2;
             }
+        }
+
+        public void SpawnBoss() 
+        {
+            GameObject Boss;
+            if (BossList.AvailableEnemies.Count != 1)
+            {
+                int RandomSelection = Random.Range(0, BossList.AvailableEnemies.Count);
+                Boss = Instantiate(BossList.AvailableEnemies[RandomSelection], BossRoom.transform);
+                Boss.transform.parent = null;
+            }
+            else
+            {
+                Boss = Instantiate(BossList.AvailableEnemies[0], BossRoom.transform);
+                Boss.transform.parent = null;
+            }
+
         }
         #endregion
 
