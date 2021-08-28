@@ -1846,7 +1846,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4290149919329859057}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 200, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3501224359623308627}
@@ -1882,7 +1882,7 @@ MonoBehaviour:
   groupId: 0
   autoConnect: 1
   geometryVersion: 2021.1
-  lastPosition: {x: 200, y: 0, z: 0}
+  lastPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &4357922529681074103
 GameObject:
   m_ObjectHideFlags: 0
