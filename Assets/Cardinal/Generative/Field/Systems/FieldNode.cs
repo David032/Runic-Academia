@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Cardinal.Generative.Field
 {
+    //Used in the field to mark where an Interest Node can be spawned
     public class FieldNode : MonoBehaviour
     {
         public FieldNodeSize Size = FieldNodeSize.Medium;

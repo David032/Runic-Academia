@@ -270,11 +270,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DestroyOnLoad: 1
   LocationSplit: 2
-  AvailableFields:
-  - {fileID: 6456595772277728110, guid: 9462c7373374e8c4ebe0f4e930dcfead, type: 3}
-  - {fileID: 6518766717668015886, guid: 5bc84d9a94dd5b04c8b6a005ae42f1ff, type: 3}
-  - {fileID: 4290149919329859057, guid: 874f610403f897747abdedad980560a1, type: 3}
-  - {fileID: 7170241543445684208, guid: 1b0a9d16505a9af4495db72829f4ae9d, type: 3}
+  POIsource: {fileID: 11400000, guid: ee20753aa191cc84bb41b93a388af43f, type: 2}
+  PotentialFields: {fileID: 11400000, guid: 0f1e9191b74733d43a9d45322b383530, type: 2}
 --- !u!4 &1270847078
 Transform:
   m_ObjectHideFlags: 0
