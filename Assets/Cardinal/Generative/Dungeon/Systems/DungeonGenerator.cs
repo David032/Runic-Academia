@@ -775,7 +775,6 @@ namespace Cardinal.Generative.Dungeon
 
                 spawnedLoot.Add(LootToSpawn);
             }
-
         }
 
         public void SpawnEnemies(EnemyList sourceObjects,
@@ -799,7 +798,8 @@ namespace Cardinal.Generative.Dungeon
                     }
                 }
 
-                int RandomLootSelection = Random.Range(0, sourceObjects.AvailableEnemies.Count);
+                int RandomLootSelection = Random.Range(0, 
+                    sourceObjects.AvailableEnemies.Count);
                 int RandomPlaceSelection = Random.Range(0, potentialLocations.Count);
                 if (potentialLocations.Count == 0)
                 {

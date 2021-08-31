@@ -269,9 +269,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 1
-  LocationSplit: 2
-  POIsource: {fileID: 11400000, guid: ee20753aa191cc84bb41b93a388af43f, type: 2}
+  ResourceNodeSpread: 2
+  LootNodeSpread: 2
+  EnemyAmount: 2
+  POISource: {fileID: 11400000, guid: ee20753aa191cc84bb41b93a388af43f, type: 2}
   PotentialFields: {fileID: 11400000, guid: 0f1e9191b74733d43a9d45322b383530, type: 2}
+  ResourceNodes: {fileID: 11400000, guid: 460909fad8f1be747976837a0b8c0788, type: 2}
+  LootNodes: {fileID: 11400000, guid: b295a41876e6be3478c6cbb4fd9eaa8e, type: 2}
+  EnemyList: {fileID: 11400000, guid: 68ace4a35b1ce65428358a7a6f28a034, type: 2}
 --- !u!4 &1270847078
 Transform:
   m_ObjectHideFlags: 0
