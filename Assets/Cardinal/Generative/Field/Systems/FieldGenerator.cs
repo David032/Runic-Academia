@@ -33,6 +33,7 @@ namespace Cardinal.Generative.Field
         {
             GenerateField();
             PopulateFieldStructures();
+            FillFieldStructures();
         }
 
         void GenerateField() 
@@ -48,11 +49,9 @@ namespace Cardinal.Generative.Field
             foreach (GameObject item in PlacesToFill)
             {
                 FieldNode nodeData = item.GetComponent<FieldNode>();
-                print(nodeData);
                 List<GameObject> potentialFillers = new List<GameObject>();
                 foreach (GameObject filler in POISource.PotentialPOIs)
                 {
-                    print(filler);
                     if (filler.GetComponent<InterestNode>().Size <= nodeData.Size)
                     {
                         potentialFillers.Add(filler);
@@ -108,7 +107,7 @@ namespace Cardinal.Generative.Field
                 GameObject LootToSpawn = Instantiate
                     (sourceObjects.LootNodes[RandomLootSelection],
                     LocationToSpawn.transform);
-                LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
+                LocationToSpawn.GetComponent<FieldResource>().isUsed = true;
                 LootToSpawn.transform.parent = holder.transform;
 
                 SpawnedContent.Add(LootToSpawn);
@@ -127,8 +126,8 @@ namespace Cardinal.Generative.Field
 
                 foreach (var item in nodes)
                 {
-                    NodeMarker thisMarker = item.GetComponent<NodeMarker>();
-                    if (!thisMarker.isUsed && thisMarker.type == type)
+                    FieldResource thisMarker = item.GetComponent<FieldResource>();
+                    if (!thisMarker.isUsed && thisMarker.Type == type)
                     {
                         potentialLocations.Add(item);
                     }
@@ -145,7 +144,7 @@ namespace Cardinal.Generative.Field
                 GameObject EnemyToSpawn = Instantiate
                     (sourceObjects.AvailableEnemies[RandomLootSelection],
                     LocationToSpawn.transform);
-                LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
+                LocationToSpawn.GetComponent<FieldResource>().isUsed = true;
                 EnemyToSpawn.transform.parent = holder.transform;
 
                 SpawnedEnemies.Add(EnemyToSpawn);
