@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   raycastLayer: 0
   yOffset: 1
-  autoTangent: 1
+  autoTangent: 0

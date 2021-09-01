@@ -27,6 +27,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _FoamDistance: 0.5
     - _FoamNoiseScaleHQ: 1.75
@@ -49,6 +50,7 @@ Material:
     - _HorizonColor: {r: 1, g: 1, b: 1, a: 1}
     - _Specular: {r: 0.103773594, g: 0.101267025, b: 0.087620154, a: 1}
     - _WaveParams: {r: 1, g: 1, b: 0.5, a: 10}
+  m_BuildTextureStacks: []
 --- !u!43 &-1019950947047327512
 Mesh:
   m_ObjectHideFlags: 0
@@ -209,6 +211,7 @@ Mesh:
   m_MeshMetrics[1]: 1
   m_MeshOptimizationFlags: 1
   m_StreamData:
+    serializedVersion: 2
     offset: 0
     size: 0
     path: 
@@ -224,33 +227,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 004ffb8c9b4e90d438d35887f7b002e4, type: 3}
   m_Name: StandardQuality_Ocean
   m_EditorClassIdentifier: 
-  waterMode: 0
-  meshResolution: 2
-  meshNoise: 0
-  mesh: {fileID: -1019950947047327512}
-  material: {fileID: -9222825754462057760}
+  lightingModel: 0
+  useFlatLighting: 0
+  renderQueueIndex: 0
   color: {r: 0.23073158, g: 0.5754717, b: 0.44496292, a: 0.69803923}
   specColor: {r: 0.103773594, g: 0.101267025, b: 0.087620154, a: 1}
   smoothness: 0.5
-  enableLightAbsorbtion: 1
+  enableLightAbsorption: 1
   depthColor: {r: 0, g: 0.16361555, b: 0.2924528, a: 1}
   maxDepth: 8
-  enableHorizonBlend: 0
-  horizonColor: {r: 1, g: 1, b: 1, a: 1}
-  horizonThickness: 0.1
-  horizonEnhancement: 0.5
   enableFoam: 1
   foamColor: {r: 1, g: 1, b: 1, a: 1}
   foamDistance: 0.5
   enableFoamHQ: 0
   foamNoiseScaleHQ: 1.75
   foamNoiseSpeedHQ: 1
-  enableRipple: 1
+  shorelineFoamStrength: 1
+  crestFoamStrength: 0
+  crestMaxDepth: 0
+  slopeFoamStrength: 0
+  slopeFoamFlowSpeed: 0
+  slopeFoamDistance: 0
   rippleHeight: 0.15
   rippleSpeed: 5
+  rippleNoiseScale: 0
+  enableWave: 0
+  waveDirection: 0
+  waveSpeed: 0
+  waveHeight: 0
+  waveLength: 0
+  waveSteepness: 0
+  waveDeform: 0
   fresnelStrength: 1
   fresnelBias: 0
-  enableReflection: 0
+  enableReflection: 1
   reflectionTextureResolution: 512
   enableReflectionPixelLight: 0
   reflectionClipPlaneOffset: 0.2
@@ -259,11 +269,10 @@ MonoBehaviour:
     m_Bits: 4294967295
   reflectCustomSkybox: 0
   reflectionDistortionStrength: 50
-  enableRefraction: 0
-  refractionTextureResolution: 512
-  enableRefractionPixelLight: 0
-  refractionClipPlaneOffset: 0.2
-  refractionLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  enableRefraction: 1
   refractionDistortionStrength: 50
+  enableCaustic: 0
+  causticTexture: {fileID: 0}
+  causticSize: 0
+  causticStrength: 0
+  causticDistortionStrength: 0
