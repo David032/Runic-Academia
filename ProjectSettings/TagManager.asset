@@ -17,9 +17,9 @@ TagManager:
   - Ground
   - Path
   - InteriorFloor
-  - Wall
+  - GroundFloorWall
   - Roof
-  - 
+  - NotGroundFloorWall
   - 
   - 
   - 

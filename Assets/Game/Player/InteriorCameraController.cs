@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
+//This is ugly, but atomised into individual checks to prevent screw-ups
 public class InteriorCameraController : MonoBehaviour
 {
     GameObject MainCamObject;
@@ -18,7 +19,22 @@ public class InteriorCameraController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            MainCamObject.SetActive(false);
+            foreach (var item in 
+                gameObject.transform.GetComponentsInChildren<Transform>())
+            {
+                if (item.gameObject.layer == 8) //Interior Floors
+                {
+                    item.GetComponent<MeshRenderer>().enabled = false;
+                }
+                if (item.gameObject.layer == 11)//Walls that aren't on the ground floor
+                {
+                    item.GetComponent<MeshRenderer>().enabled = false;
+                }
+                if (item.gameObject.layer == 10)//Roofs
+                {
+                    item.GetComponent<MeshRenderer>().enabled = false;
+                }
+            }
         }
     }
 
@@ -26,7 +42,22 @@ public class InteriorCameraController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            MainCamObject.SetActive(true);
+            foreach (var item in 
+                gameObject.transform.GetComponentsInChildren<Transform>())
+            {
+                if (item.gameObject.layer == 8) //Interior Floors
+                {
+                    item.GetComponent<MeshRenderer>().enabled = true;
+                }
+                if (item.gameObject.layer == 11)//Walls that aren't on the ground floor
+                {
+                    item.GetComponent<MeshRenderer>().enabled = true;
+                }
+                if (item.gameObject.layer == 10)//Roofs
+                {
+                    item.GetComponent<MeshRenderer>().enabled = true;
+                }
+            }
         }
     }
 }
