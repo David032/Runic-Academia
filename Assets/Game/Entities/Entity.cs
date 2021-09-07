@@ -24,6 +24,7 @@ namespace Runic.Entities
         {
             entityAgent = GetComponent<NavMeshAgent>();
             entityAnimator = GetComponent<Animator>();
+            Health = GetComponent<Health>();
         }
 
         void Update()

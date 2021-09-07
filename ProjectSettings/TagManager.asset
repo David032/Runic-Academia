@@ -6,39 +6,40 @@ TagManager:
   tags:
   - Enemy
   - NPC
+  - NodeMarker
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Impassable
   - Water
   - UI
   - Ground
   - Path
   - InteriorFloor
-  - Wall
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - WorldUI
+  - GroundFloorWall
   - Roof
+  - NotGroundFloorWall
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - POLARIS RAYCAST
+  - POLARIS SPLINE
   m_SortingLayers:
   - name: Default
     uniqueID: 0

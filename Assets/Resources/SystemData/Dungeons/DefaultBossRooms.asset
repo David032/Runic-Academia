@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00424af72387fb04da9120f85f8fe056, type: 3}
+  m_Name: DefaultBossRooms
+  m_EditorClassIdentifier: 
+  RoomsToUse:
+  - {fileID: 5937786903991233923, guid: 44caa0b11f2a5e84baab2d0f99040954, type: 3}
+  - {fileID: 6077522869712432189, guid: a797a0087b101164598eb86a3d616217, type: 3}
+  - {fileID: 2303367212377797698, guid: dc0d8ec86e6b16a4ca75a395ca789e6a, type: 3}
+  - {fileID: 590069534311485441, guid: 788a15c9fabab4248a190077b3f14ce9, type: 3}

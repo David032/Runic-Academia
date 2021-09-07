@@ -26,6 +26,7 @@ public class PlayerControls : MonoBehaviour
     public bool isInteracting = false;
     public bool isWalking = false;
     public bool canAct = true;
+    public bool canCamControl = true;
     //Objects
     public GameObject followTarget;
     public GameObject equippedWeapon;
@@ -48,7 +49,7 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         characterAnimator.SetFloat("Speed_f", GetSpeed());
-        Look(look);
+        //Look(look);
         Move(move);
         Interact();
     }
@@ -112,6 +113,10 @@ public class PlayerControls : MonoBehaviour
 
     private void Look(Vector2 direction)
     {
+        if (!canCamControl)
+        {
+            return;
+        }
         if (direction == Vector2.zero)
         {
             return;
@@ -151,6 +156,7 @@ public class PlayerControls : MonoBehaviour
         }
     }
 
+    #region Interactions
     IEnumerator ChestInteractAnimation() 
     {
         characterAnimator.SetInteger("Interaction", 1);
@@ -168,6 +174,7 @@ public class PlayerControls : MonoBehaviour
         characterAnimator.SetInteger("Interaction", 0);
         characterAnimator.SetBool("Interacting", false);
     }
+    #endregion
 
     #region InputEvents
     public void OnMove(InputAction.CallbackContext context)
@@ -240,4 +247,17 @@ public class PlayerControls : MonoBehaviour
     }
 
     #endregion
+
+    #region Cross-System
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (!collision.gameObject.GetComponent<MeshRenderer>().enabled)
+            {
+                collision.gameObject.GetComponent<MeshRenderer>().enabled = true;
+            }
+        }
+
+    #endregion
+
+
 }
