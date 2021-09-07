@@ -27,11 +27,17 @@ namespace Cardinal.Analyser.UI
         {
             //Why unity no support dicts in editor :(
             Philanthropist.TypeValue.text = Analyser.PhilanthropistValue.ToString();
+            Philanthropist.TypeSlider.value = Analyser.PhilanthropistValue;
             Socialiser.TypeValue.text = Analyser.SocialiserValue.ToString();
+            Socialiser.TypeSlider.value = Analyser.SocialiserValue;
             FreeSpirit.TypeValue.text = Analyser.FreeSpiritValue.ToString();
+            FreeSpirit.TypeSlider.value = Analyser.FreeSpiritValue;
             Achiever.TypeValue.text = Analyser.AchieverValue.ToString();
+            Achiever.TypeSlider.value = Analyser.AchieverValue;
             Disruptor.TypeValue.text = Analyser.DisruptorValue.ToString();
+            Disruptor.TypeSlider.value = Analyser.DisruptorValue;
             Player.TypeValue.text = Analyser.PlayerValue.ToString();
+            Player.TypeSlider.value = Analyser.PlayerValue;
         }
 
         public void ToggleDisplayWindow() 

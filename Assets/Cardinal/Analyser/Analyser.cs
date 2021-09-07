@@ -8,6 +8,7 @@ namespace Cardinal.Analyser
 {
     public class Analyser : CardinalSingleton<Analyser> 
     {
+        //These will not be public in final
         public float PhilanthropistValue;
         public float SocialiserValue;
         public float FreeSpiritValue;
