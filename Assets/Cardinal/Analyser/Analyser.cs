@@ -8,6 +8,24 @@ namespace Cardinal.Analyser
 {
     public class Analyser : CardinalSingleton<Analyser> 
     {
+        public float PhilanthropistValue;
+        public float SocialiserValue;
+        public float FreeSpiritValue;
+        public float AchieverValue;
+        public float DisruptorValue;
+        public float PlayerValue;
+
+        private void Start()
+        {
+            
+        }
+
+        private void Update()
+        {
+            
+        }
+
+        #region Mk1 Analyser
         [Header("Inbound Event Buffer")]
         public List<EventData> Events;
         [Header("Max Events Before Pass")]
@@ -59,5 +77,6 @@ namespace Cardinal.Analyser
                     + " behaviours");
             }
         }
+        #endregion
     }
 }
