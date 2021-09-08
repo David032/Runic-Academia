@@ -61,3 +61,5 @@ crashlytics-build.properties
 *.gif
 *.mp4
 
+
+Assets/_TerrainData/
