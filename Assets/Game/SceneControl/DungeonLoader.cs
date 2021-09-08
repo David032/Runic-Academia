@@ -35,6 +35,7 @@ namespace Runic.SceneManagement
             {
                 StartCoroutine(LoadPlayerIntoLoadingScene());
                 StartCoroutine(LoadDungeon());
+                StartCoroutine(UnloadAreas());
             }
         }
 
@@ -51,7 +52,7 @@ namespace Runic.SceneManagement
             SceneManager.MoveGameObjectToScene(VirtualCam, SceneManager.GetSceneAt(2));
             SceneManager.SetActiveScene(SceneManager.GetSceneAt(2));
 
-            ConfigureDungeon();
+            StartCoroutine(ConfigureDungeon());
 
             GameObject PlayerHoldingLocation = GameObject.Find("PlayerStartPosition");
             Player.GetComponent<CharacterController>().enabled = false;
@@ -59,8 +60,7 @@ namespace Runic.SceneManagement
             yield return new WaitForSeconds(1f);
             Player.GetComponent<CharacterController>().enabled = true;
         }
-
-        private void ConfigureDungeon()
+        IEnumerator ConfigureDungeon()
         {
             DungeonGenerator DungeonManager =
                 GameObject.Find("DungeonManager").GetComponent<DungeonGenerator>();
@@ -83,6 +83,25 @@ namespace Runic.SceneManagement
             DungeonManager.EnemyList = RequestedEnemyList;
             DungeonManager.BossList = RequestedBossList;
             StartCoroutine(DungeonManager.LoadDungeon());
+            yield return new WaitForSeconds(1f);
+        }
+
+        IEnumerator UnloadAreas() 
+        {
+            AsyncOperation UnloadHubArea = SceneManager.UnloadSceneAsync
+                (SceneManager.GetSceneAt(0));
+            while (!UnloadHubArea.isDone)
+            {
+                yield return null;
+            }
+            print("Unloaded Hub Area!");
+            AsyncOperation UnloadLoadingArea = SceneManager.UnloadSceneAsync
+                (SceneManager.GetSceneAt(1));
+            while (!UnloadLoadingArea.isDone)
+            {
+                yield return null;
+            }
+            print("Unloaded Loading Area!");
         }
     }
 }
