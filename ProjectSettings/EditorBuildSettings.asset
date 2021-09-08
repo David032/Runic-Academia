@@ -6,7 +6,16 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: d1c3109bdb54ad54c8a2b2838528e640
+    path: Assets/Scenes/LoadingScene.unity
+    guid: 8a96fbb8c9749b54ca6e658a6dcb5409
+  - enabled: 1
+    path: Assets/Scenes/HubArea.unity
+    guid: 2068a322ce8ee6c46869ce6c31013338
+  - enabled: 1
+    path: Assets/Scenes/GeneratedFieldDemo.unity
+    guid: 97cc63b1ce55cce40bf3c8c6d929c9ca
+  - enabled: 1
+    path: Assets/Scenes/GeneratedDungeon.unity
+    guid: fd935b23dc160d447a8c3adec66e2e13
   m_configObjects:
     xr.sdk.mock-hmd.settings: {fileID: 11400000, guid: aa62ea059ad4b9840b9c93d146e2d572, type: 2}

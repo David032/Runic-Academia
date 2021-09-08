@@ -50,10 +50,10 @@ namespace Cardinal.Generative.Dungeon
         // Start is called before the first frame update
         void Start()
         {
-            StartCoroutine(LoadDungeon());
+            //StartCoroutine(LoadDungeon());
         }
 
-        IEnumerator LoadDungeon() 
+        public IEnumerator LoadDungeon() 
         {
             GenerateDungeon();
             yield return new WaitForSeconds(2.5f);
