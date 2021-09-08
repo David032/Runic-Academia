@@ -34,6 +34,7 @@ namespace Runic.SceneManagement
             if (other.CompareTag("Player")) 
             {
                 StartCoroutine(LoadPlayerIntoLoadingScene());
+                StartCoroutine(LoadDungeon());
             }
         }
 
