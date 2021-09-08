@@ -33,10 +33,17 @@ namespace Runic.SceneManagement
         {
             if (other.CompareTag("Player")) 
             {
-                StartCoroutine(LoadPlayerIntoLoadingScene());
-                StartCoroutine(LoadDungeon());
-                StartCoroutine(UnloadAreas());
+                StartCoroutine(TransitionToDungeon());
             }
+        }
+
+        IEnumerator TransitionToDungeon() 
+        {
+            StartCoroutine(LoadPlayerIntoLoadingScene());
+            yield return new WaitForSeconds(5f);
+            StartCoroutine(LoadDungeon());
+            yield return new WaitForSeconds(10f);
+            StartCoroutine(UnloadAreas());        
         }
 
         IEnumerator LoadDungeon()
@@ -83,25 +90,34 @@ namespace Runic.SceneManagement
             DungeonManager.EnemyList = RequestedEnemyList;
             DungeonManager.BossList = RequestedBossList;
             StartCoroutine(DungeonManager.LoadDungeon());
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         IEnumerator UnloadAreas() 
         {
-            AsyncOperation UnloadHubArea = SceneManager.UnloadSceneAsync
-                (SceneManager.GetSceneAt(0));
-            while (!UnloadHubArea.isDone)
+            for (int i = 0; i < SceneManager.sceneCount; i++)
             {
-                yield return null;
+                print(SceneManager.GetSceneAt(i).name);
             }
-            print("Unloaded Hub Area!");
-            AsyncOperation UnloadLoadingArea = SceneManager.UnloadSceneAsync
-                (SceneManager.GetSceneAt(1));
-            while (!UnloadLoadingArea.isDone)
+            AsyncOperation UnloadLoading = SceneManager.UnloadSceneAsync
+                (SceneManager.GetSceneByName("LoadingScene"));
+            while (!UnloadLoading.isDone)
             {
                 yield return null;
             }
             print("Unloaded Loading Area!");
+
+            AsyncOperation UnloadHub = SceneManager.UnloadSceneAsync
+                (SceneManager.GetSceneByName("HubArea"));
+            while (!UnloadHub.isDone)
+            {
+                print(UnloadHub.progress);
+                yield return null;
+            }
+            print("Unloaded Hub Area!");
+
+
+            yield return new WaitForSeconds(0.5f);
         }
     }
 }

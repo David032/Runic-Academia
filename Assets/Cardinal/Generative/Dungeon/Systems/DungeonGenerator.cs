@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Unity.AI.Navigation;
 
 namespace Cardinal.Generative.Dungeon
 {
@@ -56,6 +57,7 @@ namespace Cardinal.Generative.Dungeon
         public IEnumerator LoadDungeon() 
         {
             GenerateDungeon();
+            GetComponent<NavMeshSurface>().BuildNavMesh();
             yield return new WaitForSeconds(2.5f);
             SpreadObjects(LootNodes, LootNodeSpread, MarkerType.Loot);
             yield return new WaitForSeconds(2.5f);
