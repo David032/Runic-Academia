@@ -263,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 1
-  Health: {fileID: 0}
+  Health: {fileID: 4479021050995018376}
 --- !u!114 &4479021050995018376
 MonoBehaviour:
   m_ObjectHideFlags: 0
