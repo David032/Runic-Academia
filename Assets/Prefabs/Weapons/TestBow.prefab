@@ -115,3 +115,5 @@ MonoBehaviour:
   damage: 1
   cooldown: 1.5
   attackDuration: 2
+  WeaponRange: 10
+  projectile: {fileID: 0}

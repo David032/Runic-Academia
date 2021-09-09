@@ -22,6 +22,14 @@ namespace Runic.Characteristics
                 current = max;
             }
         }
+
+        private void Update()
+        {
+            if (current <= 0)
+            {
+                onEmpty.Invoke();
+            }
+        }
         public float Percent() =>
         (current != 0 && max != 0) ? (float)current / (float)max : 0;
 

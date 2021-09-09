@@ -27,10 +27,7 @@ namespace Runic.Interactions
 
         private void OnTriggerStay(Collider other)
         {
-            if (other.gameObject.CompareTag("NPC"))
-            {
-                ToggleDoor();
-            }
+
             if (other.gameObject.CompareTag("Player"))
             {
                 if (other.GetComponent<PlayerControls>().isInteracting)
@@ -42,10 +39,17 @@ namespace Runic.Interactions
             }
         }
 
-        void ToggleCam() 
+        private void OnTriggerEnter(Collider other)
         {
-
+            if (other.gameObject.CompareTag("NPC"))
+            {
+                if (Door.transform.rotation.eulerAngles.y == 0)
+                {
+                    ToggleDoor();
+                }
+            }
         }
+
 
         void ToggleDoor() 
         {

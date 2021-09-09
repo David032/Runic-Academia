@@ -13,6 +13,7 @@ namespace Runic.Weapons
         public int damage = 1;
         public float cooldown = 1.5f;
         public float attackDuration = 1;
+        public float WeaponRange;
 
         protected Animator entityAnimator;
         protected bool canAttack = true;

@@ -115,3 +115,4 @@ MonoBehaviour:
   damage: 1
   cooldown: 1
   attackDuration: 1
+  WeaponRange: 1.5

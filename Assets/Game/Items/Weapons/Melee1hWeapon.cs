@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Runic.Weapons
 {
     public class Melee1hWeapon : WeaponObject
-    {
+    {       
         protected override void AttackStart()
         {
             entityAnimator.SetInteger("WeaponType_int", 12);

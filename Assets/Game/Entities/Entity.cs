@@ -13,9 +13,17 @@ namespace Runic.Entities
         public EntityFlag Flag = EntityFlag.Friendly;
         [Header("Attributes")]
         public Health Health;
+        [Header("Characteristics")]
+        public float VisibilityRange = 15f;
+        public float Fov = 90f;
 
         protected NavMeshAgent entityAgent;
         protected Animator entityAnimator;
+        protected GameObject playerRef 
+        {
+            get => player;
+        }
+        GameObject player;
 
         Vector3 lastPosition;
         float speed;
@@ -25,6 +33,7 @@ namespace Runic.Entities
             entityAgent = GetComponent<NavMeshAgent>();
             entityAnimator = GetComponent<Animator>();
             Health = GetComponent<Health>();
+            player = GameObject.FindGameObjectWithTag("Player");
         }
 
         void Update()
@@ -38,6 +47,49 @@ namespace Runic.Entities
             lastPosition = transform.position;
             return speed;
         }
+
+        public Health GetHealth() { return Health; }
+
+        public bool CanSeePlayer() 
+        {
+            GameObject origin = gameObject;
+            Vector3 startPoint = new Vector3(transform.position.x,
+                transform.position.y + 1, transform.position.z);
+            RaycastHit hitinfo;
+            Vector3 playerLoc = GameObject.FindGameObjectWithTag("Player")
+                .transform.position;
+            Vector3 direction = (playerLoc - startPoint).normalized;
+
+            if (Physics.Raycast(new Ray(startPoint, direction),out hitinfo, 
+                VisibilityRange))
+            {
+                if (Vector3.Angle
+                    (origin.transform.forward, direction) < Fov / 2)
+                {
+                    if (hitinfo.collider.gameObject.tag == "Player" || 
+                        hitinfo.collider.GetComponentInParent<PlayerControls>())
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                print("Failed to raycast?");
+                return false;
+            }
+        }
+
+        public float GetDistanceToPlayer() 
+        { return Vector3.Distance(transform.position, playerRef.transform.position); }
     }
 
 }
