@@ -73,6 +73,7 @@ namespace Runic.Entities
                     }
                     else
                     {
+                        print(hitinfo.collider.gameObject.name);
                         return false;
                     }
                 }
