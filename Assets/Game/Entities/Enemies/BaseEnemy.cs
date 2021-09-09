@@ -18,6 +18,19 @@ namespace Runic.Entities.Enemies
         {
             entityAnimator.SetFloat("Speed_f", GetSpeed());
         }
+
+        public Vector3 GenerateRandomPosition(Vector3 origin, float range)
+        {
+            Vector3 destination = new Vector3();
+            destination.x = Random.Range(origin.x + (range * -1),
+                origin.x + range);
+            destination.y = origin.y;
+            destination.z = Random.Range(origin.z + (range * -1),
+                origin.z + range);
+            return destination;
+        }
+
+        public GameObject GetPlayerRef() { return playerRef; }
     }
 
 }
