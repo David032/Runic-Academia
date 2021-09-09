@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Unity.AI.Navigation;
 
 namespace Runic.Entities.Enemies
 {
@@ -27,7 +29,14 @@ namespace Runic.Entities.Enemies
             destination.y = origin.y;
             destination.z = Random.Range(origin.z + (range * -1),
                 origin.z + range);
+
             return destination;
+        }
+
+        public bool TestPosition(Vector3 destination) 
+        {
+            NavMeshPath path = new NavMeshPath();
+            return GetComponent<NavMeshAgent>().CalculatePath(destination, path);
         }
 
         public GameObject GetPlayerRef() { return playerRef; }
