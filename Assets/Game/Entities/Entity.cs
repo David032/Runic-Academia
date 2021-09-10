@@ -56,8 +56,8 @@ namespace Runic.Entities
             Vector3 startPoint = new Vector3(transform.position.x,
                 transform.position.y + 1, transform.position.z);
             RaycastHit hitinfo;
-            Vector3 playerLoc = GameObject.FindGameObjectWithTag("Player")
-                .transform.position;
+            Vector3 playerLoc = new Vector3(player.transform.position.x, 
+                player.transform.position.y + 1, player.transform.position.z);
             Vector3 direction = (playerLoc - startPoint).normalized;
 
             if (Physics.Raycast(new Ray(startPoint, direction),out hitinfo, 
@@ -69,16 +69,20 @@ namespace Runic.Entities
                     if (hitinfo.collider.gameObject.tag == "Player" || 
                         hitinfo.collider.GetComponentInParent<PlayerControls>())
                     {
+                        Debug.DrawLine(startPoint, playerLoc, Color.green);
                         return true;
                     }
                     else
                     {
-                        print(hitinfo.collider.gameObject.name);
+                        Debug.DrawLine(startPoint, playerLoc, Color.yellow);
+                        print(gameObject.name + " hit " +
+                            hitinfo.collider.gameObject.name);
                         return false;
                     }
                 }
                 else
                 {
+                    print(gameObject.name + " can't see the player");
                     return false;
                 }
             }
