@@ -1,4 +1,5 @@
 using Runic.Characteristics;
+using Runic.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,8 @@ namespace Runic.Entities
         [Header("Characteristics")]
         public float VisibilityRange = 15f;
         public float Fov = 90f;
+        [Header("Resources")]
+        public List<Item> Inventory = new List<Item>();
 
         protected NavMeshAgent entityAgent;
         protected Animator entityAnimator;

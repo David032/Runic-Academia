@@ -7,7 +7,6 @@ namespace Runic.Entities.Player
 {
     public class Player : Entity
     {
-        public List<Item> Inventory;
         // Start is called before the first frame update
         void Start()
         {
