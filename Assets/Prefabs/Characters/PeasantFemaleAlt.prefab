@@ -2218,7 +2218,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 94
   m_CollisionDetection: 0
 --- !u!195 &1420974099837282330
 NavMeshAgent:
@@ -2350,6 +2350,8 @@ MonoBehaviour:
   Name: 
   Flag: 0
   Health: {fileID: 0}
+  VisibilityRange: 15
+  Fov: 90
 --- !u!1 &2285115289939442163
 GameObject:
   m_ObjectHideFlags: 0

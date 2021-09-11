@@ -7,7 +7,7 @@ namespace Runic.AI
 {
     public class BehaviourBase : MonoBehaviour
     {
-        NavMeshAgent entityAgent;
+        protected NavMeshAgent entityAgent;
         void Start()
         {
             entityAgent = GetComponent<NavMeshAgent>();
