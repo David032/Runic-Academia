@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df67558a3b1f9d646b2fcefff76ee802, type: 3}
+  m_Name: T1 Staff
+  m_EditorClassIdentifier: 
+  Name: Weak Oak Staff
+  Description: A flimsy oak staff
+  Type: 0
+  model: {fileID: 9166539525864622787, guid: 155a5296891d16248906413c93e5a59e, type: 3}
+  icon: {fileID: 21300000, guid: 271c6d2218562564587d4cabc531011c, type: 3}
+  value: 1
+  WeaponMod: 0

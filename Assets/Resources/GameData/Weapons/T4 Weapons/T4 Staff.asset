@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df67558a3b1f9d646b2fcefff76ee802, type: 3}
+  m_Name: T4 Staff
+  m_EditorClassIdentifier: 
+  Name: Elven Staff
+  Description: 'An Elven staff '
+  Type: 0
+  model: {fileID: 3710442288543952409, guid: 46aa6eb649036ff498bc5883ec300602, type: 3}
+  icon: {fileID: 21300000, guid: 565150436597cf347a30e5a23e440a6a, type: 3}
+  value: 4
+  WeaponMod: 2
