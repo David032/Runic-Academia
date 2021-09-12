@@ -11,7 +11,20 @@ namespace Runic.Characteristics
     }
     public abstract class Energy : MonoBehaviour
     {
-        public int current = 0;
+        int _current = 0;
+        public int current
+        {
+            get { return Mathf.Min(_current, max); }
+            set
+            {
+                bool emptyBefore = _current == 0;
+                _current = Mathf.Clamp(value, 0, max);
+                if (_current == 0 && !emptyBefore)
+                {
+                    onEmpty.Invoke();
+                }
+            }
+        }
         public abstract int max { get; }
         public bool spawnFull = true;
 
@@ -25,10 +38,7 @@ namespace Runic.Characteristics
 
         private void Update()
         {
-            if (current <= 0)
-            {
-                onEmpty.Invoke();
-            }
+
         }
         public float Percent() =>
         (current != 0 && max != 0) ? (float)current / (float)max : 0;

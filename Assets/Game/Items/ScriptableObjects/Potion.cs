@@ -11,14 +11,24 @@ namespace Runic.Items
     public class Potion : Consumable
     {
         public int HealthModifier = 0;
-        public int AdrenelineModifier = 0;
+        public int ManaModifier = 0;
+        public int StaminaModifier = 0;
 
-        //public override void Use(Character player)
-        //{
-        //    NarrativeManager.Instance.LogMessage("The player drank " + name.ToLower());
-        //    player.ChangeHealth(-1 * HealthModifier);
-        //    player.IncreaseAdreneline(AdrenelineModifier);
-        //    base.Use(player);
-        //}
+        public override void Use(Entities.Entity entity)
+        {
+            if (entity.Health != null)
+            {
+                entity.Health.current += HealthModifier;
+            }
+            if (entity.Mana != null)
+            {
+                entity.Mana.current += ManaModifier;
+            }
+            if (entity.Stamina != null)
+            {
+                entity.Stamina.current += StaminaModifier;
+            }
+            base.Use(entity);
+        }
     }
 }

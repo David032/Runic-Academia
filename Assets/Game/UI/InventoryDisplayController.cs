@@ -13,7 +13,6 @@ namespace Runic.UI
         public GameObject InventoryItemWidget;
         public TextMeshProUGUI FallBackText;
         public TextMeshProUGUI PlayerCoins;
-        public Image SlottedConsumable;
 
         Entities.Player.Player Owner;
         List<GameObject> displayedItems = new List<GameObject>();
@@ -27,7 +26,6 @@ namespace Runic.UI
         void Update()
         {
             PlayerCoins.text = Owner.Coins + "gp";
-            SlottedConsumable.sprite = Owner.SlottedConsumable.icon;
         }
 
         public void ToggleInventoryWindow() 
@@ -42,8 +40,10 @@ namespace Runic.UI
                     GameObject itemDisplay = Instantiate(InventoryItemWidget, Window.transform);
                     ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
                     widget.SetItemWidget(item.Name, item.Description, item.Type, item.value);
-
-
+                    if (item.Type == ItemType.Food || item.Type == ItemType.Potion || item.Type == ItemType.Tonic)
+                    {
+                        widget.ConfigureUsableItem((Items.Consumable)item, Owner);
+                    }
                     displayedItems.Add(itemDisplay);
                 }
             }

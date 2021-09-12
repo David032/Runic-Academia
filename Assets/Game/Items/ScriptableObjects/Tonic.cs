@@ -12,18 +12,15 @@ namespace Runic.Items
     {
         public float Duration = 15f;
 
-        public int AttackMod = 0;
-        public int RangedMod = 0;
-        public int MagicMod = 0;
-        public int DefMod = 0;
+        public int HealthModifier = 0;
+        public int ManaModifier = 0;
+        public int StaminaModifier = 0;
 
-        //public override void Use(Character player)
-        //{
-        //    PlayerCharacter playerCharacter = (PlayerCharacter)player;
-        //    NarrativeManager.Instance.LogMessage("The player drank " + name.ToLower());
-        //    playerCharacter.StartCoroutine(playerCharacter.TimedTonicUse(this));
-        //    base.Use(player);
-        //}
+        public override void Use(Entities.Entity entity)
+        {
+            entity.StartCoroutine(entity.TimedTonicUse(this));
+            base.Use(entity);
+        }
 
 
     }

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.UI;
 
 namespace Runic.UI
 {
@@ -28,6 +29,12 @@ namespace Runic.UI
             Description.text = description;
             Type.text = type.ToString();
             Value.text = value.ToString();
+        }
+
+        public void ConfigureUsableItem(Items.Consumable usableItem, Entities.Entity User) 
+        {
+            GetComponent<Button>().onClick.AddListener(delegate { usableItem.Use(User); });
+
         }
     }
 }

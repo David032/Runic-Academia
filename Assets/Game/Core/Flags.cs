@@ -32,6 +32,8 @@ namespace Runic
         Pocket,
         Food,
         QuestItem,
+        Potion,
+        Tonic
     }
 }
 

@@ -8,10 +8,13 @@ namespace Runic.Items
 
     public class Consumable : Item
     {
-        //public virtual void Use(Character player) 
-        //{
-        //    UiManager.Instance.RevertItemSlot();
-        //    player.EquippedItem = null;
-        //}
+        public virtual void Use(Entities.Entity entity)
+        {
+            entity.Inventory.Remove(this);
+            if (entity.CompareTag("Player"))
+            {
+                entity.gameObject.GetComponentInChildren<Runic.UI.InventoryDisplayController>().ToggleInventoryWindow();
+            }
+        }
     }
 }

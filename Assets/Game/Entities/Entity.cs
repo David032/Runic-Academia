@@ -14,11 +14,15 @@ namespace Runic.Entities
         public EntityFlag Flag = EntityFlag.Friendly;
         [Header("Attributes")]
         public Health Health;
+        public Mana Mana;
+        public Stamina Stamina;
         [Header("Characteristics")]
         public float VisibilityRange = 15f;
         public float Fov = 90f;
         [Header("Resources")]
         public List<Item> Inventory = new List<Item>();
+        public int Coins = 50;
+
 
         protected NavMeshAgent entityAgent;
         protected Animator entityAnimator;
@@ -98,6 +102,35 @@ namespace Runic.Entities
 
         public float GetDistanceToPlayer() 
         { return Vector3.Distance(transform.position, playerRef.transform.position); }
+
+        public IEnumerator TimedTonicUse(Tonic thisTonic)
+        {
+            if (Health != null)
+            {
+                Health.current += thisTonic.HealthModifier;
+            }
+            if (Mana != null)
+            {
+                Mana.current += thisTonic.ManaModifier;
+            }
+            if (Stamina != null)
+            {
+                Stamina.current += thisTonic.StaminaModifier;
+            }
+            yield return new WaitForSeconds(thisTonic.Duration);
+            if (Health != null)
+            {
+                Health.current -= thisTonic.HealthModifier;
+            }
+            if (Mana != null)
+            {
+                Mana.current -= thisTonic.ManaModifier;
+            }
+            if (Stamina != null)
+            {
+                Stamina.current -= thisTonic.StaminaModifier;
+            }
+        }
     }
 
 }
