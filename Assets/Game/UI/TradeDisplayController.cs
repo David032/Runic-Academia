@@ -19,6 +19,7 @@ namespace Runic.UI
         List<GameObject> TraderItems;
         public void ShowTradeDisplay(Entity Trader, Player Player) 
         {
+            TradeWindow.SetActive(true);
             foreach (Items.Item item in Player.Inventory)
             {
                 GameObject itemDisplay = Instantiate(InventoryItemWidget, PlayerSide.transform);
