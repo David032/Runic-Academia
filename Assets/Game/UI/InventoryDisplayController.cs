@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Runic.Entities;
+using TMPro;
+using UnityEngine.UI;
 
 namespace Runic.UI
 {
@@ -9,53 +11,50 @@ namespace Runic.UI
     {
         public GameObject Window;
         public GameObject InventoryItemWidget;
+        public TextMeshProUGUI FallBackText;
+        public TextMeshProUGUI PlayerCoins;
+        public Image SlottedConsumable;
 
-        Entity Owner;
+        Entities.Player.Player Owner;
         List<GameObject> displayedItems = new List<GameObject>();
         // Start is called before the first frame update
         void Start()
         {
-            Owner = GetComponentInParent<Entity>();
+            Owner = GetComponentInParent<Entities.Player.Player>();
         }
 
         // Update is called once per frame
         void Update()
         {
+            PlayerCoins.text = Owner.Coins + "gp";
+            SlottedConsumable.sprite = Owner.SlottedConsumable.icon;
+        }
+
+        public void ToggleInventoryWindow() 
+        {
+            Window.SetActive(!Window.activeSelf);
             if (Window.activeSelf)
             {
                 foreach (Items.Item item in Owner.Inventory)
                 {
-                    GameObject itemDisplay = 
-                        Instantiate(InventoryItemWidget, Window.transform);
-                    try
-                    {
-                        itemDisplay.GetComponent<ItemWidget>().SetItemWidget
-                            (item.name, item.Description, item.Type, item.value);
-                    }
-                    catch (System.Exception)
-                    {
-                        print("?!?!?!");
-                    }
+                    //FallBackText.text += "\n" + item.Name + " - " + item.Description + " - "
+                    //    + item.Type.ToString() + " - " + item.value.ToString() + "gp";
+                    GameObject itemDisplay = Instantiate(InventoryItemWidget, Window.transform);
+                    ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
+                    widget.SetItemWidget(item.Name, item.Description, item.Type, item.value);
+
 
                     displayedItems.Add(itemDisplay);
                 }
             }
             else
             {
-                if (displayedItems.Count != 0)
+                FallBackText.text = "";
+                foreach (var item in displayedItems)
                 {
-                    foreach (var item in displayedItems)
-                    {
-                        Destroy(item.gameObject);
-                    }
+                    Destroy(item);
                 }
-
             }
-        }
-
-        public void ToggleInventoryWindow() 
-        {
-            Window.SetActive(!Window.activeSelf);
         }
     }
 }

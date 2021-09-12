@@ -12,6 +12,15 @@ namespace Runic.UI
         public TextMeshProUGUI Type;
         public TextMeshProUGUI Value;
 
+        private void Start()
+        {
+            
+        }
+
+        private void Update()
+        {
+            
+        }
         public void SetItemWidget
             (string name,string description, ItemType type, int value) 
         {
