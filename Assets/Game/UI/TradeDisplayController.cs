@@ -15,8 +15,8 @@ namespace Runic.UI
 
         public GameObject InventoryItemWidget;
 
-        List<GameObject> PlayerItems;
-        List<GameObject> TraderItems;
+        List<GameObject> PlayerItems = new List<GameObject>();
+        List<GameObject> TraderItems = new List<GameObject>();
         public void ShowTradeDisplay(Entity Trader, Player Player) 
         {
             TradeWindow.SetActive(true);
