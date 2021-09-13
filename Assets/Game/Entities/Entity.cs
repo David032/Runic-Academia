@@ -1,4 +1,5 @@
 using Runic.Characteristics;
+using Runic.Characteristics.Titles;
 using Runic.Items;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,6 +13,8 @@ namespace Runic.Entities
         [Header("Base")]
         public string Name = "";
         public EntityFlag Flag = EntityFlag.Friendly;
+        public TypeOfEntity typeOfEntity = TypeOfEntity.All;
+        public BaseTitle Title;
         [Header("Attributes")]
         public Health Health;
         public Mana Mana;

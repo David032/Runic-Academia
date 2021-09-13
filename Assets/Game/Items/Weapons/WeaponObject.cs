@@ -1,8 +1,12 @@
 ﻿using Runic.Characteristics;
+using Runic.Characteristics.Titles;
 using Runic.Entities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using System.Linq;
+using Runic.Characteristics.Titles;
 
 namespace Runic.Weapons
 {
@@ -15,15 +19,21 @@ namespace Runic.Weapons
         public float attackDuration = 1;
         public float WeaponRange;
 
+        public UnityEvent OnAttack;
+        public TwoGoArgsEvent OnAttackCollision;
+
         protected Animator entityAnimator;
         protected bool canAttack = true;
         protected Transform holder;
         protected GameObject root;
+        protected Entity Wielder;
         private void Awake()
         {
             entityAnimator = GetComponentInParent<Animator>();
             holder = entityAnimator.gameObject.transform;
+            Wielder = holder.GetComponent<Entity>();
             root = holder.GetComponentInChildren<EntityOrigin>().gameObject;
+            //OnAttack.AddListener(delegate { Attack(); }); -Not sure if this is right?
         }
         protected IEnumerator AttackSequence()
         {
@@ -41,7 +51,7 @@ namespace Runic.Weapons
         }
 
         public void Attack() 
-        {
+        {   
             StartCoroutine(AttackSequence());
         }
         protected abstract void AttackStart();
@@ -51,11 +61,23 @@ namespace Runic.Weapons
         {
             if (other.GetComponent<Health>())
             {
+                Entity target = other.GetComponent<Entity>();
                 other.GetComponent<Health>().current -= damage;
-            } 
-        }
 
+                if (Wielder.Title is DamageTitle)
+                {
+                    DamageTitle damageData = (DamageTitle)Wielder.Title;
+                    if (damageData.AffectedTypes.Contains(target.typeOfEntity))
+                    {
+                        other.GetComponent<Health>().current 
+                            -= damageData.ExtraDamage;
+                    }
+                }
+            }
+        }
         public Transform FetchWielder() { return holder; }
     }
 
+    [System.Serializable]
+    public class TwoGoArgsEvent: UnityEvent<GameObject, GameObject> { }
 }

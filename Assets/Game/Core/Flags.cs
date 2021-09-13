@@ -36,11 +36,12 @@ namespace Runic
         Tonic
     }
 
-    public enum TypeOfEnemy
+    public enum TypeOfEntity
     {
         Artificial,
         Goblin,
         Undead,
+        Human,
         All
     }
 }

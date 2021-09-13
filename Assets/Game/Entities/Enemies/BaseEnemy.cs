@@ -9,7 +9,6 @@ namespace Runic.Entities.Enemies
     public partial class BaseEnemy : Entity
     {
         public Weapons.WeaponObject weapon;
-        public TypeOfEnemy EnemyType = TypeOfEnemy.All;
         // Start is called before the first frame update
         void Start()
         {
