@@ -6,9 +6,10 @@ using Unity.AI.Navigation;
 
 namespace Runic.Entities.Enemies
 {
-    public class BaseEnemy : Entity
+    public partial class BaseEnemy : Entity
     {
         public Weapons.WeaponObject weapon;
+        public TypeOfEnemy EnemyType = TypeOfEnemy.All;
         // Start is called before the first frame update
         void Start()
         {

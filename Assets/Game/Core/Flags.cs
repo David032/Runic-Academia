@@ -35,5 +35,13 @@ namespace Runic
         Potion,
         Tonic
     }
+
+    public enum TypeOfEnemy
+    {
+        Artificial,
+        Goblin,
+        Undead,
+        All
+    }
 }
 

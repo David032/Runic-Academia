@@ -1333,10 +1333,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 1
+  Title: {fileID: 0}
   Health: {fileID: 3645130747576525008}
+  Mana: {fileID: 0}
+  Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
+  Inventory: []
+  Coins: 50
   weapon: {fileID: 4309507190940218994}
+  EnemyType: 1
 --- !u!114 &3645130747576525008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1349,7 +1355,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 687d73646860ab44781fa2ae780e52d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  current: 0
   spawnFull: 1
   onEmpty:
     m_PersistentCalls:
