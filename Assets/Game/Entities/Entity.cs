@@ -37,7 +37,14 @@ namespace Runic.Entities
 
         Vector3 lastPosition;
         float speed;
-
+        private void Start()
+        {
+            if (Title is CharacteristicTitle)
+            {
+                CharacteristicTitle titleData = (CharacteristicTitle)Title;
+                //Apply modifier here
+            }
+        }
         void Awake()
         {
             entityAgent = GetComponent<NavMeshAgent>();
