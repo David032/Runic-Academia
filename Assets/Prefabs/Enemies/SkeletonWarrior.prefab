@@ -2185,6 +2185,7 @@ GameObject:
   - component: {fileID: -4574362669320444617}
   - component: {fileID: -5296460524926133839}
   - component: {fileID: 4528653708288918465}
+  - component: {fileID: 4733944092127767162}
   m_Layer: 0
   m_Name: SkeletonWarrior
   m_TagString: Enemy
@@ -2242,6 +2243,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 1
+  typeOfEntity: 4
   Title: {fileID: 0}
   Health: {fileID: 2121105751295506470}
   Mana: {fileID: 0}
@@ -2251,7 +2253,6 @@ MonoBehaviour:
   Inventory: []
   Coins: 50
   weapon: {fileID: 725758132675389719}
-  EnemyType: 2
 --- !u!114 &2121105751295506470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2267,7 +2268,19 @@ MonoBehaviour:
   spawnFull: 1
   onEmpty:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4733944092127767162}
+        m_TargetAssemblyTypeName: Runic.Achievements.Interfaces.EntityDeath, Assembly-CSharp
+        m_MethodName: OnEntityDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   baseHealth: 100
   bonus: 0
 --- !u!136 &1464713387630281789
@@ -2367,6 +2380,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 1843372628765425818}
   leftHand: {fileID: 1843430119862555486}
+--- !u!114 &4733944092127767162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844079643241603878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99726d17a657bb42906189f6e27c748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1844084096827471864
 GameObject:
   m_ObjectHideFlags: 0
@@ -2905,11 +2930,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ca1534a0cdd24d45a48647338fb4148, type: 3}
---- !u!4 &1003868473860750686 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1689542584494838198, guid: 7ca1534a0cdd24d45a48647338fb4148, type: 3}
-  m_PrefabInstance: {fileID: 1917410880758951144}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &725758132675389719 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1193007657085863423, guid: 7ca1534a0cdd24d45a48647338fb4148, type: 3}
@@ -2921,6 +2941,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2212b4ca658432741829a02f4f153b0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &1003868473860750686 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1689542584494838198, guid: 7ca1534a0cdd24d45a48647338fb4148, type: 3}
+  m_PrefabInstance: {fileID: 1917410880758951144}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3962406407050652505
 PrefabInstance:
   m_ObjectHideFlags: 0

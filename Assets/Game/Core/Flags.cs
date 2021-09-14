@@ -44,5 +44,10 @@ namespace Runic
         Human,
         All
     }
+    public enum ProgressCriteria
+    {
+        DungeonCompletion,
+        RoomEntered,
+    }
 }
 

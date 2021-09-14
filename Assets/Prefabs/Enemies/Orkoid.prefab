@@ -206,6 +206,7 @@ GameObject:
   - component: {fileID: 4024517898816743192}
   - component: {fileID: 8514720281861218171}
   - component: {fileID: 4191416244892221988}
+  - component: {fileID: 6050447727982526081}
   m_Layer: 0
   m_Name: Orkoid
   m_TagString: Enemy
@@ -263,6 +264,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 1
+  typeOfEntity: 4
   Title: {fileID: 0}
   Health: {fileID: 4479021050995018376}
   Mana: {fileID: 0}
@@ -272,7 +274,6 @@ MonoBehaviour:
   Inventory: []
   Coins: 50
   weapon: {fileID: 0}
-  EnemyType: 1
 --- !u!114 &4479021050995018376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -288,7 +289,19 @@ MonoBehaviour:
   spawnFull: 1
   onEmpty:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6050447727982526081}
+        m_TargetAssemblyTypeName: Runic.Achievements.Interfaces.EntityDeath, Assembly-CSharp
+        m_MethodName: OnEntityDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   baseHealth: 100
   bonus: 0
 --- !u!114 &9122960688873411812
@@ -387,6 +400,18 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6050447727982526081
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577669841468849875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f99726d17a657bb42906189f6e27c748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6577691575898202339
 GameObject:
   m_ObjectHideFlags: 0

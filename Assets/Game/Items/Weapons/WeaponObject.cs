@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using System.Linq;
-using Runic.Characteristics.Titles;
 
 namespace Runic.Weapons
 {
