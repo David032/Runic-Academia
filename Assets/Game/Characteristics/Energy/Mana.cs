@@ -13,6 +13,7 @@ namespace Runic.Characteristics
     public class Mana : Energy
     {
         public int baseMana = 100;
+        public int bonusMana = 0;
 
         IManaBonus[] _bonusComponents;
         IManaBonus[] bonusComponents
@@ -29,11 +30,7 @@ namespace Runic.Characteristics
             get
             {
                 int baseThisLevel = baseMana;
-                int bonus = 0;
-                for (int i = 0; i < bonusComponents.Length; ++i)
-                {
-                    bonus += bonusComponents[i].GetManaBonus(baseThisLevel);
-                }
+                int bonus = bonusMana;
                 return baseThisLevel + bonus;
             }
         }

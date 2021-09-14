@@ -13,7 +13,7 @@ namespace Runic.Characteristics
     public class Health : Energy
     {
         public int baseHealth = 100;
-        public int bonus = 0;
+        public int bonusHealth = 0;
 
         IHealthBonus[] _bonusComponents;
         IHealthBonus[] bonusComponents
@@ -33,11 +33,11 @@ namespace Runic.Characteristics
             get
             {
                 int baseThisLevel = baseHealth;
-                int bonus = 0;
-                for (int i = 0; i < bonusComponents.Length; ++i)
-                {
-                    bonus += bonusComponents[i].GetHealthBonus(baseThisLevel);
-                }
+                int bonus = bonusHealth;
+                //for (int i = 0; i < bonusComponents.Length; ++i)
+                //{
+                //    bonus += bonusComponents[i].GetHealthBonus(baseThisLevel);
+                //}
                 return baseThisLevel + bonus;
             }
         }

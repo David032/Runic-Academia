@@ -12,6 +12,7 @@ namespace Runic.Characteristics
     public class Stamina : Energy
     {
         public int baseEndurance = 10;
+        public int bonusEndurance = 0;
 
         IEnduranceBonus[] _bonusComponents;
         IEnduranceBonus[] bonusComponents
@@ -26,12 +27,9 @@ namespace Runic.Characteristics
         {
             get
             {
-                int bonus = 0;
-                for (int i = 0; i < bonusComponents.Length; ++i)
-                {
-                    bonus += bonusComponents[i].GetEnduranceBonus(baseEndurance);
-                }
-                return baseEndurance + bonus;
+                int baseThisLevel = baseEndurance;
+                int bonus = bonusEndurance;
+                return baseThisLevel + bonus;
             }
         }
     }
