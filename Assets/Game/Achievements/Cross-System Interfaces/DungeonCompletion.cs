@@ -12,14 +12,14 @@ namespace Runic.Achievements.Interfaces
             foreach (Achievement achievementItem in 
                 AchievementManager.Instance.ActiveAchievements.Keys)
             {
-                //if (achievementItem is ProgressAchievement progressAchievement)
-                //{
-                //    if (progressAchievement.ProgressionRequirement ==
-                //        ProgressCriteria.DungeonCompletion)
-                //    {
-                //        progressAchievement.IncrementValue();
-                //    }
-                //}
+                if (achievementItem is ProgressAchievement progressAchievement)
+                {
+                    if (progressAchievement.ProgressionRequirement ==
+                        ProgressCriteria.DungeonCompletion)
+                    {
+                        progressAchievement.IncrementValue();
+                    }
+                }
             }
         }
     }
