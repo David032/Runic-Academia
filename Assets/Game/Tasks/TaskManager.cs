@@ -10,6 +10,16 @@ namespace Runic.Tasks
         public List<Job> ActiveJobs = new List<Job>();
         public List<Quest> ActiveQuests = new List<Quest>();
         public List<Task> CompletedTasks = new List<Task>();
+
+        private void Start()
+        {
+            
+        }
+
+        void CheckEndeavours() 
+        {
+            
+        }
     }
 }
 
