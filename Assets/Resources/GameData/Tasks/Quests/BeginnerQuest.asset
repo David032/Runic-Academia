@@ -15,5 +15,8 @@ MonoBehaviour:
   Name: 
   Description: 
   isQuestElement: 0
-  TasksToComplete: []
+  TasksToComplete:
+  - {fileID: 11400000, guid: e4f7dfd054edcc145a2631089e033679, type: 2}
+  - {fileID: 11400000, guid: c46ad3af0463e0f4291b4c4764e6efc1, type: 2}
+  - {fileID: 0}
   Rewards: []
