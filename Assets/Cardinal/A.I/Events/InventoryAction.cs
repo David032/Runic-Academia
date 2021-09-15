@@ -45,14 +45,14 @@ namespace Cardinal.AI.Events
                 other.GetComponent<PlayerControls>().Interact
                     (InteractionTypes.Person);
                 transform.LookAt(other.transform);
-                if (!other.GetComponent<Player>().Inventory.Contains(requiredItem) 
-                    && !isComplete)
+                if (!other.GetComponent<Player>().inventory.Inventory
+                    .Contains(requiredItem) && !isComplete)
                 {
                     DialogueManager.Instance.ConfigureDialogue(Request);
                     DialogueManager.Instance.ShowWindow();
                 }
-                else if (!isComplete 
-                    && other.GetComponent<Player>().Inventory.Contains(requiredItem))
+                else if (!isComplete && other.GetComponent<Player>()
+                    .inventory.Inventory.Contains(requiredItem))
                 {
                     DialogueManager.Instance.ConfigureDialogue(ThanksMessage);
                     DialogueManager.Instance.ShowWindow();
@@ -61,7 +61,7 @@ namespace Cardinal.AI.Events
                     MentalModel.events.Add(@event);
                     MentalModel.eventMemories.Add(new NPCEventMemory(@event));
                     isComplete = true;
-                    other.GetComponent<Player>().Inventory.Remove(requiredItem);
+                    other.GetComponent<Player>().inventory.RemoveItem(requiredItem);
                 }
                 else
                 {

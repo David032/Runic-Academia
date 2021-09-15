@@ -8,6 +8,7 @@ using UnityEngine.AI;
 
 namespace Runic.Entities
 {
+    [RequireComponent(typeof(EntityInventory))]
     public class Entity : MonoBehaviour
     {
         [Header("Base")]
@@ -23,9 +24,7 @@ namespace Runic.Entities
         public float VisibilityRange = 15f;
         public float Fov = 90f;
         [Header("Resources")]
-        public List<Item> Inventory = new List<Item>();
-        public int Coins = 50;
-
+        public EntityInventory inventory;
 
         protected NavMeshAgent entityAgent;
         protected Animator entityAnimator;

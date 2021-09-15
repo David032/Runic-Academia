@@ -10,7 +10,7 @@ namespace Runic.Items
     {
         public virtual void Use(Entities.Entity entity)
         {
-            entity.Inventory.Remove(this);
+            entity.inventory.RemoveItem(this);
             if (entity.CompareTag("Player"))
             {
                 entity.gameObject.GetComponentInChildren<Runic.UI.InventoryDisplayController>().ToggleInventoryWindow();

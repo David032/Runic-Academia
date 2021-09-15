@@ -25,7 +25,7 @@ namespace Runic.UI
         // Update is called once per frame
         void Update()
         {
-            PlayerCoins.text = Owner.Coins + "gp";
+            PlayerCoins.text = Owner.inventory.Coins + "gp";
         }
 
         public void ToggleInventoryWindow() 
@@ -33,7 +33,7 @@ namespace Runic.UI
             Window.SetActive(!Window.activeSelf);
             if (Window.activeSelf)
             {
-                foreach (Items.Item item in Owner.Inventory)
+                foreach (Items.Item item in Owner.inventory.Inventory)
                 {
                     //FallBackText.text += "\n" + item.Name + " - " + item.Description + " - "
                     //    + item.Type.ToString() + " - " + item.value.ToString() + "gp";

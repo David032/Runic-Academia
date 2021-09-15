@@ -30,7 +30,7 @@ namespace Cardinal.AI.Events
             }
             if (other.GetComponent<PlayerControls>().isInteracting && !hasCompleted)
             {
-                if (!other.GetComponent<Player>().Inventory.Contains(RequiredItem))
+                if (!other.GetComponent<Player>().inventory.Inventory.Contains(RequiredItem))
                 {
                     DialogueManager.Instance.ConfigureDialogue(InteractionMessage);
                     DialogueManager.Instance.ShowWindow();
@@ -42,7 +42,7 @@ namespace Cardinal.AI.Events
                     DialogueManager.Instance.ConfigureDialogue(CompletionMessage);
                     DialogueManager.Instance.ShowWindow();
                     CreateEvent();
-                    other.GetComponent<Player>().Inventory.Remove(RequiredItem);
+                    other.GetComponent<Player>().inventory.RemoveItem(RequiredItem);
                     DefaultState.SetActive(false);
                     ChangedState.SetActive(true);
                 }

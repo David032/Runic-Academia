@@ -20,7 +20,7 @@ namespace Runic.UI
         public void ShowTradeDisplay(Entity Trader, Player Player) 
         {
             TradeWindow.SetActive(true);
-            foreach (Items.Item item in Player.Inventory)
+            foreach (Items.Item item in Player.inventory.Inventory)
             {
                 GameObject itemDisplay = Instantiate(InventoryItemWidget, PlayerSide.transform);
                 ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
@@ -29,7 +29,7 @@ namespace Runic.UI
                     (delegate { OnTrade(Trader, Player, (item.value * GetTraderBuyingModifier(Trader)), item); });
                 PlayerItems.Add(itemDisplay);
             }
-            foreach (Items.Item item in Trader.Inventory)
+            foreach (Items.Item item in Trader.inventory.Inventory)
             {
                 GameObject itemDisplay = Instantiate(InventoryItemWidget, TraderSide.transform);
                 ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
@@ -43,11 +43,11 @@ namespace Runic.UI
         void OnTrade(Entity DestinationEntity, Entity Seller, float cost, Items.Item itemToTrade) 
         {
             int ActualCost = Mathf.RoundToInt(cost);
-            if (DestinationEntity.Coins - ActualCost >= 0)
+            if (DestinationEntity.inventory.Coins - ActualCost >= 0)
             {
-                Seller.Inventory.Remove(itemToTrade);
-                DestinationEntity.Inventory.Add(itemToTrade);
-                DestinationEntity.Coins -= ActualCost;
+                Seller.inventory.RemoveItem(itemToTrade);
+                DestinationEntity.inventory.AddItem(itemToTrade);
+                DestinationEntity.inventory.RemoveCurrency(ActualCost);
             }
             else
             {

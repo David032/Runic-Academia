@@ -13,7 +13,7 @@ namespace Runic.Rewards
         {
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Entities.Entity PlayerEntity = player.GetComponent<Entities.Entity>();
-            PlayerEntity.Inventory.Add(Instantiate(ItemToReward));
+            PlayerEntity.inventory.AddItem(Instantiate(ItemToReward));
         }
     }
 }

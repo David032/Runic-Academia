@@ -27,7 +27,7 @@ namespace Runic.Interactions
                 other.GetComponent<PlayerControls>().Interact(InteractionTypes.Chest);
                 foreach (var item in itemsInChest)
                 {
-                    other.GetComponent<Player>().Inventory.Add(item);
+                    other.GetComponent<Player>().inventory.AddItem(item);
                 }
                 itemsInChest.Clear();
             }
