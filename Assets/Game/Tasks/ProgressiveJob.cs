@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Runic.Tasks
+namespace Runic.Tasks.Jobs
 {
     [CreateAssetMenu(fileName = "ProgressiveJob", menuName = "Runic/Tasks/Job/ProgressiveJob")]
     public class ProgressiveJob : Job
