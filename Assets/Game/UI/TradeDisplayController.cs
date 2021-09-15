@@ -22,20 +22,32 @@ namespace Runic.UI
             TradeWindow.SetActive(true);
             foreach (Items.Item item in Player.inventory.Inventory)
             {
-                GameObject itemDisplay = Instantiate(InventoryItemWidget, PlayerSide.transform);
+                GameObject itemDisplay = 
+                    Instantiate(InventoryItemWidget, PlayerSide.transform);
                 ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
-                widget.SetItemWidget(item.Name, item.Description, item.Type, item.value);
+                widget.SetItemWidget
+                    (item.Name, item.Description, item.Type, item.value);
                 widget.GetComponent<Button>().onClick.AddListener
-                    (delegate { OnTrade(Trader, Player, (item.value * GetTraderBuyingModifier(Trader)), item); });
+                    (delegate 
+                    {
+                        OnTrade(Trader, Player, 
+                            (item.value * GetTraderBuyingModifier(Trader)), item); 
+                    });
                 PlayerItems.Add(itemDisplay);
             }
             foreach (Items.Item item in Trader.inventory.Inventory)
             {
-                GameObject itemDisplay = Instantiate(InventoryItemWidget, TraderSide.transform);
+                GameObject itemDisplay = 
+                    Instantiate(InventoryItemWidget, TraderSide.transform);
                 ItemWidget widget = itemDisplay.GetComponent<ItemWidget>();
-                widget.SetItemWidget(item.Name, item.Description, item.Type, item.value);
+                widget.SetItemWidget
+                    (item.Name, item.Description, item.Type, item.value);
                 widget.GetComponent<Button>().onClick.AddListener
-                    (delegate { OnTrade(Player, Trader,item.value * GetTraderSellingModifier(Trader), item); });
+                    (delegate 
+                    {
+                        OnTrade(Player, Trader,
+                            item.value * GetTraderSellingModifier(Trader), item); 
+                    });
                 TraderItems.Add(itemDisplay);
             }
         }
@@ -48,6 +60,7 @@ namespace Runic.UI
                 Seller.inventory.RemoveItem(itemToTrade);
                 DestinationEntity.inventory.AddItem(itemToTrade);
                 DestinationEntity.inventory.RemoveCurrency(ActualCost);
+                Seller.inventory.AddCurrency(ActualCost);
             }
             else
             {
