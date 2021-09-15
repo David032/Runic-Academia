@@ -4,6 +4,7 @@ using UnityEngine;
 using System.Linq;
 using Runic.Achievements;
 using Runic.Tasks;
+using Runic.Tasks.Jobs;
 
 namespace Runic.Entities
 {
@@ -28,27 +29,27 @@ namespace Runic.Entities
 
             foreach (Job jobItem in TaskManager.Instance.ActiveJobs.ToList())
             {
-                //if (jobItem is KillJob)
-                //{
-                //    var KillJob = (KillJob)jobItem;
-                //    if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
-                //    {
-                //        KillJob.IncrementValue();
-                //    }
-                //}
+                if (jobItem is KillJob)
+                {
+                    var KillJob = (KillJob)jobItem;
+                    if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
+                    {
+                        KillJob.IncrementValue();
+                    }
+                }
             }
 
             foreach (Task questItem in TaskManager.Instance.ActiveQuest.TasksToComplete)
             {
-                //if (questItem is KillJob)
-                //{
-                //    var KillJob = (KillJob)questItem;
-                //    if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
-                //    {
-                //        KillJob.IncrementValue();
-                //    }
-                //}
-                
+                if (questItem is KillJob)
+                {
+                    var KillJob = (KillJob)questItem;
+                    if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
+                    {
+                        KillJob.IncrementValue();
+                    }
+                }
+
             }
         }
     }
