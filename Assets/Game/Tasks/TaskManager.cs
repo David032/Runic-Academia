@@ -8,7 +8,7 @@ namespace Runic.Tasks
     {
         public List<Endeavour> ActiveEndeavours = new List<Endeavour>();
         public List<Job> ActiveJobs = new List<Job>();
-        public List<Quest> ActiveQuests = new List<Quest>();
+        public Quest ActiveQuest;
         public List<Task> CompletedTasks = new List<Task>();
 
         private void Start()
@@ -19,6 +19,16 @@ namespace Runic.Tasks
         void CheckEndeavours() 
         {
             
+        }
+
+        void CheckJobs() 
+        {
+        
+        }
+
+        void CheckQuests() 
+        {
+        
         }
     }
 }

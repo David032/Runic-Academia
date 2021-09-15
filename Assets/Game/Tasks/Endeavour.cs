@@ -14,6 +14,22 @@ namespace Runic.Tasks
         {
             Reward.OnRecieve();
         }
+
+        public override void OnCompletion()
+        {
+            if (TaskManager.Instance.ActiveEndeavours.Contains(this))
+            {
+                TaskManager.Instance.ActiveEndeavours.Remove(this);
+            }
+            else
+            {
+                if (TaskManager.Instance.ActiveQuest.TasksToComplete.Contains(this))
+                {
+                    TaskManager.Instance.ActiveQuest.CompleteStage(this);
+                }
+            }
+            TaskManager.Instance.CompletedTasks.Add(this);
+        }
     }
 }
 

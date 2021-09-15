@@ -21,8 +21,7 @@ namespace Runic.Tasks.Interfaces
                         if (visitation.LocationId == Id)
                         {
                             visitation.GiveReward();
-                            TaskManager.Instance.ActiveEndeavours.Remove(item);
-                            TaskManager.Instance.CompletedTasks.Add(item);
+                            visitation.OnCompletion();
                         }
                     }
                 }
