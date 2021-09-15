@@ -54,6 +54,7 @@ GameObject:
   - component: {fileID: 8899161470797559884}
   - component: {fileID: 7855046581051668100}
   - component: {fileID: 2278926425534328162}
+  - component: {fileID: 6440741074550128716}
   m_Layer: 0
   m_Name: MeleeTrader
   m_TagString: NPC
@@ -257,9 +258,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Melee Trader
   Flag: 0
+  typeOfEntity: 4
+  Title: {fileID: 0}
   Health: {fileID: 0}
+  Mana: {fileID: 0}
+  Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
+  inventory: {fileID: 6440741074550128716}
 --- !u!114 &8899161470797559884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -305,6 +311,32 @@ MonoBehaviour:
     _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
     _objectReferences:
     - {fileID: 11400000, guid: c2b258fd6c524a54c9624ed29a5ae078, type: 2}
+--- !u!114 &6440741074550128716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1509694129011520953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e57fc489dc4c3a4a869b279987b8de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: []
+  Coins: 50
+  OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1509716610820275931
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,6 +2129,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
+--- !u!4 &5786013950895453364 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4708438473446811237, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
+  m_PrefabInstance: {fileID: 1232779927485911761}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &5802496351642751157 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4727985075661898340, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
@@ -2108,11 +2145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &5786013950895453364 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4708438473446811237, guid: 55bd468366094bd47981ac70a3bd60eb, type: 3}
-  m_PrefabInstance: {fileID: 1232779927485911761}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6986594625910940456
 PrefabInstance:
   m_ObjectHideFlags: 0

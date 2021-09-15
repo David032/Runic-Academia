@@ -39,18 +39,21 @@ namespace Runic.Entities
                 }
             }
 
-            foreach (Task questItem in TaskManager.Instance.ActiveQuest.TasksToComplete)
+            if (TaskManager.Instance.ActiveQuest != null)
             {
-                if (questItem is KillJob)
+                foreach (Task questItem in TaskManager.Instance.ActiveQuest.TasksToComplete)
                 {
-                    var KillJob = (KillJob)questItem;
-                    if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
+                    if (questItem is KillJob)
                     {
-                        KillJob.IncrementValue();
+                        var KillJob = (KillJob)questItem;
+                        if (KillJob.TypeToTrack == thisEntity.typeOfEntity)
+                        {
+                            KillJob.IncrementValue();
+                        }
                     }
                 }
-
             }
+
         }
     }
 }

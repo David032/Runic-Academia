@@ -36,7 +36,7 @@ namespace Runic.Entities
 
         Vector3 lastPosition;
         float speed;
-        private void Start()
+        void Start()
         {
             if (Title is CharacteristicTitle)
             {
@@ -46,6 +46,7 @@ namespace Runic.Entities
         }
         void Awake()
         {
+            inventory = GetComponent<EntityInventory>();
             entityAgent = GetComponent<NavMeshAgent>();
             entityAnimator = GetComponent<Animator>();
             Health = GetComponent<Health>();

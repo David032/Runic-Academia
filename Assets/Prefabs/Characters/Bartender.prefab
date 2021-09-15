@@ -2142,9 +2142,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 0
+  typeOfEntity: 4
+  Title: {fileID: 0}
   Health: {fileID: 0}
+  Mana: {fileID: 0}
+  Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
+  inventory: {fileID: 0}
 --- !u!1 &2354841824667067980
 GameObject:
   m_ObjectHideFlags: 0

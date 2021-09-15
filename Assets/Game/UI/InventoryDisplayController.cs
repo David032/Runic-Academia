@@ -14,12 +14,12 @@ namespace Runic.UI
         public TextMeshProUGUI FallBackText;
         public TextMeshProUGUI PlayerCoins;
 
-        Entities.Player.Player Owner;
+        Entity Owner;
         List<GameObject> displayedItems = new List<GameObject>();
         // Start is called before the first frame update
         void Start()
         {
-            Owner = GetComponentInParent<Entities.Player.Player>();
+            Owner = GetComponentInParent<Entity>();
         }
 
         // Update is called once per frame

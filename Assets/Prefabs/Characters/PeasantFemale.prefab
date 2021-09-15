@@ -995,6 +995,7 @@ GameObject:
   - component: {fileID: 3642026436691910894}
   - component: {fileID: 2531385153643062280}
   - component: {fileID: 5301769118427618692}
+  - component: {fileID: 7004797285218171293}
   m_Layer: 0
   m_Name: PeasantFemale
   m_TagString: NPC
@@ -1224,9 +1225,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 0
+  typeOfEntity: 4
+  Title: {fileID: 0}
   Health: {fileID: 0}
+  Mana: {fileID: 0}
+  Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
+  inventory: {fileID: 7004797285218171293}
+--- !u!114 &7004797285218171293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7117392301366472465}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e57fc489dc4c3a4a869b279987b8de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: []
+  Coins: 50
+  OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7117392301366473049
 GameObject:
   m_ObjectHideFlags: 0
