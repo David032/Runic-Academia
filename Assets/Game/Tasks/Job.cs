@@ -19,12 +19,14 @@ namespace Runic.Tasks
             if (TaskManager.Instance.ActiveJobs.Contains(this))
             {
                 TaskManager.Instance.ActiveJobs.Remove(this);
+                CompletionMessage();
             }
             else
             {
                 if (TaskManager.Instance.ActiveQuest.TasksToComplete.Contains(this))
                 {
                     TaskManager.Instance.ActiveQuest.CompleteStage(this);
+                    CompletionMessage();
                 }
             }
             TaskManager.Instance.CompletedTasks.Add(this);

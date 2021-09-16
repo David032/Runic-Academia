@@ -16,4 +16,4 @@ MonoBehaviour:
   Description: 
   isQuestElement: 0
   Reward: {fileID: 0}
-  DesiredItem: {fileID: 0}
+  DesiredItem: {fileID: 11400000, guid: 32fd7c08463876d4cb61fabdc190e1ba, type: 2}

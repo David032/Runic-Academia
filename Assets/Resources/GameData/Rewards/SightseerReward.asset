@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38939de32f106a3418f2761f74107fcf, type: 3}
   m_Name: SightseerReward
   m_EditorClassIdentifier: 
-  RewardName: 
-  RewardDescription: 
+  RewardName: Sightseer Title
+  RewardDescription: The sightseer title
   RewardValue: -1
   TitleToRecieve: {fileID: 11400000, guid: 656875cd31d15164e864d232bac22679, type: 2}

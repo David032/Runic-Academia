@@ -9,7 +9,7 @@ namespace Runic.Tasks.Interfaces
     {
         public string Id = "";
 
-        private void OnTriggerEnter(Collider other)
+        void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
@@ -22,6 +22,22 @@ namespace Runic.Tasks.Interfaces
                         {
                             visitation.GiveReward();
                             visitation.OnCompletion();
+                        }
+                    }
+                }
+                if (TaskManager.Instance.ActiveQuest != null)
+                {
+                    foreach (Task item in 
+                        TaskManager.Instance.ActiveQuest.TasksToComplete.ToList())
+                    {
+                        if (item is VisitEndeavour)
+                        {
+                            VisitEndeavour visitation = (VisitEndeavour)item;
+                            if (visitation.LocationId == Id)
+                            {
+                                visitation.GiveReward();
+                                visitation.OnCompletion();
+                            }
                         }
                     }
                 }

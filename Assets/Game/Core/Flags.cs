@@ -48,7 +48,8 @@ namespace Runic
     {
         DungeonCompletion,
         RoomEntered,
-        EnemyKilled
+        EnemyKilled,
+        GatherItem
     }
 }
 

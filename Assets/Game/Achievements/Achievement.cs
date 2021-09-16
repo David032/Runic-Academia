@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Runic.Dialogue;
 
 namespace Runic.Achievements
 {
@@ -16,6 +17,11 @@ namespace Runic.Achievements
             AchievementManager.Instance.ActiveAchievements[this] = true;
             AchievementManager.Instance.ActiveAchievements.Remove(this);
             AchievementManager.Instance.CompletedAchievements.Add(this);
+            DialogueObject Message = CreateInstance<DialogueObject>();
+            Message.Contents = "Congratulations! You just unlocked the " 
+                + AchievementName + " achievement";
+            DialogueManager.Instance.ConfigureDialogue(Message);
+            DialogueManager.Instance.ShowWindow();
         }
     }
 }

@@ -10,7 +10,10 @@ namespace Runic.Rewards
         public int AmountToGain = 0;
         public override void OnRecieve()
         {
-            //Add Amount to currency pouch            
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            Entities.Entity PlayerEntity = player.GetComponent<Entities.Entity>();
+            PlayerEntity.inventory.AddCurrency(AmountToGain);
+            DisplayRewardMessage();
         }
     }
 }

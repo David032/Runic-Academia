@@ -28,6 +28,7 @@ namespace Runic.Interactions
                 foreach (var item in itemsInChest)
                 {
                     other.GetComponent<Player>().inventory.AddItem(item);
+                    Tasks.TaskManager.Instance.CheckForUpdates();
                 }
                 itemsInChest.Clear();
             }

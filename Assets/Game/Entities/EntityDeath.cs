@@ -41,7 +41,7 @@ namespace Runic.Entities
 
             if (TaskManager.Instance.ActiveQuest != null)
             {
-                foreach (Task questItem in TaskManager.Instance.ActiveQuest.TasksToComplete)
+                foreach (Task questItem in TaskManager.Instance.ActiveQuest.TasksToComplete.ToList())
                 {
                     if (questItem is KillJob)
                     {

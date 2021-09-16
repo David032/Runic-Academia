@@ -14,6 +14,7 @@ namespace Runic.Rewards
             GameObject player = GameObject.FindGameObjectWithTag("Player");
             Entities.Entity PlayerEntity = player.GetComponent<Entities.Entity>();
             PlayerEntity.Title = Instantiate(TitleToRecieve);
+            DisplayRewardMessage();
         }
     }
 }

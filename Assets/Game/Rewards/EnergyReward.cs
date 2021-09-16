@@ -30,6 +30,7 @@ namespace Runic.Rewards
                 default:
                     break;
             }
+            DisplayRewardMessage();
         }
     }
 }
