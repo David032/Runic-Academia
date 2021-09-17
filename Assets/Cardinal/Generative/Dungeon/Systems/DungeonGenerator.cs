@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Unity.AI.Navigation;
+using Runic.Characteristics;
+using Runic.SceneManagement;
 
 namespace Cardinal.Generative.Dungeon
 {
@@ -846,11 +848,13 @@ namespace Cardinal.Generative.Dungeon
                 int RandomSelection = Random.Range(0, BossList.AvailableEnemies.Count);
                 Boss = Instantiate(BossList.AvailableEnemies[RandomSelection], BossRoom.transform);
                 Boss.transform.parent = null;
+                Boss.GetComponent<Health>().onEmpty.AddListener(delegate { BossRoom.GetComponentInChildren<HubAreaLoader>().OpenExit(); });
             }
             else
             {
                 Boss = Instantiate(BossList.AvailableEnemies[0], BossRoom.transform);
                 Boss.transform.parent = null;
+                Boss.GetComponent<Health>().onEmpty.AddListener(delegate { BossRoom.GetComponentInChildren<HubAreaLoader>().OpenExit(); });
             }
 
         }
