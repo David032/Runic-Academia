@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Runic.UI
 {
-    public class UIPassthrough : MonoBehaviour
+    public class ClockPositionPasser : MonoBehaviour
     {
         public TextMeshProUGUI AmPmSpot;
         public TextMeshProUGUI daySpot;

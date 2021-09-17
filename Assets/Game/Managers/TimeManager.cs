@@ -54,7 +54,7 @@ namespace Runic.Managers
         void SetUpUI() 
         {
             player = GameObject.FindGameObjectWithTag("Player");
-            UIPassthrough positions = player.GetComponentInChildren<UIPassthrough>();
+            ClockPositionPasser positions = player.GetComponentInChildren<ClockPositionPasser>();
             AmPmSpot = positions.AmPmSpot;
             daySpot = positions.daySpot;
             minuteSpot = positions.minuteSpot;
