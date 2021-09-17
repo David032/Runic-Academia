@@ -15,7 +15,7 @@ namespace Runic.SceneManagement
         {
             Player = GameObject.FindGameObjectWithTag("Player");
             MainCam = GameObject.FindGameObjectWithTag("MainCamera");
-            VirtualCam = GameObject.Find("PlayerVirtualCamOverhead");
+            VirtualCam = GameObject.FindGameObjectWithTag("VirtualCamera");
         }
 
         protected IEnumerator LoadPlayerIntoLoadingScene()

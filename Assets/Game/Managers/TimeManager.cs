@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.Events;
+using Runic.UI;
 
 namespace Runic.Managers
 {
@@ -43,8 +44,29 @@ namespace Runic.Managers
         public UnityEvent DayChange = new UnityEvent();
         public UnityEvent CycleChange = new UnityEvent();
 
+        GameObject player;
+        bool isconfigured = false;
+        private void Start()
+        {
+            Invoke("SetUpUI", 5f);
+        }
+
+        void SetUpUI() 
+        {
+            player = GameObject.FindGameObjectWithTag("Player");
+            UIPassthrough positions = player.GetComponentInChildren<UIPassthrough>();
+            AmPmSpot = positions.AmPmSpot;
+            daySpot = positions.daySpot;
+            minuteSpot = positions.minuteSpot;
+            secondsSpot = positions.secondsSpot;
+        }
+
         void Update()
         {
+            if (!isconfigured)
+            {
+                return;
+            }
             Time.timeScale = timeRate;
             timer += Time.deltaTime;
 

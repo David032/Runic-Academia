@@ -11,9 +11,8 @@ public class InteriorCameraController : MonoBehaviour
 
     private void Start()
     {
-        MainCamObject = GameObject.Find("PlayerVirtualCamOverhead");
-        virtualCamera = MainCamObject
-            .GetComponent<CinemachineVirtualCamera>();
+
+
     }
     private void OnTriggerEnter(Collider other)
     {
