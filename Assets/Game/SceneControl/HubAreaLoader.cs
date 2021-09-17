@@ -42,12 +42,17 @@ namespace Runic.SceneManagement
             StartCoroutine(LoadPlayerIntoLoadingScene());
             yield return new WaitForSeconds(5f);
             StartCoroutine(LoadHub()); //LoadHubAreas
-            //yield return new WaitForSeconds(10f);
-            //StartCoroutine(UnloadAreas());
+            yield return new WaitForSeconds(10f);
+            StartCoroutine(UnloadAreas());
         }
 
         IEnumerator LoadHub() 
         {
+            print("At start of loading hub:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
             AsyncOperation LoadHubScene = SceneManager.LoadSceneAsync
                 (1, LoadSceneMode.Additive);
             while (!LoadHubScene.isDone)
@@ -64,10 +69,20 @@ namespace Runic.SceneManagement
             Player.transform.position = PlayerHoldingLocation.transform.position;
             yield return new WaitForSeconds(1f);
             Player.GetComponent<CharacterController>().enabled = true;
+            print("At end of loading hub:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
         }
 
         IEnumerator UnloadAreas()
         {
+            print("At end of unload of dungeon & load:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {
                 print(SceneManager.GetSceneAt(i).name);
@@ -88,7 +103,11 @@ namespace Runic.SceneManagement
                 yield return null;
             }
             print("Unloaded Dungeon!");
-
+            print("At end of unload of dungeon & load:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
 
             yield return new WaitForSeconds(0.5f);
         }

@@ -31,7 +31,7 @@ namespace Runic.Weapons
             entityAnimator = GetComponentInParent<Animator>();
             holder = entityAnimator.gameObject.transform;
             Wielder = holder.GetComponent<Entity>();
-            root = holder.GetComponentInChildren<EntityOrigin>().gameObject;
+            //root = holder.GetComponentInChildren<EntityOrigin>().gameObject; - Don't think this is used anywhere?
             //OnAttack.AddListener(delegate { Attack(); }); -Not sure if this is right?
         }
         protected IEnumerator AttackSequence()

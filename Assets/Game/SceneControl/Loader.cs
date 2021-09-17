@@ -20,10 +20,26 @@ namespace Runic.SceneManagement
 
         protected IEnumerator LoadPlayerIntoLoadingScene()
         {
-            Scene LoadingScene = SceneManager.GetSceneByBuildIndex(0);
+            if (Player is null)
+            {
+                Player = GameObject.FindGameObjectWithTag("Player");
+            }
+            if (MainCam is null)
+            {
+                MainCam = GameObject.FindGameObjectWithTag("MainCamera");
+            }
+            if (VirtualCam is null)
+            {
+                VirtualCam = GameObject.FindGameObjectWithTag("VirtualCamera");
+            }
 
+            print("At load  of loadign scene start:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
             AsyncOperation LoadLoadingScene = SceneManager.LoadSceneAsync
-                (0, LoadSceneMode.Additive);
+                ("LoadingScene", LoadSceneMode.Additive);
             while (!LoadLoadingScene.isDone)
             {
                 yield return null;
@@ -38,6 +54,11 @@ namespace Runic.SceneManagement
             Player.transform.position = PlayerHoldingLocation.transform.position;
             yield return new WaitForSeconds(1f);
             Player.GetComponent<CharacterController>().enabled = true;
+            print("At end of loading scene start:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
         }
     }
 }

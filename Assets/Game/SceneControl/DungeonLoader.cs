@@ -48,6 +48,11 @@ namespace Runic.SceneManagement
 
         IEnumerator LoadDungeon()
         {
+            print("At start of loading dungeon:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
             AsyncOperation LoadDungeonScene = SceneManager.LoadSceneAsync
                 (3, LoadSceneMode.Additive);
             while (!LoadDungeonScene.isDone)
@@ -66,6 +71,11 @@ namespace Runic.SceneManagement
             Player.transform.position = PlayerHoldingLocation.transform.position;
             yield return new WaitForSeconds(1f);
             Player.GetComponent<CharacterController>().enabled = true;
+            print("At end of loading dungeon:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
         }
         IEnumerator ConfigureDungeon()
         {
@@ -93,11 +103,12 @@ namespace Runic.SceneManagement
             yield return new WaitForSeconds(0.5f);
         }
 
-        IEnumerator UnloadAreas() 
+        IEnumerator UnloadAreas()
         {
+            print("At start of unload of hub & load:");
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {
-                print(SceneManager.GetSceneAt(i).name);
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
             }
             AsyncOperation UnloadLoading = SceneManager.UnloadSceneAsync
                 (SceneManager.GetSceneByName("LoadingScene"));
@@ -116,7 +127,11 @@ namespace Runic.SceneManagement
             }
             print("Unloaded Hub Area!");
 
-
+            print("At end of unload of hub & load:");
+            for (int i = 0; i < SceneManager.sceneCount; i++)
+            {
+                print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
+            }
             yield return new WaitForSeconds(0.5f);
         }
     }

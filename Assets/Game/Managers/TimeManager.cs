@@ -59,6 +59,7 @@ namespace Runic.Managers
             daySpot = positions.daySpot;
             minuteSpot = positions.minuteSpot;
             secondsSpot = positions.secondsSpot;
+            isconfigured = true;
         }
 
         void Update()
