@@ -15,6 +15,11 @@ namespace Runic.UI
         Entity Entity;
         void Start()
         {
+            Invoke("SetUp", 1.5f);
+        }
+
+        void SetUp() 
+        {
             cameraLocation = Camera.main.transform;
             Entity = GetComponentInParent<Entity>();
             if (Entity.Name != null)

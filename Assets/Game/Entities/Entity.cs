@@ -43,6 +43,7 @@ namespace Runic.Entities
                 CharacteristicTitle titleData = (CharacteristicTitle)Title;
                 //Apply modifier here
             }
+            entityAnimator = GetComponent<Animator>();
         }
         void Awake()
         {

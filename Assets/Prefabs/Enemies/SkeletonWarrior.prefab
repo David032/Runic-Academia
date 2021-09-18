@@ -2186,6 +2186,7 @@ GameObject:
   - component: {fileID: -5296460524926133839}
   - component: {fileID: 4528653708288918465}
   - component: {fileID: 4733944092127767162}
+  - component: {fileID: 976626876141626254}
   m_Layer: 0
   m_Name: SkeletonWarrior
   m_TagString: Enemy
@@ -2250,8 +2251,7 @@ MonoBehaviour:
   Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
-  Inventory: []
-  Coins: 50
+  inventory: {fileID: 0}
   weapon: {fileID: 725758132675389719}
 --- !u!114 &2121105751295506470
 MonoBehaviour:
@@ -2282,7 +2282,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   baseHealth: 100
-  bonus: 0
+  bonusHealth: 0
 --- !u!136 &1464713387630281789
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2380,6 +2380,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 1843372628765425818}
   leftHand: {fileID: 1843430119862555486}
+  controller: {fileID: 9100000, guid: 1de385df2ff713a41adfcbbb63b8af91, type: 2}
 --- !u!114 &4733944092127767162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2392,6 +2393,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99726d17a657bb42906189f6e27c748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &976626876141626254
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1844079643241603878}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e57fc489dc4c3a4a869b279987b8de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: []
+  Coins: 50
+  OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1844084096827471864
 GameObject:
   m_ObjectHideFlags: 0

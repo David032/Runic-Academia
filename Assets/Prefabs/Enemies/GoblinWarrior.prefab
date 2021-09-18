@@ -1341,8 +1341,7 @@ MonoBehaviour:
   Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
-  Inventory: []
-  Coins: 50
+  inventory: {fileID: 0}
   weapon: {fileID: 4309507190940218994}
 --- !u!114 &3645130747576525008
 MonoBehaviour:
@@ -1373,7 +1372,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   baseHealth: 100
-  bonus: 0
+  bonusHealth: 0
 --- !u!136 &1004849934305194675
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1471,6 +1470,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 760748282368118698}
   leftHand: {fileID: 758864095639408044}
+  controller: {fileID: 9100000, guid: 1de385df2ff713a41adfcbbb63b8af91, type: 2}
 --- !u!114 &3766141680959610118
 MonoBehaviour:
   m_ObjectHideFlags: 0

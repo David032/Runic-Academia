@@ -19,11 +19,27 @@ namespace Runic.Tasks
 
         private void Start()
         {
-            Player = GameObject.FindGameObjectWithTag("Player")
-                .GetComponent<Entity>();
-            playerInventory = Player.GetComponent<EntityInventory>();
+            Invoke("SetUp", 5f);
             InvokeRepeating("CheckJobs", 5, 5);
             InvokeRepeating("CheckEndeavours", 5, 5);
+        }
+
+        void SetUp() 
+        {
+            Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
+            playerInventory = Player.GetComponent<EntityInventory>();
+        }
+
+        private void Update()
+        {
+            if (Player is null)
+            {
+                Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Entity>();
+            }
+            if (playerInventory is null)
+            {
+                playerInventory = Player.GetComponent<EntityInventory>();
+            }
         }
 
         public void CheckForUpdates() 

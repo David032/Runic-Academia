@@ -12,12 +12,25 @@ namespace Cardinal.AI.NPC
         Transform playerTransform;
         void Start()
         {
+            Invoke("SetUp", 1.5f);
+        }
+
+        void SetUp() 
+        {
             playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
             opinionDisk = gameObject.GetComponentInChildren<SpriteRenderer>();
         }
 
         public void UpdateDisplay(float opinion)
         {
+            if (playerTransform is null)
+            {
+                playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            }
+            if (opinionDisk is null)
+            {
+                opinionDisk = gameObject.GetComponentInChildren<SpriteRenderer>();
+            }
             Vector3 opinionDiskRotation = opinionDisk.transform.rotation.eulerAngles;
             opinionDiskNumber.text = opinion.ToString();
             opinionDisk.transform.rotation.eulerAngles.Set(opinionDiskRotation.x, playerTransform.rotation.eulerAngles.y, opinionDiskRotation.z);
