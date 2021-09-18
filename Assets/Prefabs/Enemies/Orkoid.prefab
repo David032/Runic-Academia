@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 8514720281861218171}
   - component: {fileID: 4191416244892221988}
   - component: {fileID: 6050447727982526081}
+  - component: {fileID: 6701369046226176422}
   m_Layer: 0
   m_Name: Orkoid
   m_TagString: Enemy
@@ -273,6 +274,8 @@ MonoBehaviour:
   Fov: 90
   inventory: {fileID: 0}
   weapon: {fileID: 0}
+  MeleeRange: 10
+  SplashPotion: {fileID: 0}
 --- !u!114 &4479021050995018376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -376,8 +379,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"nest":{"source":"Macro","macro":null,"embed":null}}'
-    _objectReferences: []
+    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
+    _objectReferences:
+    - {fileID: 11400000, guid: 9ae02086b657fef4aaf05bf24e255429, type: 2}
 --- !u!195 &4191416244892221988
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -412,6 +416,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f99726d17a657bb42906189f6e27c748, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6701369046226176422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6577669841468849875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e57fc489dc4c3a4a869b279987b8de3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Inventory: []
+  Coins: 50
+  OnItemAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnItemRemoved:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyAdded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnCurrencyRemoved:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &6577691575898202339
 GameObject:
   m_ObjectHideFlags: 0

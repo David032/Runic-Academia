@@ -142,6 +142,14 @@ namespace Runic.Entities
                 Stamina.current -= thisTonic.StaminaModifier;
             }
         }
+
+        public void ExecuteDie()
+        {
+            int randomDeath = Random.Range(1, 3);
+            GetComponent<Animator>().SetInteger("DeathType_int", randomDeath);
+            GetComponent<Animator>().SetBool("IsDead_b", true);
+            GetComponent<Animator>().SetBool("Death_b", true);
+        }
     }
 
 }

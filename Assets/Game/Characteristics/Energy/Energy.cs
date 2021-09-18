@@ -23,6 +23,10 @@ namespace Runic.Characteristics
                 {
                     onEmpty.Invoke();
                 }
+                else
+                {
+                    print("[Damage event here]");
+                }
             }
         }
         public abstract int max { get; }
