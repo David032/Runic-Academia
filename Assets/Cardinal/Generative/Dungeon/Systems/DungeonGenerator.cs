@@ -116,6 +116,7 @@ namespace Cardinal.Generative.Dungeon
             {
                 GameObject SpawnedRoom =
                     GenerateAndReturnSuitableRoom(currentDoor, 2);
+                SpawnedRoom.GetComponent<Room>().isMainRoute = true;
                 priorRoom = SpawnedRoom;
                 currentDoor = GetRandomDoor(SpawnedRoom.GetComponent<Room>());
             }

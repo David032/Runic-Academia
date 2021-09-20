@@ -1388,6 +1388,7 @@ MonoBehaviour:
   doorways: []
   RoomFlags: 
   isDone: 0
+  isBroken: 0
 --- !u!1 &4438884970454797071
 GameObject:
   m_ObjectHideFlags: 0
