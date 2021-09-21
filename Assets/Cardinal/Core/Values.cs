@@ -19,6 +19,16 @@ namespace Cardinal
         Evil
     }
 
+    public enum HexadTypes
+    {
+        Philanthropists,
+        Socialisers,
+        FreeSpirits,
+        Achievers,
+        Players,
+        Disruptors
+    }
+
     public enum Categories
     {
         Good,
