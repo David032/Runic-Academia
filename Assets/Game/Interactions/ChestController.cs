@@ -1,7 +1,11 @@
+using Cardinal.Analyser;
+using Cardinal.Appraiser;
+using Cardinal.Generative.Dungeon;
 using Runic.Entities.Player;
 using Runic.Items;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Runic.Interactions
@@ -13,6 +17,7 @@ namespace Runic.Interactions
         private void Awake()
         {
             GetComponent<BoxCollider>().isTrigger = true;
+            GetComponent<BoxCollider>().size = Vector3.one * 2;
         }
 
         private void OnTriggerStay(Collider other)
@@ -24,7 +29,25 @@ namespace Runic.Interactions
 
             if (other.GetComponent<PlayerControls>().isInteracting)
             {
+                print("Player interacting!");
                 other.GetComponent<PlayerControls>().Interact(InteractionTypes.Chest);
+                NodeInteractedWith @event = ScriptableObject.CreateInstance<NodeInteractedWith>();
+                @event.Name = "Player retrieved item(s)";
+                @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.EventPriority = Cardinal.Priority.Low;
+                @event.NodeType = Cardinal.NodeType.Chest;
+                @event.items = itemsInChest.ToList();
+                @event.RoomType = GetComponentInParent<Room>().Type;
+                if (Tasks.TaskManager.Instance.HasItemTasks())
+                {
+                    @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100);
+                }
+                else
+                {
+                    @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
+                }
+                Analyser.Instance.RegisterEvent(@event);
+
                 foreach (var item in itemsInChest)
                 {
                     other.GetComponent<Player>().inventory.AddItem(item);

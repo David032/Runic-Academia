@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 7665070238968890758}
   - component: {fileID: 7665070238969986534}
   - component: {fileID: 7691044162692544940}
+  - component: {fileID: 4898912009148114546}
+  - component: {fileID: 5661024998043356058}
   m_Layer: 0
   m_Name: Mushrooms
   m_TagString: Untagged
@@ -97,3 +99,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43804078104836886, guid: b0eee228966ad814c989eb3c48504600, type: 2}
+--- !u!65 &4898912009148114546
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665070238967853140}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8510413, y: 1.4301251, z: 0.9058423}
+  m_Center: {x: -0.00000023841858, y: 0.71506256, z: -0.00000023841858}
+--- !u!114 &5661024998043356058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7665070238967853140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8518fb13023e1994e80e4d64ce593886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInNode: []

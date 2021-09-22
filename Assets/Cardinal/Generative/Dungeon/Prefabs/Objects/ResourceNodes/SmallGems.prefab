@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 348489705168952365}
   - component: {fileID: 359365703061057995}
   - component: {fileID: 308507149834688563}
+  - component: {fileID: 2387291776080455300}
+  - component: {fileID: -6474250646970716681}
   m_Layer: 0
   m_Name: SmallGems
   m_TagString: Untagged
@@ -98,3 +100,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43287926403273940, guid: 09dd0375b0eee5940a0b80bbadf10e2f, type: 2}
+--- !u!65 &2387291776080455300
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336255013398364833}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.599367, y: 0.65687776, z: 0.72619385}
+  m_Center: {x: -0.09106703, y: 0.41499084, z: -0.008621484}
+--- !u!114 &-6474250646970716681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 336255013398364833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8518fb13023e1994e80e4d64ce593886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInNode: []

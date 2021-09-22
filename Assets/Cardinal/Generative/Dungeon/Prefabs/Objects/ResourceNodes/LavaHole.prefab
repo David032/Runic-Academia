@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8222422310809668293}
   - component: {fileID: 8222422310810794307}
   - component: {fileID: 8286513071164468413}
+  - component: {fileID: 3521258172287087930}
+  - component: {fileID: -4226995516814376021}
   m_Layer: 0
   m_Name: LavaHole
   m_TagString: Untagged
@@ -97,3 +99,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43661486324747616, guid: a9a281aea0ef9514bb9eab3af2513035, type: 2}
+--- !u!65 &3521258172287087930
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222422310812786289}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.5144792, y: 1.2048708, z: 3.423298}
+  m_Center: {x: 0.00000071525574, y: 0.5362883, z: -0.000005722046}
+--- !u!114 &-4226995516814376021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8222422310812786289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8518fb13023e1994e80e4d64ce593886, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInNode: []

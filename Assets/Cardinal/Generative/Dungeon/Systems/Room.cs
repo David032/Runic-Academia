@@ -9,9 +9,10 @@ namespace Cardinal.Generative.Dungeon
     {
         public List<Doorway> doorways;
         public List<RoomFlags> RoomFlags;
+        public RoomType Type;
         public bool isDone = false;
         public bool isBroken = false;
-        public bool firstEntry = false;
+        public bool firstEntry = true;
         public bool isMainRoute = false;
 
         // Start is called before the first frame update
@@ -34,13 +35,52 @@ namespace Cardinal.Generative.Dungeon
                 return;
             }
 
-            if (!firstEntry)
+            if (firstEntry)
             {
-                //Fire first entry message
+                if (isMainRoute)
+                {
+                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
+                    @event.Name = "Player entered " + gameObject;
+                    @event.Time = Time.realtimeSinceStartup.ToString();
+                    @event.RoomType = Type;
+                    @event.IsFirstEntry = true;
+                    @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 100);
+                    Analyser.Analyser.Instance.RegisterEvent(@event);
+                }
+                else
+                {
+                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
+                    @event.Name = "Player entered " + gameObject;
+                    @event.Time = Time.realtimeSinceStartup.ToString();
+                    @event.RoomType = Type;
+                    @event.IsFirstEntry = true;
+                    @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 200);
+                    Analyser.Analyser.Instance.RegisterEvent(@event);
+                }
+                firstEntry = false;
             }
             else
             {
-                //Fire retrace entry message
+                if (isMainRoute)
+                {
+                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
+                    @event.Name = "Player reentered " + gameObject;
+                    @event.Time = Time.realtimeSinceStartup.ToString();
+                    @event.RoomType = Type;
+                    @event.IsFirstEntry = true;
+                    @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 50);
+                    Analyser.Analyser.Instance.RegisterEvent(@event);
+                }
+                else
+                {
+                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
+                    @event.Name = "Player reentered " + gameObject;
+                    @event.Time = Time.realtimeSinceStartup.ToString();
+                    @event.RoomType = Type;
+                    @event.IsFirstEntry = true;
+                    @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 100);
+                    Analyser.Analyser.Instance.RegisterEvent(@event);
+                }
             }
         }
     }

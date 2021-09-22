@@ -18,7 +18,6 @@ namespace Cardinal
         Good,
         Evil
     }
-
     public enum HexadTypes
     {
         Philanthropists,
@@ -28,7 +27,6 @@ namespace Cardinal
         Players,
         Disruptors
     }
-
     public enum Categories
     {
         Good,
@@ -77,7 +75,6 @@ namespace Cardinal
         Funny,
         Boring
     }
-
     public enum Factions
     {
         TownA,
@@ -85,6 +82,26 @@ namespace Cardinal
         VillageA,
         City,
         None
+    }
+    public enum RoomType
+    {
+        MainRoom,
+        SecondaryRoom,
+        PuzzleRoom,
+        BossRoom,
+        SpecialRoom
+    }
+    public enum Priority
+    {
+        Low,
+        Medium,
+        High
+    }
+
+    public enum NodeType 
+    {
+        Chest,
+        Resource
     }
 }
 

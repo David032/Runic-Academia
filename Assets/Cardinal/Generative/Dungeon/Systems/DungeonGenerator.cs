@@ -103,6 +103,7 @@ namespace Cardinal.Generative.Dungeon
             GameObject roomToSpawn = Instantiate(GetRandomRoom
                 (StarterRooms.RoomsToUse));
             roomToSpawn.transform.position = Vector3.zero;
+            roomToSpawn.GetComponent<Room>().isMainRoute = true;
             SpawnRoom = roomToSpawn;
             GeneratedRooms.Add(roomToSpawn);
             priorRoom = SpawnRoom;
@@ -124,6 +125,7 @@ namespace Cardinal.Generative.Dungeon
             if (RequiresBoss)
             {
                 BossRoom = GenerateNonGenericRoom(currentDoor, BossRooms);
+                BossRoom.GetComponent<Room>().isMainRoute = true;
                 SpawnBoss();
             }
 
@@ -776,7 +778,7 @@ namespace Cardinal.Generative.Dungeon
                     (sourceObjects.LootNodes[RandomLootSelection],
                     LocationToSpawn.transform);
                 LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
-                LootToSpawn.transform.parent = holder.transform;
+                //LootToSpawn.transform.parent = holder.transform;
 
                 spawnedLoot.Add(LootToSpawn);
             }

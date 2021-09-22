@@ -109,6 +109,8 @@ GameObject:
   - component: {fileID: 1952571171153318991}
   - component: {fileID: 1952571171154385625}
   - component: {fileID: 2017229215969444247}
+  - component: {fileID: 2679906914858614669}
+  - component: {fileID: 2236700781235866970}
   m_Layer: 0
   m_Name: ChestCommon
   m_TagString: Untagged
@@ -195,3 +197,29 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 43133926653982510, guid: 64b8ea99aa15bd34686a3f26836321e8, type: 2}
+--- !u!65 &2679906914858614669
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952571171156410325}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.8512431, y: 0.33838883, z: 0.57276905}
+  m_Center: {x: 0.000000029802322, y: 0.16919442, z: -0.0066945404}
+--- !u!114 &2236700781235866970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1952571171156410325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 21382b774b044a2409d8a05c73908515, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemsInChest: []

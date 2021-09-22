@@ -8,16 +8,19 @@ namespace Cardinal.Appraiser
     {
         public string Name;
         public string Time;
-        public List<BehaviourTypes> BehaviourIndicators = new List<BehaviourTypes>();
-        public string Description;
+        public Priority EventPriority = Priority.Medium;
+    }
 
-        public void PopulateEventData(string EventName, string EventDescription, 
-            List<BehaviourTypes> behaviours)
+    [System.Serializable]
+    public class HexadCorrelation 
+    {
+        public HexadTypes Type;
+        public int Amount;
+
+        public HexadCorrelation(HexadTypes CategoryType, int AmountToChangeBy) 
         {
-            Name = EventName;
-            Time = System.DateTime.Now.ToString();
-            BehaviourIndicators = behaviours;
-            Description = EventDescription;
+            Type = CategoryType;
+            Amount = AmountToChangeBy;
         }
     }
 }

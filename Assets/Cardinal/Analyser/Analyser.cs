@@ -50,33 +50,6 @@ namespace Cardinal.Analyser
         /// </summary>
         void BasicAnalysis() 
         {
-            //Maybe swap for a sortedictionary
-            SortedDictionary<string, int> BehaviourCount = 
-                new SortedDictionary<string, int>();
-            foreach (EventData eventEntry in Events)
-            {
-                foreach (BehaviourTypes indicitiveBehaviour 
-                    in eventEntry.BehaviourIndicators)
-                {
-                    if (!BehaviourCount.ContainsKey(indicitiveBehaviour.
-                        ToString()))
-                    {
-                        BehaviourCount.Add(indicitiveBehaviour.ToString(), 1);
-                    }
-                    else
-                    {
-                        BehaviourCount[indicitiveBehaviour.ToString()] += 1;
-                    }
-                }
-            }
-
-
-            print("Out of " + Events.Count + " events:");
-            foreach (var item in BehaviourCount)
-            {
-                print(item.Value + " events exhibited " + item.Key 
-                    + " behaviours");
-            }
         }
         #endregion
     }

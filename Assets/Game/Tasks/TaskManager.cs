@@ -104,6 +104,40 @@ namespace Runic.Tasks
         {
         
         }
+
+        public bool HasItemTasks() 
+        {
+            foreach (Endeavour endeavour in ActiveEndeavours)
+            {
+                if (endeavour is ItemEndeavour)
+                {
+                    return true;
+                }
+            }
+
+            foreach (Job job in ActiveJobs)
+            {
+                if (job is ItemJob)
+                {
+                    return true;
+                }
+            }
+            if (ActiveQuest != null)
+            {
+                foreach (Task task in ActiveQuest.TasksToComplete)
+                {
+                    if (task is ItemEndeavour || task is ItemJob)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
     }
 }
 
