@@ -36,6 +36,9 @@ public class PlayerDeath : MonoBehaviour
         @event.Slayer = LastEnemy.GetComponent<Entity>();
         Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
 
-        //Respawn code
+        GameObject PlayerHoldingLocation = GameObject.Find("PlayerStartPosition");
+        GetComponent<CharacterController>().enabled = false;
+        transform.position = PlayerHoldingLocation.transform.position;
+        GetComponent<CharacterController>().enabled = true;
     }
 }
