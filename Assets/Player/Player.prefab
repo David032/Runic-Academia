@@ -11349,6 +11349,7 @@ GameObject:
   - component: {fileID: 7191692506635974750}
   - component: {fileID: 5982649002344029577}
   - component: {fileID: 3132839438415619756}
+  - component: {fileID: -4209328351665098377}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -11633,7 +11634,19 @@ MonoBehaviour:
   spawnFull: 1
   onEmpty:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: -4209328351665098377}
+        m_TargetAssemblyTypeName: PlayerDeath, Assembly-CSharp
+        m_MethodName: OnDeath
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   baseHealth: 100
   bonusHealth: 0
 --- !u!114 &7191692506635974750
@@ -11650,6 +11663,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rightHand: {fileID: 8822268985931694549}
   leftHand: {fileID: 8822171138731086193}
+  controller: {fileID: 0}
 --- !u!143 &5982649002344029577
 CharacterController:
   m_ObjectHideFlags: 0
@@ -11694,6 +11708,20 @@ MonoBehaviour:
   OnCurrencyRemoved:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-4209328351665098377
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8821901428976844253}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 638fd6a377c2c1f489201872e9a52a71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LastEnemy: {fileID: 0}
+  CurrentRoom: {fileID: 0}
 --- !u!1 &8821905626337134269
 GameObject:
   m_ObjectHideFlags: 0

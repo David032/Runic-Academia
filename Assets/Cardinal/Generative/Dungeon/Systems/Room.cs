@@ -82,6 +82,7 @@ namespace Cardinal.Generative.Dungeon
                     Analyser.Analyser.Instance.RegisterEvent(@event);
                 }
             }
+            other.GetComponent<PlayerDeath>().CurrentRoom = gameObject;
         }
     }
 
