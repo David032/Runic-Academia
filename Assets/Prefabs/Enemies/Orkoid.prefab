@@ -272,10 +272,10 @@ MonoBehaviour:
   Stamina: {fileID: 0}
   VisibilityRange: 15
   Fov: 90
-  inventory: {fileID: 0}
-  weapon: {fileID: 0}
+  inventory: {fileID: 6701369046226176422}
+  weapon: {fileID: 1193007657085863423, guid: 7ca1534a0cdd24d45a48647338fb4148, type: 3}
   MeleeRange: 10
-  SplashPotion: {fileID: 0}
+  SplashPotion: {fileID: 2659416283301492104, guid: 22d86bce516801d45a4c93d73f50734a, type: 3}
 --- !u!114 &4479021050995018376
 MonoBehaviour:
   m_ObjectHideFlags: 0
