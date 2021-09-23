@@ -1,3 +1,4 @@
+using Cardinal.Appraiser;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,6 +40,23 @@ namespace Runic.SceneManagement
 
         IEnumerator LoadHubArea() 
         {
+            if (Tasks.TaskManager.Instance.HasCompleteDungeonTasks())
+            {
+                CompletedDungeonEvent @event = ScriptableObject.CreateInstance<CompletedDungeonEvent>();
+                @event.Name = "Player completed a dungeon";
+                @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.EventPriority = Cardinal.Priority.High;
+                @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
+                Tasks.TaskManager.Instance.IncrementProgressJobs(ProgressCriteria.DungeonCompletion);
+            }
+            else
+            {
+                CompletedDungeonEvent @event = ScriptableObject.CreateInstance<CompletedDungeonEvent>();
+                @event.Name = "Player completed a dungeon";
+                @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.EventPriority = Cardinal.Priority.High;
+                @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 300);
+            }
             StartCoroutine(LoadPlayerIntoLoadingScene());
             yield return new WaitForSeconds(5f);
             StartCoroutine(LoadHub()); //LoadHubAreas

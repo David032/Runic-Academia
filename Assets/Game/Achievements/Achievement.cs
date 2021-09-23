@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Runic.Dialogue;
+using Cardinal.Appraiser;
 
 namespace Runic.Achievements
 {
@@ -22,6 +23,15 @@ namespace Runic.Achievements
                 + AchievementName + " achievement";
             DialogueManager.Instance.ConfigureDialogue(Message);
             DialogueManager.Instance.ShowWindow();
+
+            AchievementCompletedEvent @event = ScriptableObject.CreateInstance<AchievementCompletedEvent>();
+            @event.Name = "Player achieved " + AchievementName;
+            @event.Time = Time.realtimeSinceStartup.ToString();
+            @event.Achievement = this;
+            @event.EventPriority = Cardinal.Priority.Low;
+            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Achievers, 300));
+            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Players, 200));
+            Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
         }
     }
 }

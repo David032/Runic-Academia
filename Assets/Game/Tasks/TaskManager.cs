@@ -138,6 +138,52 @@ namespace Runic.Tasks
             }
             return false;
         }
+        public bool HasCompleteDungeonTasks() 
+        {
+            foreach (Job job in ActiveJobs)
+            {
+                if (job is ProgressiveJob progressiveJob && progressiveJob.ProgressCriteria == ProgressCriteria.DungeonCompletion)
+                {
+                    return true;
+                }
+            }
+            if (ActiveQuest != null)
+            {
+                foreach (Task task in ActiveQuest.TasksToComplete)
+                {
+                    if (task is ProgressiveJob progressiveJob && progressiveJob.ProgressCriteria == ProgressCriteria.DungeonCompletion)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public void IncrementProgressJobs(ProgressCriteria criteria) 
+        {
+            foreach (Job job in ActiveJobs)
+            {
+                if (job is ProgressiveJob progressiveJob && progressiveJob.ProgressCriteria == ProgressCriteria.DungeonCompletion)
+                {
+                    progressiveJob.IncrementValue();
+                }
+            }
+            if (ActiveQuest != null)
+            {
+                foreach (Task task in ActiveQuest.TasksToComplete)
+                {
+                    if (task is ProgressiveJob progressiveJob && progressiveJob.ProgressCriteria == ProgressCriteria.DungeonCompletion)
+                    {
+                        progressiveJob.IncrementValue();
+                    }
+                }
+            }
+        }
     }
 }
 

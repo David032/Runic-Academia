@@ -46,6 +46,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 100);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
+                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
                 else
                 {
@@ -56,6 +57,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 200);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
+                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
                 firstEntry = false;
             }
@@ -70,6 +72,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 50);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
+                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
                 else
                 {
@@ -80,6 +83,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 100);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
+                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
             }
             other.GetComponent<PlayerDeath>().CurrentRoom = gameObject;
