@@ -97,11 +97,16 @@ namespace Cardinal
         Medium,
         High
     }
-
     public enum NodeType 
     {
         Chest,
         Resource
+    }
+
+    public enum InventoryChange
+    {
+        Gain,
+        Loss
     }
 }
 
