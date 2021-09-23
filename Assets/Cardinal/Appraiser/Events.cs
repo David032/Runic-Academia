@@ -1,4 +1,5 @@
 using Runic.Achievements;
+using Runic.Characteristics.Titles;
 using Runic.Items;
 using Runic.Tasks;
 using System.Collections;
@@ -28,6 +29,11 @@ namespace Cardinal.Appraiser
     {
         public int Amount;
         public InventoryChange Change;
+    }
+
+    public class TitleEarntEvent : EventData 
+    {
+        public BaseTitle Title;
     }
 }
 
