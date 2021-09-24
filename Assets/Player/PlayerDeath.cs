@@ -1,4 +1,5 @@
 using Cardinal.Appraiser;
+using Runic.Characteristics;
 using Runic.Entities;
 using Runic.Entities.Enemies;
 using System.Collections;
@@ -40,5 +41,6 @@ public class PlayerDeath : MonoBehaviour
         GetComponent<CharacterController>().enabled = false;
         transform.position = PlayerHoldingLocation.transform.position;
         GetComponent<CharacterController>().enabled = true;
+        GetComponent<Health>().Restore();
     }
 }

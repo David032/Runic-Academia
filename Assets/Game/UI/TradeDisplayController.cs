@@ -4,6 +4,7 @@ using UnityEngine;
 using Runic.Entities;
 using Runic.Entities.Player;
 using UnityEngine.UI;
+using Cardinal.Appraiser;
 
 namespace Runic.UI
 {
@@ -66,6 +67,24 @@ namespace Runic.UI
             {
                 print("Don't think " + DestinationEntity + " has enough coins");
             }
+            NPCTradeEvent @event = ScriptableObject.CreateInstance<NPCTradeEvent>();
+            @event.Name = "Player made a trade";
+            @event.Time = Time.realtimeSinceStartup.ToString();
+            @event.EventPriority = Cardinal.Priority.Medium;
+            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Philanthropists, 200));
+            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Players, 200));
+            if (Seller.gameObject.CompareTag("Player"))
+            {
+                @event.ChangeData = new InventoryChangeData(Cardinal.InventoryChange.Loss, itemToTrade, ActualCost);
+                @event.NPC = DestinationEntity;
+            }
+            else
+            {
+                @event.ChangeData = new InventoryChangeData(Cardinal.InventoryChange.Gain, itemToTrade, ActualCost);
+                @event.NPC = Seller;
+            }
+            Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
+
             ClearDisplay();
             TradeWindow.SetActive(false);
         }

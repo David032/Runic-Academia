@@ -217,7 +217,7 @@ namespace Runic.Tasks
 
         public void IncrementProgressJobs(ProgressCriteria criteria) 
         {
-            foreach (Job job in ActiveJobs)
+            foreach (Job job in ActiveJobs.ToList())
             {
                 if (job is ProgressiveJob progressiveJob && progressiveJob.ProgressCriteria == ProgressCriteria.DungeonCompletion)
                 {

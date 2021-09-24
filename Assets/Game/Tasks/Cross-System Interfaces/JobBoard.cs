@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Runic.Dialogue;
+using Cardinal.Appraiser;
 
 namespace Runic.Tasks.Interfaces
 {
@@ -67,6 +68,14 @@ namespace Runic.Tasks.Interfaces
                             DialogueManager.Instance.ShowWindow();
                         }
                     }
+
+                    TaskTakenEvent @event = ScriptableObject.CreateInstance<TaskTakenEvent>();
+                    @event.Name = "Player took task " + taskToGrant.Name;
+                    @event.Time = Time.realtimeSinceStartup.ToString();
+                    @event.EventPriority = Cardinal.Priority.High;
+                    @event.Task = taskToGrant;
+                    @event.HexadCorrelation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
+                    Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
                 }
             }
         }

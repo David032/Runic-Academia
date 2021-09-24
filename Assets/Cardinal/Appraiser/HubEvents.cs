@@ -1,5 +1,6 @@
 using Runic.Entities;
 using Runic.Items;
+using Runic.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +19,7 @@ namespace Cardinal.Appraiser
     {
 
     }
-    public class NPCTradeEvent : EventData 
+    public class NPCTradeEvent : NPCEvent 
     {
         public InventoryChangeData ChangeData;
     }
@@ -29,18 +30,29 @@ namespace Cardinal.Appraiser
         public InventoryChange Change;
         public Item Item;
         public int Amount;
-    }
 
+        public InventoryChangeData(InventoryChange WhatSortOfChangeOccured, Item WhatChangedHands, int WhatWasItsValue) 
+        {
+            Change = WhatSortOfChangeOccured;
+            Item = WhatChangedHands;
+            Amount = WhatWasItsValue;
+        }
+    }
     public class BuildingEnteredEvent:EventData
     {
         public string BuildingName;
         public HexadCorrelation Correlation;
     }
-
     public class CollectibleFoundEvent : EventData 
     {
         public Item Item;
         public int SeriesNumber;
         public HexadCorrelation Correlation;
+    }
+
+    public class TaskTakenEvent : EventData
+    {
+        public Task Task;
+        public HexadCorrelation HexadCorrelation;
     }
 }

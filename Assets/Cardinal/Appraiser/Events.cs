@@ -18,19 +18,16 @@ namespace Cardinal.Appraiser
         public Achievement Achievement;
         public List<HexadCorrelation> Correlations;
     }
-
     public class InventoryChangeEvent : EventData 
     {
         public Item Item;
         public InventoryChange Change;
     }
-
     public class CurrencyChangeEvent : EventData 
     {
         public int Amount;
         public InventoryChange Change;
     }
-
     public class TitleEarntEvent : EventData 
     {
         public BaseTitle Title;

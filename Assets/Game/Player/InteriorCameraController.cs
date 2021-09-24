@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using Cardinal.Appraiser;
 
 //This is ugly, but atomised into individual checks to prevent screw-ups
 public class InteriorCameraController : MonoBehaviour
@@ -34,6 +35,14 @@ public class InteriorCameraController : MonoBehaviour
                     item.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
+
+            BuildingEnteredEvent @event = ScriptableObject.CreateInstance<BuildingEnteredEvent>();
+            @event.Name = "Player entered " + gameObject;
+            @event.Time = Time.realtimeSinceStartup.ToString();
+            @event.EventPriority = Cardinal.Priority.Low;
+            @event.BuildingName = gameObject.name;
+            @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
+            Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
         }
     }
 
