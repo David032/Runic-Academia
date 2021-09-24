@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace Cardinal.Appraiser
-{
+{    
+    //@event.Name = "Player entered " + gameObject;
+    //@event.Time = Time.realtimeSinceStartup.ToString();
+    //@event.EventPriority = Cardinal.Priority.Low;
     public abstract class NPCEvent:EventData
     {
         public Entity NPC;

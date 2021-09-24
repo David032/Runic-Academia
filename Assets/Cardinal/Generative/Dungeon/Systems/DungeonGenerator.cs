@@ -817,7 +817,7 @@ namespace Cardinal.Generative.Dungeon
                     (sourceObjects.AvailableEnemies[RandomLootSelection],
                     LocationToSpawn.transform);
                 LocationToSpawn.GetComponent<NodeMarker>().isUsed = true;
-                LootToSpawn.transform.parent = holder.transform;
+                //LootToSpawn.transform.parent = holder.transform;
 
                 spawnedLoot.Add(LootToSpawn);
             }

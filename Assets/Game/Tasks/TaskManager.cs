@@ -163,6 +163,57 @@ namespace Runic.Tasks
             }
             return false;
         }
+        public bool HasKillTasks()
+        {
+            foreach (Job job in ActiveJobs)
+            {
+                if (job is KillJob)
+                {
+                    return true;
+                }
+            }
+            if (ActiveQuest != null)
+            {
+                foreach (Task task in ActiveQuest.TasksToComplete)
+                {
+                    if (task is KillJob)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
+
+        public bool HasKillTasks(TypeOfEntity requiredType)
+        {
+            foreach (Job job in ActiveJobs)
+            {
+                if (job is KillJob killJob && killJob.TypeToTrack == requiredType)
+                {
+                    return true;
+                }
+            }
+            if (ActiveQuest != null)
+            {
+                foreach (Task task in ActiveQuest.TasksToComplete)
+                {
+                    if (task is KillJob killJob && killJob.TypeToTrack == requiredType)
+                    {
+                        return true;
+                    }
+                }
+            }
+            else
+            {
+                return false;
+            }
+            return false;
+        }
 
         public void IncrementProgressJobs(ProgressCriteria criteria) 
         {

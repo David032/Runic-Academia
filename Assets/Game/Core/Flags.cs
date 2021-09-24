@@ -44,6 +44,13 @@ namespace Runic
         Human,
         All
     }
+
+    public enum EnemyCategory
+    {
+        Add,
+        Leader,
+        Boss,
+    }
     public enum ProgressCriteria
     {
         DungeonCompletion,

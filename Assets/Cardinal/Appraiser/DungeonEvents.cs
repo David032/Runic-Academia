@@ -1,3 +1,4 @@
+using Runic;
 using Runic.Entities;
 using Runic.Items;
 using System.Collections;
@@ -9,11 +10,6 @@ namespace Cardinal.Appraiser
     //@event.Name = "Player entered " + gameObject;
     //@event.Time = Time.realtimeSinceStartup.ToString();
     //@event.EventPriority = Cardinal.Priority.Low;
-
-    public class DungeonEvents : MonoBehaviour
-    {
-    }
-
     public class RoomEnteredEvent:EventData
     {
         public RoomType RoomType = RoomType.MainRoom;
@@ -35,6 +31,14 @@ namespace Cardinal.Appraiser
     public class CompletedDungeonEvent : EventData
     {
         public HexadCorrelation Correlation;
+    }
+
+    public class EnemyKilledEvent : EventData
+    {
+        public TypeOfEntity TypeOfEntity;
+        public EnemyCategory EnemyCategory;
+        public RoomType RoomType;
+        public List<HexadCorrelation> Correlations;
     }
 }
 
