@@ -11,12 +11,10 @@ namespace Cardinal.Appraiser
     public class TaskCompletedEvent : EventData
     {
         public Task Task;
-        public HexadCorrelation Correlation;
     }
-    public class AchievementCompletedEvent : EventData
+    public class AchievementCompletedEvent : MultiEventData
     {
         public Achievement Achievement;
-        public List<HexadCorrelation> Correlations;
     }
     public class InventoryChangeEvent : EventData 
     {

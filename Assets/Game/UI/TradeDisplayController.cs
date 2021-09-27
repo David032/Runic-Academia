@@ -71,8 +71,8 @@ namespace Runic.UI
             @event.Name = "Player made a trade";
             @event.Time = Time.realtimeSinceStartup.ToString();
             @event.EventPriority = Cardinal.Priority.Medium;
-            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Philanthropists, 200));
-            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Players, 200));
+            @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Philanthropists, 200);
+            @event.secondaryCorrelation = new HexadCorrelation(Cardinal.HexadTypes.Players, 200);
             if (Seller.gameObject.CompareTag("Player"))
             {
                 @event.ChangeData = new InventoryChangeData(Cardinal.InventoryChange.Loss, itemToTrade, ActualCost);

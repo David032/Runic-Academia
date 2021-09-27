@@ -37,28 +37,21 @@ namespace Cardinal.Generative.Dungeon
 
             if (firstEntry)
             {
+                Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
+                @event.Name = "Player entered " + gameObject;
+                @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.RoomType = Type;
+                @event.IsFirstEntry = true;
                 if (isMainRoute)
                 {
-                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
-                    @event.Name = "Player entered " + gameObject;
-                    @event.Time = Time.realtimeSinceStartup.ToString();
-                    @event.RoomType = Type;
-                    @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 100);
-                    Analyser.Analyser.Instance.RegisterEvent(@event);
-                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
                 else
                 {
-                    Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
-                    @event.Name = "Player entered " + gameObject;
-                    @event.Time = Time.realtimeSinceStartup.ToString();
-                    @event.RoomType = Type;
-                    @event.IsFirstEntry = true;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 200);
-                    Analyser.Analyser.Instance.RegisterEvent(@event);
-                    Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 }
+                Analyser.Analyser.Instance.RegisterEvent(@event);
+                Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
                 firstEntry = false;
             }
             else

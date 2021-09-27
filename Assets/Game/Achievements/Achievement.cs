@@ -29,8 +29,8 @@ namespace Runic.Achievements
             @event.Time = Time.realtimeSinceStartup.ToString();
             @event.Achievement = this;
             @event.EventPriority = Cardinal.Priority.Low;
-            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Achievers, 300));
-            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Players, 200));
+            @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 300);
+            @event.secondaryCorrelation = new HexadCorrelation(Cardinal.HexadTypes.Players, 200);
             Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
         }
     }

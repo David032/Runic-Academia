@@ -64,10 +64,10 @@ namespace Runic.Entities
             @event.TypeOfEntity = GetComponent<BaseEnemy>().typeOfEntity;
             @event.EnemyCategory = GetComponent<BaseEnemy>().Category;
             @event.RoomType = GetComponentInParent<Room>().Type;
-            @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Players, 100));
+            @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Players, 100);
             if (TaskManager.Instance.HasKillTasks(GetComponent<BaseEnemy>().typeOfEntity))
             {
-                @event.Correlations.Add(new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100));
+                @event.secondaryCorrelation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100);
             }
             Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
         }

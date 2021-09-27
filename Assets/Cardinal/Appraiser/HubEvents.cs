@@ -10,10 +10,9 @@ namespace Cardinal.Appraiser
     //@event.Name = "Player entered " + gameObject;
     //@event.Time = Time.realtimeSinceStartup.ToString();
     //@event.EventPriority = Cardinal.Priority.Low;
-    public abstract class NPCEvent:EventData
+    public abstract class NPCEvent:MultiEventData
     {
         public Entity NPC;
-        public List<HexadCorrelation> Correlations;
     }
     public class NPCInteractionEvent : NPCEvent
     {
@@ -41,18 +40,15 @@ namespace Cardinal.Appraiser
     public class BuildingEnteredEvent:EventData
     {
         public string BuildingName;
-        public HexadCorrelation Correlation;
     }
     public class CollectibleFoundEvent : EventData 
     {
         public Item Item;
         public int SeriesNumber;
-        public HexadCorrelation Correlation;
     }
 
     public class TaskTakenEvent : EventData
     {
         public Task Task;
-        public HexadCorrelation HexadCorrelation;
     }
 }

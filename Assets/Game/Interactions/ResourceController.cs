@@ -39,11 +39,11 @@ namespace Runic.Interactions
                 @event.RoomType = GetComponentInParent<Room>().Type;
                 if (Tasks.TaskManager.Instance.HasItemTasks())
                 {
-                    @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100);
+                    @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100);
                 }
                 else
                 {
-                    @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
+                    @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
                 }
                 Analyser.Instance.RegisterEvent(@event);
 

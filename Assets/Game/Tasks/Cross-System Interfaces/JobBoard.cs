@@ -74,7 +74,7 @@ namespace Runic.Tasks.Interfaces
                     @event.Time = Time.realtimeSinceStartup.ToString();
                     @event.EventPriority = Cardinal.Priority.High;
                     @event.Task = taskToGrant;
-                    @event.HexadCorrelation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
+                    @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
                     Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
                 }
             }

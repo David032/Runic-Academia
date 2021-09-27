@@ -8,7 +8,12 @@ namespace Cardinal.Appraiser
     {
         public string Name;
         public string Time;
+        public HexadCorrelation Correleation;
         public Priority EventPriority = Priority.Medium;
+    }
+    public class MultiEventData : EventData 
+    {
+        public HexadCorrelation secondaryCorrelation;
     }
 
     [System.Serializable]

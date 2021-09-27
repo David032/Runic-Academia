@@ -14,14 +14,12 @@ namespace Cardinal.Appraiser
     {
         public RoomType RoomType = RoomType.MainRoom;
         public bool IsFirstEntry = false;
-        public HexadCorrelation Correleation;
     }
     public class NodeInteractedWith : EventData 
     {
         public NodeType NodeType = NodeType.Chest;
         public List<Item> items;
         public RoomType RoomType = RoomType.MainRoom;
-        public HexadCorrelation Correlation;
     }
     public class PlayerDeathEvent : EventData 
     {
@@ -30,15 +28,13 @@ namespace Cardinal.Appraiser
     }
     public class CompletedDungeonEvent : EventData
     {
-        public HexadCorrelation Correlation;
     }
 
-    public class EnemyKilledEvent : EventData
+    public class EnemyKilledEvent : MultiEventData
     {
         public TypeOfEntity TypeOfEntity;
         public EnemyCategory EnemyCategory;
         public RoomType RoomType;
-        public List<HexadCorrelation> Correlations;
     }
 }
 

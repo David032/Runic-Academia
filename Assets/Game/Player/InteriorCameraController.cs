@@ -41,7 +41,7 @@ public class InteriorCameraController : MonoBehaviour
             @event.Time = Time.realtimeSinceStartup.ToString();
             @event.EventPriority = Cardinal.Priority.Low;
             @event.BuildingName = gameObject.name;
-            @event.Correlation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
+            @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 100);
             Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
         }
     }
