@@ -41,14 +41,15 @@ namespace Cardinal.Generative.Dungeon
         public EnemyList BossList;
         [Header("Generated Data")]
         public List<GameObject> GeneratedRooms;
+        public List<GameObject> spawnedLoot;
+        public List<GameObject> spawnedNodes;
 
         [Header("Internals")]
         GameObject SpawnRoom;
         GameObject BossRoom;
         GameObject priorRoom;
 
-        List<GameObject> spawnedLoot;
-        List<GameObject> spawnedNodes;
+
 
         // Start is called before the first frame update
         void Start()

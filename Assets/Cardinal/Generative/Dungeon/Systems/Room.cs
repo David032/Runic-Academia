@@ -40,6 +40,7 @@ namespace Cardinal.Generative.Dungeon
                 Appraiser.RoomEnteredEvent @event = ScriptableObject.CreateInstance<Appraiser.RoomEnteredEvent>();
                 @event.Name = "Player entered " + gameObject;
                 @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.EventPriority = Priority.Medium;
                 @event.RoomType = Type;
                 @event.IsFirstEntry = true;
                 if (isMainRoute)
