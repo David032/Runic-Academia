@@ -9,8 +9,7 @@ namespace Cardinal.Analyser
 {
     public class Analyser : CardinalSingleton<Analyser> 
     {
-        //These will not be public in final
-        [Header("Profiled Values - Hexad")]
+        [Header("Profiled Values - Hexad")]//These shouldn't be public in final
         public float PhilanthropistValue;
         public float SocialiserValue;
         public float FreeSpiritValue;
@@ -20,6 +19,7 @@ namespace Cardinal.Analyser
         [Header("Profiled Values - NonHexad")]
         public float KillDeathRation;
         public float DungeonProgression;
+        public PlayerPerformance Performance = PlayerPerformance.Average;
         [Header("Inbound Events Buffer")]
         public List<EventData> LowPriorityEvents;
         public List<EventData> MediumPriorityEvents;
@@ -31,13 +31,16 @@ namespace Cardinal.Analyser
 
         private void Start()
         {
-            InvokeRepeating("AnalyseMediumPriority", PassTime, PassTime);
+            InvokeRepeating("ScheduledAnalysis", PassTime, PassTime);
         }
 
         private void Update()
         {
             
         }
+
+        #region Core Functionality
+
         public void RegisterEvent(EventData data) 
         {
             switch (data.EventPriority)
@@ -50,14 +53,34 @@ namespace Cardinal.Analyser
                     break;
                 case Priority.High:
                     HighPriorityEvents.Add(data);
-                    AnalyseHighPriority();
+                    ImmediateAnalysis();
                     break;
                 default:
                     break;
             }
         }
 
-        #region Analysis Queues
+        public void ReflectiveAnalysis() 
+        {
+            AnalyseLowPriority();
+            ProfileCompletionEfficency();
+        }
+        public void ScheduledAnalysis() 
+        {
+            AnalyseMediumPriority();
+            KillDeathRation = CalculateKillDeathRatio();
+            DungeonProgression = CalculateProgressThroughDungeon();
+            ProfileRoomRoutingNavigationBehaviour();
+            ProfileEnemyKills();
+        }
+        public void ImmediateAnalysis() 
+        {
+            AnalyseHighPriority();
+            DeathAssessment();
+        }
+        #endregion
+
+        #region Event Queue Analysis
         public void AnalyseLowPriority() 
         {
             if (LowPriorityEvents.Count == 0)
@@ -65,9 +88,7 @@ namespace Cardinal.Analyser
                 return;
             }
             UpdateHexadModel(LowPriorityEvents);
-            ProfileCompletionEfficency();
         }
-
         public void AnalyseMediumPriority() 
         {
             if (MediumPriorityEvents.Count == 0)
@@ -75,10 +96,6 @@ namespace Cardinal.Analyser
                 return;
             }
             UpdateHexadModel(MediumPriorityEvents);
-            KillDeathRation = CalculateKillDeathRatio();
-            DungeonProgression = CalculateProgressThroughDungeon();
-            ProfileRoomRoutingNavigationBehaviour();
-            ProfileEnemyKills();
         }
 
         public void AnalyseHighPriority()
@@ -92,7 +109,10 @@ namespace Cardinal.Analyser
         #endregion
 
         #region Analysis Functions
-        //Update player hexad model
+        /// <summary>
+        /// Update player hexad model
+        /// </summary>
+        /// <param name="eventsToWorkFrom"></param>
         void UpdateHexadModel(List<EventData> eventsToWorkFrom) 
         {
             foreach (EventData item in eventsToWorkFrom)
@@ -111,7 +131,9 @@ namespace Cardinal.Analyser
             }
 
         }
-        //Identify if the player is sticking to the main path
+        /// <summary>
+        /// Identify if the player is sticking to the main path
+        /// </summary>
         void ProfileRoomRoutingNavigationBehaviour() 
         {
             //If Player is only entering main path rooms -Free Spirit
@@ -132,7 +154,9 @@ namespace Cardinal.Analyser
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.FreeSpirits,-300));
             }
         }
-        //Identify if the player isn't using the task system
+        /// <summary>
+        /// Identify if the player isn't using the task system
+        /// </summary>
         void ProfileCompletionEfficency() 
         {
             Runic.Tasks.TaskManager taskManager = Runic.Tasks.TaskManager.Instance;
@@ -144,7 +168,9 @@ namespace Cardinal.Analyser
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.Disruptors, 100));
             }
         }
-        //Identify if the player is only fighting the bosses
+        /// <summary>
+        /// Identify if the player is only fighting the bosses
+        /// </summary>
         void ProfileEnemyKills() 
         {
             int normalKills = 0;
@@ -172,6 +198,35 @@ namespace Cardinal.Analyser
             if (normalKills == 0 && bossKills != 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.Disruptors, 300));
+            }
+        }
+        /// <summary>
+        /// Identify if the player is struggling
+        /// </summary>
+        void DeathAssessment() 
+        {
+            int deaths = 0;
+            DungeonEnteredEvent entryData = null;
+            List<EventData> Events = GetAllEvents();
+            foreach (EventData item in Events)
+            {
+                if (item is PlayerDeathEvent)
+                {
+                    deaths++;
+                }
+                if (item is DungeonEnteredEvent @event)
+                {
+                    entryData = @event;
+                }
+            }
+            int AllowedDeaths = AllowableDeaths(entryData);
+            if (deaths < AllowedDeaths)
+            {
+                //Things are fine
+            }
+            if (deaths > AllowedDeaths)
+            {
+                Performance--;
             }
         }
         #endregion
@@ -220,6 +275,25 @@ namespace Cardinal.Analyser
                 }
             }
             return ProgressThroughDungeon / TotalRooms;
+        }
+
+        //Calculate Permitted Number of Deaths
+        int AllowableDeaths(DungeonEnteredEvent dungeonData) 
+        {
+            int AllowedDeaths = 0;
+            if (dungeonData.RequiresBoss)
+            {
+                AllowedDeaths++;
+            }
+            if (dungeonData.Size != Generative.SizeOfDungeon.Small)
+            {
+                AllowedDeaths++;
+            }
+            if (dungeonData.EnemyAmount >= Generative.ResourceAvailability.Abundant)
+            {
+                AllowedDeaths++;
+            }
+            return AllowedDeaths;
         }
         #endregion
 

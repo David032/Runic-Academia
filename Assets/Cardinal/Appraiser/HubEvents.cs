@@ -1,3 +1,4 @@
+using Cardinal.Generative;
 using Runic.Entities;
 using Runic.Items;
 using Runic.Tasks;
@@ -46,9 +47,20 @@ namespace Cardinal.Appraiser
         public Item Item;
         public int SeriesNumber;
     }
-
     public class TaskTakenEvent : EventData
     {
         public Task Task;
+    }
+
+    public class DungeonEnteredEvent:EventData
+    {
+        public SizeOfDungeon Size;
+        public TypeOfDungeon Type;
+        public bool RequiresBoss;
+        public int PuzzleRooms;
+        public int SpecialRooms;
+        public ResourceAvailability ResourceNodeSpread;
+        public ResourceAvailability LootNodeSpread;
+        public ResourceAvailability EnemyAmount;
     }
 }

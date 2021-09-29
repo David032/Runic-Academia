@@ -102,11 +102,19 @@ namespace Cardinal
         Chest,
         Resource
     }
-
     public enum InventoryChange
     {
         Gain,
         Loss
+    }
+
+    public enum PlayerPerformance
+    {
+        Poor,
+        BelowAverage,
+        Average,
+        AboveAverage,
+        Exceptional
     }
 }
 

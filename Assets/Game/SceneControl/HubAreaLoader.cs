@@ -35,7 +35,7 @@ namespace Runic.SceneManagement
         {
             if (other.CompareTag("Player"))
             {
-                Analyser.Instance.AnalyseLowPriority();
+                Analyser.Instance.ReflectiveAnalysis();
                 StartCoroutine(LoadHubArea());
             }
         }

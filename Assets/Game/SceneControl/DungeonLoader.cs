@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cardinal.Generative;
 using Cardinal.Generative.Dungeon;
+using Cardinal.Appraiser;
+using Cardinal.Analyser;
 
 namespace Runic.SceneManagement
 {
@@ -33,6 +35,20 @@ namespace Runic.SceneManagement
         {
             if (other.CompareTag("Player")) 
             {
+                DungeonEnteredEvent @event = ScriptableObject.CreateInstance<DungeonEnteredEvent>();
+                @event.Name = "Player entered a dungeon";
+                @event.Time = Time.realtimeSinceStartup.ToString();
+                @event.EventPriority = Cardinal.Priority.High;
+                @event.Size = RequestedDungeonSize;
+                @event.Type = RequestedDungeonType;
+                @event.RequiresBoss = RequestedRequiresBoss;
+                @event.PuzzleRooms = RequestedNumberOfPuzzleRooms;
+                @event.SpecialRooms = RequestedNumberOfSpecialRooms;
+                @event.ResourceNodeSpread = RequestedResourceNodeSpread;
+                @event.LootNodeSpread = RequestedLootNodeSpread;
+                @event.EnemyAmount = RequestedEnemyAmount;
+                Analyser.Instance.RegisterEvent(@event);
+
                 StartCoroutine(TransitionToDungeon());
             }
         }

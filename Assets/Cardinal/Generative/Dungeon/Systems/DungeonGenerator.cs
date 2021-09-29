@@ -96,8 +96,6 @@ namespace Cardinal.Generative.Dungeon
             }
         }
 
-
-
         #region PhysicalGeneration
         public void GenerateSpawnRoom() 
         {
