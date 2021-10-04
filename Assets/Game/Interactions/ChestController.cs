@@ -37,7 +37,14 @@ namespace Runic.Interactions
                 @event.EventPriority = Cardinal.Priority.Low;
                 @event.NodeType = Cardinal.NodeType.Chest;
                 @event.items = itemsInChest.ToList();
-                @event.RoomType = GetComponentInParent<Room>().Type;
+                try
+                {
+                    @event.RoomType = GetComponentInParent<Room>().Type;
+                }
+                catch (System.Exception)
+                {
+                    print("This chest ain't in a room!");
+                }
                 if (Tasks.TaskManager.Instance.HasItemTasks())
                 {
                     @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Achievers, 100);

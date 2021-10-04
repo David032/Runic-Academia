@@ -63,7 +63,7 @@ namespace Runic.Entities
             @event.EventPriority = Cardinal.Priority.Medium;
             @event.TypeOfEntity = GetComponent<BaseEnemy>().typeOfEntity;
             @event.EnemyCategory = GetComponent<BaseEnemy>().Category;
-            @event.RoomType = GetComponentInParent<Room>().Type;
+            @event.RoomType = GetComponentInParent<Room>().Type; //Issue with this + the boss?
             @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Players, 100);
             if (TaskManager.Instance.HasKillTasks(GetComponent<BaseEnemy>().typeOfEntity))
             {
