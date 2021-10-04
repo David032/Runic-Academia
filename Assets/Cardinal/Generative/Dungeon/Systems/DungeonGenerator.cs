@@ -849,13 +849,13 @@ namespace Cardinal.Generative.Dungeon
             {
                 int RandomSelection = Random.Range(0, BossList.AvailableEnemies.Count);
                 Boss = Instantiate(BossList.AvailableEnemies[RandomSelection], BossRoom.transform);
-                Boss.transform.parent = null;
+                //Boss.transform.parent = null;
                 Boss.GetComponent<Health>().onEmpty.AddListener(delegate { BossRoom.GetComponentInChildren<HubAreaLoader>().OpenExit(); });
             }
             else
             {
                 Boss = Instantiate(BossList.AvailableEnemies[0], BossRoom.transform);
-                Boss.transform.parent = null;
+                //Boss.transform.parent = null;
                 Boss.GetComponent<Health>().onEmpty.AddListener(delegate { BossRoom.GetComponentInChildren<HubAreaLoader>().OpenExit(); });
             }
 

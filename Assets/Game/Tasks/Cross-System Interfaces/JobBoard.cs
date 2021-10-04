@@ -72,7 +72,7 @@ namespace Runic.Tasks.Interfaces
                     TaskTakenEvent @event = ScriptableObject.CreateInstance<TaskTakenEvent>();
                     @event.Name = "Player took task " + taskToGrant.Name;
                     @event.Time = Time.realtimeSinceStartup.ToString();
-                    @event.EventPriority = Cardinal.Priority.High;
+                    @event.EventPriority = Cardinal.Priority.Medium;
                     @event.Task = taskToGrant;
                     @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
                     Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);

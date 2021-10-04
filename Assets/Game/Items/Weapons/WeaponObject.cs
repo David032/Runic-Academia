@@ -58,7 +58,7 @@ namespace Runic.Weapons
 
         public void OnTriggerEnter(Collider other)
         {
-            if (other.GetComponent<Health>())
+            if (other.GetComponent<Health>() && other.gameObject != GetComponentInParent<Health>().gameObject)
             {
                 Entity target = other.GetComponent<Entity>();
                 other.GetComponent<Health>().current -= damage;
