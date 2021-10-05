@@ -21,6 +21,14 @@ namespace Cardinal.AI.NPC
             opinionDisk = gameObject.GetComponentInChildren<SpriteRenderer>();
         }
 
+        private void Update()
+        {
+            if (playerTransform == null)
+            {
+                playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
+            }
+        }
+
         public void UpdateDisplay(float opinion)
         {
             if (playerTransform is null)

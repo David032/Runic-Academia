@@ -45,6 +45,10 @@ namespace Runic.UI
 
         void Update()
         {
+            if (cameraLocation == null)
+            {
+                cameraLocation = Camera.main.transform;
+            }
             transform.LookAt(cameraLocation);
         }
     }
