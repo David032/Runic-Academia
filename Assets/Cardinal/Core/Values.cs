@@ -107,7 +107,6 @@ namespace Cardinal
         Gain,
         Loss
     }
-
     public enum PlayerPerformance
     {
         Poor,
@@ -115,6 +114,22 @@ namespace Cardinal
         Average,
         AboveAverage,
         Exceptional
+    }
+    public enum ResponseWindow
+    {
+        NextDungeonGeneration,
+        NextRespawn,
+        NextReturnToHubArea
+    }
+
+    public enum ResponseKeywords
+    {
+        Player,
+        Enemies,
+        Dungeon,
+        Boss,
+        Success,
+        Failure
     }
 }
 

@@ -17,9 +17,10 @@ namespace Cardinal.Analyser
         public float DisruptorValue;
         public float PlayerValue;
         [Header("Profiled Values - NonHexad")]
-        public float KillDeathRation;
+        public float KillDeathRatio;
         public float DungeonProgression;
         public PlayerPerformance Performance = PlayerPerformance.Average;
+        public int DungeonsCompletedCount = 0;
         [Header("Inbound Events Buffer")]
         public List<EventData> LowPriorityEvents;
         public List<EventData> MediumPriorityEvents;
@@ -64,11 +65,17 @@ namespace Cardinal.Analyser
         {
             AnalyseLowPriority();
             ProfileCompletionEfficency();
+            if (DungeonsCompletedCount != DungeonsCompleted())
+            {
+                //Call the adjustor to make the change
+                DungeonsCompletedCount = DungeonsCompleted();
+            }
+
         }
         public void ScheduledAnalysis() 
         {
             AnalyseMediumPriority();
-            KillDeathRation = CalculateKillDeathRatio();
+            KillDeathRatio = CalculateKillDeathRatio();
             DungeonProgression = CalculateProgressThroughDungeon();
             ProfileRoomRoutingNavigationBehaviour();
             ProfileEnemyKills();
@@ -220,7 +227,7 @@ namespace Cardinal.Analyser
                 }
             }
             int AllowedDeaths = AllowableDeaths(entryData);
-            if (deaths < AllowedDeaths)
+            if (deaths <= AllowedDeaths)
             {
                 //Things are fine
             }
@@ -228,6 +235,24 @@ namespace Cardinal.Analyser
             {
                 Performance--;
             }
+        }
+
+        /// <summary>
+        /// Identify dungeons completed
+        /// </summary>
+        /// <returns>Number of dungeons completed</returns>
+        int DungeonsCompleted() 
+        {
+            int NumberCompleted = 0;
+            List<EventData> Events = GetAllEvents();
+            foreach (EventData item in Events)
+            {
+                if (item is CompletedDungeonEvent @event)
+                {
+                    NumberCompleted++;
+                }
+            }
+            return NumberCompleted;
         }
         #endregion
 
