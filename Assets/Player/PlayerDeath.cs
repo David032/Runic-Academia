@@ -35,6 +35,7 @@ public class PlayerDeath : MonoBehaviour
         @event.Time = Time.time.ToString();
         @event.RoomOfDeath = CurrentRoom;
         @event.Slayer = LastEnemy.GetComponent<Entity>();
+        @event.EventPriority = Cardinal.Priority.High;
         Cardinal.Analyser.Analyser.Instance.RegisterEvent(@event);
 
         GameObject PlayerHoldingLocation = GameObject.Find("PlayerStartPosition");

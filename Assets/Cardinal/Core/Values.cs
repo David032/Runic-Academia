@@ -115,22 +115,67 @@ namespace Cardinal
         AboveAverage,
         Exceptional
     }
+
+    #region Adjustor Message Elements
     public enum ResponseWindow
     {
         NextDungeonGeneration,
         NextRespawn,
         NextReturnToHubArea
     }
-
-    public enum ResponseKeywords
+    public enum ResponseSubject
     {
         Player,
+        NPC,
         Enemies,
-        Dungeon,
         Boss,
-        Success,
-        Failure
+        Dungeon,
     }
+    public enum ResponseAction
+    {
+        Completed,
+        Failed,
+        Killed,
+        Entered,
+        Left,
+        Achieved,
+        Increase,
+        Decrease,
+        Died
+    }
+    public enum ResponseValue
+    {
+        KillDeathRatio,
+        DungeonProgression,
+        PlayerPerformance,
+        DungeonsCompleted,
+        Philanthropist,
+        Socialiser,
+        FreeSpirit,
+        Achiever,
+        Disruptor,
+        Player,
+}
+    public enum ResponseLocation
+    {
+        CurrentDungeon,
+        HubArea,
+        BossRoom,
+        StartingRoom,
+    }
+    public enum ResponseGoal
+    {
+        Endeavour,
+        Task,
+        Quest,
+        Achievement
+    }
+
+    public enum ResponseModifier
+    {
+        Exclusivley,
+    }
+    #endregion
 }
 
 

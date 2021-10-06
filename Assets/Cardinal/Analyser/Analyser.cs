@@ -67,7 +67,7 @@ namespace Cardinal.Analyser
             ProfileCompletionEfficency();
             if (DungeonsCompletedCount != DungeonsCompleted())
             {
-                //Call the adjustor to make the change
+                //[ADJ]Call the adjustor to make the change
                 DungeonsCompletedCount = DungeonsCompleted();
             }
 
@@ -75,7 +75,18 @@ namespace Cardinal.Analyser
         public void ScheduledAnalysis() 
         {
             AnalyseMediumPriority();
-            KillDeathRatio = CalculateKillDeathRatio();
+            if (KillDeathRatio != CalculateKillDeathRatio())
+            {
+                if (KillDeathRatio > CalculateKillDeathRatio())
+                {
+                    //[ADJ] player deaths increasing
+                }
+                if (KillDeathRatio < CalculateKillDeathRatio())
+                {
+                    //[ADJ] Enemy kills increasing
+                }
+                KillDeathRatio = CalculateKillDeathRatio();
+            }
             DungeonProgression = CalculateProgressThroughDungeon();
             ProfileRoomRoutingNavigationBehaviour();
             ProfileEnemyKills();
@@ -104,7 +115,6 @@ namespace Cardinal.Analyser
             }
             UpdateHexadModel(MediumPriorityEvents);
         }
-
         public void AnalyseHighPriority()
         {
             if (HighPriorityEvents.Count == 0)
@@ -136,7 +146,7 @@ namespace Cardinal.Analyser
                     }
                 }
             }
-
+            //[ADJ]Indicate what the player's primary player type is
         }
         /// <summary>
         /// Identify if the player is sticking to the main path
@@ -205,6 +215,7 @@ namespace Cardinal.Analyser
             if (normalKills == 0 && bossKills != 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.Disruptors, 300));
+                //[ADJ] player is only fighting the boss - only fires after they've killed a boss
             }
         }
         /// <summary>
@@ -233,6 +244,7 @@ namespace Cardinal.Analyser
             }
             if (deaths > AllowedDeaths)
             {
+                //[ADJ]Request adjustment here
                 Performance--;
             }
         }

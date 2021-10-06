@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 namespace Cardinal.Adjustor
 {
@@ -17,6 +18,18 @@ namespace Cardinal.Adjustor
         {
         
         }
+        #region Messages
+
+        public void Message() { }
+        public void Message(ResponseSubject actor, ResponseAction action, ResponseLocation location) 
+        {
+        }
+        public void Message(ResponseSubject actor, ResponseAction action, ResponseSubject subject)
+        {
+
+        }
+
+        #endregion
     }
 }
 
