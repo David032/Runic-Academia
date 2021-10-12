@@ -2,12 +2,24 @@ using Runic.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Cardinal.Adjustor
 {
     public class DungeonCompletionResponse : Response
     {
         public DungeonLoader DungeonLoader;
+        public string DungeonName = "DemoDungeon";
+
+        private void Update()
+        {
+            if (DungeonLoader == null && SceneManager.GetActiveScene().name == "HubArea")
+            {
+                DungeonLoader = GameObject.Find(DungeonName)
+                    .GetComponent<DungeonLoader>();
+            }
+        }
+
         public override void Execute()
         {
             switch (DungeonLoader.RequestedDungeonSize)
@@ -23,6 +35,7 @@ namespace Cardinal.Adjustor
                 default:
                     break;
             }
+            Debug.LogError("Execute dungeon adjustment");
         }
     }
 }

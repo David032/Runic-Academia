@@ -1,5 +1,7 @@
+using Cardinal.Adjustor;
 using Cardinal.Analyser;
 using Cardinal.Appraiser;
+using Cardinal;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,6 +38,12 @@ namespace Runic.SceneManagement
             if (other.CompareTag("Player"))
             {
                 Analyser.Instance.ReflectiveAnalysis();
+                if (IsBossRoomExit)
+                {
+                    Adjustor.Instance.Message(ResponseSubject.Player, 
+                        ResponseAction.Completed, 
+                        ResponseLocation.CurrentDungeon);
+                }
                 StartCoroutine(LoadHubArea());
             }
         }
@@ -44,20 +52,25 @@ namespace Runic.SceneManagement
         {
             if (Tasks.TaskManager.Instance.HasCompleteDungeonTasks())
             {
-                CompletedDungeonEvent @event = ScriptableObject.CreateInstance<CompletedDungeonEvent>();
+                CompletedDungeonEvent @event = ScriptableObject
+                    .CreateInstance<CompletedDungeonEvent>();
                 @event.Name = "Player completed a dungeon";
                 @event.Time = Time.realtimeSinceStartup.ToString();
                 @event.EventPriority = Cardinal.Priority.High;
-                @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.Players, 300);
-                Tasks.TaskManager.Instance.IncrementProgressJobs(ProgressCriteria.DungeonCompletion);
+                @event.Correleation = new HexadCorrelation
+                    (HexadTypes.Players, 300);
+                Tasks.TaskManager.Instance.IncrementProgressJobs
+                    (ProgressCriteria.DungeonCompletion);
             }
             else
             {
-                CompletedDungeonEvent @event = ScriptableObject.CreateInstance<CompletedDungeonEvent>();
+                CompletedDungeonEvent @event = ScriptableObject
+                    .CreateInstance<CompletedDungeonEvent>();
                 @event.Name = "Player completed a dungeon";
                 @event.Time = Time.realtimeSinceStartup.ToString();
                 @event.EventPriority = Cardinal.Priority.High;
-                @event.Correleation = new HexadCorrelation(Cardinal.HexadTypes.FreeSpirits, 300);
+                @event.Correleation = new HexadCorrelation
+                    (HexadTypes.FreeSpirits, 300);
             }
             StartCoroutine(LoadPlayerIntoLoadingScene());
             yield return new WaitForSeconds(5f);

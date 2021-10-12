@@ -22,31 +22,40 @@ namespace Cardinal.Adjustor
         #region Messages
 
         public void Message() { }
-        public void Message(ResponseSubject actor, ResponseAction action, ResponseLocation location)
+        public void Message(ResponseSubject actor, 
+            ResponseAction action, ResponseLocation location)
         {
-            EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionLocationData(actor,action,location));
+            EventBus.Trigger(EventNames.EngageAdjustor, 
+                new ActorActionLocationData(actor,action,location));
         }
-        public void Message(ResponseSubject actor, ResponseAction action, ResponseSubject subject)
+        public void Message(ResponseSubject actor, 
+            ResponseAction action, ResponseSubject subject)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionSubjectData(actor, action, subject));
         }
-        public void Message(ResponseSubject actor, ResponseAction action, ResponseGoal goal)
+        public void Message(ResponseSubject actor, 
+            ResponseAction action, ResponseGoal goal)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionGoalData(actor,action,goal));
         }
-        public void Message(ResponseSubject actor, ResponseAction action)
+        public void Message(ResponseSubject actor, 
+            ResponseAction action)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionData(actor,action));
         }
-        public void Message(ResponseSubject actor, ResponseValue value)
+        public void Message(ResponseSubject actor, 
+            ResponseValue value)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorValueData(actor,value));
         }
-        public void Message(ResponseSubject actor, ResponseAction action, ResponseSubject subject, ResponseModifier modifier)
+        public void Message(ResponseSubject actor, 
+            ResponseAction action, ResponseSubject subject, 
+            ResponseModifier modifier)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionSubjectModifierData(actor,action,subject,modifier));
         }
-        public void Message(ResponseSubject actor, ResponseValue value, ResponseAction action)
+        public void Message(ResponseSubject actor, 
+            ResponseValue value, ResponseAction action)
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorValueActionData(actor,value,action));
         }

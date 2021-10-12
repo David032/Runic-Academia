@@ -41,7 +41,9 @@ namespace Cardinal.AI.NPC
             }
             Vector3 opinionDiskRotation = opinionDisk.transform.rotation.eulerAngles;
             opinionDiskNumber.text = opinion.ToString();
-            opinionDisk.transform.rotation.eulerAngles.Set(opinionDiskRotation.x, playerTransform.rotation.eulerAngles.y, opinionDiskRotation.z);
+            opinionDisk.transform.rotation.eulerAngles.Set
+                (opinionDiskRotation.x, playerTransform.rotation.eulerAngles.y,
+                opinionDiskRotation.z);
         }
 
     }
