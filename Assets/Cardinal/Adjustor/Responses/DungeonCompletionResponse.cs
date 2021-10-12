@@ -25,7 +25,9 @@ namespace Cardinal.Adjustor
             switch (DungeonLoader.RequestedDungeonSize)
             {
                 case Generative.SizeOfDungeon.Small:
+                    print("Requested dungeon size is " + DungeonLoader.RequestedDungeonSize);
                     DungeonLoader.RequestedDungeonSize = Generative.SizeOfDungeon.Medium;
+                    print("Requested dungeon size is now " + DungeonLoader.RequestedDungeonSize);
                     break;
                 case Generative.SizeOfDungeon.Medium:
                     DungeonLoader.RequestedDungeonSize = Generative.SizeOfDungeon.Large;
@@ -33,9 +35,10 @@ namespace Cardinal.Adjustor
                 case Generative.SizeOfDungeon.Large:
                     break;
                 default:
+                    print("Huh? Not a size?!");
                     break;
             }
-            Debug.LogError("Execute dungeon adjustment");
+            print("[ADJ]Executed! dungeon adjustment");
         }
     }
 }
