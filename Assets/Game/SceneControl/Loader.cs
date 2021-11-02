@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cardinal;
 
 namespace Runic.SceneManagement
 {
@@ -60,7 +59,7 @@ namespace Runic.SceneManagement
             {
                 print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
             }
-            //[ToFix]StateManager.Instance.ChangeState(GameState.Loading);
+            Cardinal.StateManager.Instance.ChangeState(Cardinal.GameState.Loading);
         }
     }
 }

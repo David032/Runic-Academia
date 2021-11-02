@@ -15,6 +15,16 @@ namespace Cardinal
             GameState = newState;
             OnStateChanged.Invoke();
         }
+
+        private void Start()
+        {
+            
+        }
+
+        private void Update()
+        {
+            
+        }
     }
 
 }
