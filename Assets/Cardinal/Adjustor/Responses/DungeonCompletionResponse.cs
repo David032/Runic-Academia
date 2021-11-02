@@ -1,3 +1,4 @@
+using Cardinal;
 using Runic.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
@@ -10,24 +11,21 @@ namespace Cardinal.Adjustor
     {
         public DungeonLoader DungeonLoader;
         public string DungeonName = "DemoDungeon";
-
-        private void Update()
-        {
-            if (DungeonLoader == null && SceneManager.GetActiveScene().name == "HubArea")
-            {
-                DungeonLoader = GameObject.Find(DungeonName)
-                    .GetComponent<DungeonLoader>();
-            }
-        }
-
         public override void Execute()
         {
+            //[ToFix]StateManager.Instance.OnStateChanged.AddListener(AdjustDungeon);
+        }
+        public void AdjustDungeon() 
+        {
+            //[ToFix]if (StateManager.Instance.GameState != GameState.Hub)
+            //[ToFix]{
+            //[ToFix]return;
+            //[ToFix]}
+            DungeonLoader = GameObject.Find(DungeonName).GetComponent<DungeonLoader>();
             switch (DungeonLoader.RequestedDungeonSize)
             {
                 case Generative.SizeOfDungeon.Small:
-                    print("Requested dungeon size is " + DungeonLoader.RequestedDungeonSize);
                     DungeonLoader.RequestedDungeonSize = Generative.SizeOfDungeon.Medium;
-                    print("Requested dungeon size is now " + DungeonLoader.RequestedDungeonSize);
                     break;
                 case Generative.SizeOfDungeon.Medium:
                     DungeonLoader.RequestedDungeonSize = Generative.SizeOfDungeon.Large;
@@ -35,10 +33,9 @@ namespace Cardinal.Adjustor
                 case Generative.SizeOfDungeon.Large:
                     break;
                 default:
-                    print("Huh? Not a size?!");
                     break;
             }
-            print("[ADJ]Executed! dungeon adjustment");
+            //[ToFix]StateManager.Instance.OnStateChanged.RemoveListener(AdjustDungeon);
         }
     }
 }

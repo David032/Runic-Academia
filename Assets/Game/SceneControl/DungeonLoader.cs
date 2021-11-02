@@ -6,6 +6,7 @@ using Cardinal.Generative;
 using Cardinal.Generative.Dungeon;
 using Cardinal.Appraiser;
 using Cardinal.Analyser;
+using Cardinal;
 
 namespace Runic.SceneManagement
 {
@@ -92,6 +93,7 @@ namespace Runic.SceneManagement
             {
                 print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
             }
+            //[ToFix]StateManager.Instance.ChangeState(GameState.Dungeon);
         }
         IEnumerator ConfigureDungeon()
         {
@@ -115,7 +117,7 @@ namespace Runic.SceneManagement
             DungeonManager.LootNodes = RequestedLootNodes;
             DungeonManager.EnemyList = RequestedEnemyList;
             DungeonManager.BossList = RequestedBossList;
-            StartCoroutine(DungeonManager.LoadDungeon());
+            StartCoroutine(DungeonManager.LoadDungeon()); //Doesn't this mean it's infi. looping?
             yield return new WaitForSeconds(0.5f);
         }
 

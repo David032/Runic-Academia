@@ -4,6 +4,7 @@ using UnityEngine;
 using Cardinal.Appraiser;
 using System.Linq;
 using Cardinal.Generative.Dungeon;
+using Cardinal.Adjustor;
 
 namespace Cardinal.Analyser
 {
@@ -88,6 +89,12 @@ namespace Cardinal.Analyser
                 KillDeathRatio = CalculateKillDeathRatio();
             }
             DungeonProgression = CalculateProgressThroughDungeon();
+            if (DungeonProgression > 0.5)
+            {
+                print("Player is exploring the dungeon?");
+                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseValue.DungeonProgression, ResponseAction.Increase);
+            }
+
             ProfileRoomRoutingNavigationBehaviour();
             ProfileEnemyKills();
         }

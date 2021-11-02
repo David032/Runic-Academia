@@ -4,6 +4,13 @@ using UnityEngine;
 
 namespace Cardinal
 {
+    public enum GameState
+    {
+        Hub,
+        Field,
+        Dungeon,
+        Loading
+    }
     public enum BehaviourTypes
     {
         Attacker,
@@ -121,7 +128,8 @@ namespace Cardinal
     {
         NextDungeonGeneration,
         NextRespawn,
-        NextReturnToHubArea
+        NextReturnToHubArea,
+        Immediate
     }
     public enum ResponseSubject
     {

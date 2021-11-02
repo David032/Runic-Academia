@@ -107,6 +107,7 @@ namespace Runic.SceneManagement
             {
                 print("Scene " + i + " is " + SceneManager.GetSceneAt(i).name);
             }
+            //[ToFix]StateManager.Instance.ChangeState(GameState.Hub);
         }
 
         IEnumerator UnloadAreas()
