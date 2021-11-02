@@ -13,15 +13,15 @@ namespace Cardinal.Adjustor
         public string DungeonName = "DemoDungeon";
         public override void Execute()
         {
-            //[ToFix]StateManager.Instance.OnStateChanged.AddListener(IncreaseDensityOfDungeon);
+            StateManager.Instance.OnStateChanged.AddListener(IncreaseDensityOfDungeon);
         }
 
         public void IncreaseDensityOfDungeon() 
         {
-            //[ToFix]if (StateManager.Instance.GameState != GameState.Hub)
-            //[ToFix]{
-            //[ToFix]return;
-            //[ToFix]}
+            if (StateManager.Instance.GameState != GameState.Hub)
+            {
+            return;
+            }
             DungeonLoader = GameObject.Find(DungeonName).GetComponent<DungeonLoader>();
             int randomSelection = Random.Range(0, 2);
             if (randomSelection == 0)
@@ -68,7 +68,7 @@ namespace Cardinal.Adjustor
                         break;
                 }
             }
-            //[ToFix]StateManager.Instance.OnStateChanged.RemoveListener(IncreaseDensityOfDungeon);
+            StateManager.Instance.OnStateChanged.RemoveListener(IncreaseDensityOfDungeon);
         }
     }
 

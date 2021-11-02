@@ -13,14 +13,14 @@ namespace Cardinal.Adjustor
         public string DungeonName = "DemoDungeon";
         public override void Execute()
         {
-            //[ToFix]StateManager.Instance.OnStateChanged.AddListener(AdjustDungeon);
+            StateManager.Instance.OnStateChanged.AddListener(AdjustDungeon);
         }
         public void AdjustDungeon() 
         {
-            //[ToFix]if (StateManager.Instance.GameState != GameState.Hub)
-            //[ToFix]{
-            //[ToFix]return;
-            //[ToFix]}
+            if (StateManager.Instance.GameState != GameState.Hub)
+            {
+            return;
+            }
             DungeonLoader = GameObject.Find(DungeonName).GetComponent<DungeonLoader>();
             switch (DungeonLoader.RequestedDungeonSize)
             {
@@ -35,7 +35,7 @@ namespace Cardinal.Adjustor
                 default:
                     break;
             }
-            //[ToFix]StateManager.Instance.OnStateChanged.RemoveListener(AdjustDungeon);
+            StateManager.Instance.OnStateChanged.RemoveListener(AdjustDungeon);
         }
     }
 }
