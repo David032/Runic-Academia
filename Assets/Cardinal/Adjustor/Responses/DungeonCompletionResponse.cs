@@ -19,7 +19,8 @@ namespace Cardinal.Adjustor
         {
             if (StateManager.Instance.GameState != GameState.Hub)
             {
-            return;
+                print("State was not hub area! Returning");
+                return;
             }
             DungeonLoader = GameObject.Find(DungeonName).GetComponent<DungeonLoader>();
             switch (DungeonLoader.RequestedDungeonSize)

@@ -13,60 +13,74 @@ namespace Cardinal.Adjustor
         public string DungeonName = "DemoDungeon";
         public override void Execute()
         {
-            StateManager.Instance.OnStateChanged.AddListener(IncreaseDensityOfDungeon);
+            StateManager.Instance.OnStateChanged
+                .AddListener(IncreaseDensityOfDungeon);
         }
 
         public void IncreaseDensityOfDungeon() 
         {
             if (StateManager.Instance.GameState != GameState.Hub)
             {
-            return;
+                return;
             }
-            DungeonLoader = GameObject.Find(DungeonName).GetComponent<DungeonLoader>();
+            DungeonLoader = GameObject.Find(DungeonName)
+                .GetComponent<DungeonLoader>();
             int randomSelection = Random.Range(0, 2);
             if (randomSelection == 0)
             {
                 switch (DungeonLoader.RequestedLootNodeSpread)
                 {
                     case Generative.ResourceAvailability.None:
-                        DungeonLoader.RequestedLootNodeSpread = Generative.ResourceAvailability.Sparse;
+                        DungeonLoader.RequestedLootNodeSpread = 
+                            Generative.ResourceAvailability.Sparse;
                         break;
                     case Generative.ResourceAvailability.Sparse:
-                        DungeonLoader.RequestedLootNodeSpread = Generative.ResourceAvailability.Regular;
+                        DungeonLoader.RequestedLootNodeSpread = 
+                            Generative.ResourceAvailability.Regular;
                         break;
                     case Generative.ResourceAvailability.Regular:
-                        DungeonLoader.RequestedLootNodeSpread = Generative.ResourceAvailability.Abundant;
+                        DungeonLoader.RequestedLootNodeSpread = 
+                            Generative.ResourceAvailability.Abundant;
                         break;
                     case Generative.ResourceAvailability.Abundant:
-                        DungeonLoader.RequestedLootNodeSpread = Generative.ResourceAvailability.Overflowing;
+                        DungeonLoader.RequestedLootNodeSpread = 
+                            Generative.ResourceAvailability.Overflowing;
                         break;
                     case Generative.ResourceAvailability.Overflowing:
                         break;
                     default:
                         break;
                 }
+                print(DungeonName + "'s requested loot spread is now "
+                    + DungeonLoader.RequestedLootNodeSpread);
             }
             else
             {
                 switch (DungeonLoader.RequestedResourceNodeSpread)
                 {
                     case Generative.ResourceAvailability.None:
-                        DungeonLoader.RequestedResourceNodeSpread = Generative.ResourceAvailability.Sparse;
+                        DungeonLoader.RequestedResourceNodeSpread = 
+                            Generative.ResourceAvailability.Sparse;
                         break;
                     case Generative.ResourceAvailability.Sparse:
-                        DungeonLoader.RequestedResourceNodeSpread = Generative.ResourceAvailability.Regular;
+                        DungeonLoader.RequestedResourceNodeSpread = 
+                            Generative.ResourceAvailability.Regular;
                         break;
                     case Generative.ResourceAvailability.Regular:
-                        DungeonLoader.RequestedResourceNodeSpread = Generative.ResourceAvailability.Abundant;
+                        DungeonLoader.RequestedResourceNodeSpread = 
+                            Generative.ResourceAvailability.Abundant;
                         break;
                     case Generative.ResourceAvailability.Abundant:
-                        DungeonLoader.RequestedResourceNodeSpread = Generative.ResourceAvailability.Overflowing;
+                        DungeonLoader.RequestedResourceNodeSpread = 
+                            Generative.ResourceAvailability.Overflowing;
                         break;
                     case Generative.ResourceAvailability.Overflowing:
                         break;
                     default:
                         break;
                 }
+                print(DungeonName + "'s requested resource spread is now "
+                        + DungeonLoader.RequestedResourceNodeSpread);
             }
             StateManager.Instance.OnStateChanged.RemoveListener(IncreaseDensityOfDungeon);
         }

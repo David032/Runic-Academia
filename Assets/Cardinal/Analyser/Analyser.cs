@@ -92,7 +92,10 @@ namespace Cardinal.Analyser
             if (DungeonProgression > 0.5)
             {
                 print("Player is exploring the dungeon?");
-                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseValue.DungeonProgression, ResponseAction.Increase);
+                Adjustor.Adjustor.Instance.Message
+                    (ResponseSubject.Player, 
+                    ResponseValue.DungeonProgression, 
+                    ResponseAction.Increase);
             }
 
             ProfileRoomRoutingNavigationBehaviour();

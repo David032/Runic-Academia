@@ -1343,6 +1343,7 @@ MonoBehaviour:
   Fov: 90
   inventory: {fileID: 0}
   weapon: {fileID: 4309507190940218994}
+  Category: 0
 --- !u!114 &3645130747576525008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1371,7 +1372,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  baseHealth: 100
+  baseHealth: 6
   bonusHealth: 0
 --- !u!136 &1004849934305194675
 CapsuleCollider:

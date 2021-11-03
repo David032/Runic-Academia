@@ -305,7 +305,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  baseHealth: 100
+  baseHealth: 10
   bonusHealth: 0
 --- !u!114 &9122960688873411812
 MonoBehaviour:

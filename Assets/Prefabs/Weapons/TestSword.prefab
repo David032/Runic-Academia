@@ -112,7 +112,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: 
   Type: 0
-  damage: 1
+  damage: 2
   cooldown: 1
   attackDuration: 1
   WeaponRange: 1.5
+  OnAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnAttackCollision:
+    m_PersistentCalls:
+      m_Calls: []

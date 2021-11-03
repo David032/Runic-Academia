@@ -13,6 +13,7 @@ namespace Cardinal
         public void ChangeState(GameState newState) 
         {
             GameState = newState;
+            print("State changed to: " + GameState);
             OnStateChanged.Invoke();
         }
 
