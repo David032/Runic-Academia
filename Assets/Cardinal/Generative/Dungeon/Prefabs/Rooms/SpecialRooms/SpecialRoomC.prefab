@@ -627,8 +627,11 @@ MonoBehaviour:
   doorways:
   - {fileID: 1171011208445744082}
   RoomFlags: 02000000
+  Type: 0
   isDone: 0
   isBroken: 0
+  firstEntry: 1
+  isMainRoute: 0
 --- !u!1 &2145602079053953732
 GameObject:
   m_ObjectHideFlags: 0

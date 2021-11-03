@@ -2360,8 +2360,11 @@ MonoBehaviour:
   - {fileID: 3741219562238322370}
   - {fileID: 3795351159428371871}
   RoomFlags: 
+  Type: 0
   isDone: 0
   isBroken: 0
+  firstEntry: 1
+  isMainRoute: 0
 --- !u!1 &6116626364542717959
 GameObject:
   m_ObjectHideFlags: 0

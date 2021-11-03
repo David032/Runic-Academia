@@ -33,7 +33,7 @@ namespace Cardinal.Analyser
 
         private void Start()
         {
-            InvokeRepeating("ScheduledAnalysis", PassTime, PassTime);
+            InvokeRepeating(nameof(ScheduledAnalysis), PassTime, PassTime);
         }
 
         private void Update()
@@ -75,19 +75,31 @@ namespace Cardinal.Analyser
         }
         public void ScheduledAnalysis() 
         {
+            print("[Analysis] Running scheduled analysis!");
+
             AnalyseMediumPriority();
-            if (KillDeathRatio != CalculateKillDeathRatio())
+
+            ///Ugh, this is really messy - is there no better way to avoid divide by 0?
+            List<EventData> Events = GetAllEvents();
+            foreach (EventData item in Events)
             {
-                if (KillDeathRatio > CalculateKillDeathRatio())
+                if (item is PlayerDeathEvent)
                 {
-                    //[ADJ] player deaths increasing
+                    if (KillDeathRatio != CalculateKillDeathRatio())
+                    {
+                        if (KillDeathRatio > CalculateKillDeathRatio())
+                        {
+                            //[ADJ] player deaths increasing
+                        }
+                        if (KillDeathRatio < CalculateKillDeathRatio())
+                        {
+                            //[ADJ] Enemy kills increasing
+                        }
+                    KillDeathRatio = CalculateKillDeathRatio();
+                    }                    
                 }
-                if (KillDeathRatio < CalculateKillDeathRatio())
-                {
-                    //[ADJ] Enemy kills increasing
-                }
-                KillDeathRatio = CalculateKillDeathRatio();
             }
+
             DungeonProgression = CalculateProgressThroughDungeon();
             if (DungeonProgression > 0.5)
             {
@@ -314,6 +326,7 @@ namespace Cardinal.Analyser
                     TotalRooms++;
                 }
             }
+            print("[Analysis] There are " + TotalRooms + " active rooms");
             foreach (EventData item in Events)
             {
                 if (item is RoomEnteredEvent @event && @event.IsFirstEntry == true)
@@ -321,7 +334,18 @@ namespace Cardinal.Analyser
                     ProgressThroughDungeon++;
                 }
             }
-            return ProgressThroughDungeon / TotalRooms;
+            print("[Analysis] The player has entered " + ProgressThroughDungeon + " rooms for the first time");
+            float progression;
+            try
+            {
+                progression = ProgressThroughDungeon / TotalRooms;
+            }
+            catch (System.Exception)
+            {
+                progression = -1;
+            }
+            print("[Analysis] The player is " + progression + " through the dungeon");
+            return progression;
         }
 
         //Calculate Permitted Number of Deaths

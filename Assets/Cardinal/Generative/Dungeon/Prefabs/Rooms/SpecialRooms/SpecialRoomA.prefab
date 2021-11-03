@@ -3677,8 +3677,11 @@ MonoBehaviour:
   doorways:
   - {fileID: 8438622701660048627}
   RoomFlags: 02000000
+  Type: 0
   isDone: 0
   isBroken: 0
+  firstEntry: 1
+  isMainRoute: 0
 --- !u!1001 &3501279289133643523
 PrefabInstance:
   m_ObjectHideFlags: 0

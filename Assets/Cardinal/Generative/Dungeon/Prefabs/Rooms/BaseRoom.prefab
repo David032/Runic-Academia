@@ -1387,8 +1387,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doorways: []
   RoomFlags: 
+  Type: 0
   isDone: 0
   isBroken: 0
+  firstEntry: 1
+  isMainRoute: 0
 --- !u!1 &4438884970454797071
 GameObject:
   m_ObjectHideFlags: 0

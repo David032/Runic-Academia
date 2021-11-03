@@ -3412,8 +3412,11 @@ MonoBehaviour:
   - {fileID: 1086684036324910894}
   - {fileID: 1086684037228161954}
   RoomFlags: 
+  Type: 0
   isDone: 0
   isBroken: 0
+  firstEntry: 1
+  isMainRoute: 0
 --- !u!1001 &824407961707163080
 PrefabInstance:
   m_ObjectHideFlags: 0
