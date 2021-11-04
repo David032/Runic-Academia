@@ -93,14 +93,14 @@ namespace Runic.Entities
                     else
                     {
                         Debug.DrawLine(startPoint, playerLoc, Color.yellow);
-                        print(gameObject.name + " hit " +
-                            hitinfo.collider.gameObject.name);
+                        //print(gameObject.name + " hit " +
+                        //    hitinfo.collider.gameObject.name);
                         return false;
                     }
                 }
                 else
                 {
-                    print(gameObject.name + " can't see the player");
+                    //print(gameObject.name + " can't see the player");
                     return false;
                 }
             }
