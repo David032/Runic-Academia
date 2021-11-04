@@ -221,7 +221,8 @@ namespace Cardinal.Generative.Dungeon
 
             foreach (GameObject roomToTest in SecondaryRooms)
             {
-                List<GameObject> RoomsTocheckAgainst = GeneratedRooms;
+                List<GameObject> RoomsTocheckAgainst = 
+                    new List<GameObject>(GeneratedRooms);
                 RoomsTocheckAgainst.Remove(roomToTest);
                 foreach (GameObject Room in RoomsTocheckAgainst)
                 {

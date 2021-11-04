@@ -316,8 +316,8 @@ namespace Cardinal.Analyser
         float CalculateProgressThroughDungeon() 
         {
             List<EventData> Events = GetAllEvents();
-            int ProgressThroughDungeon = 0;
-            int TotalRooms = 0;
+            float ProgressThroughDungeon = 0;
+            float TotalRooms = 0;
             DungeonGenerator Dungeon = (DungeonGenerator)DungeonGenerator.Instance;
             foreach (GameObject item in Dungeon.GeneratedRooms)
             {
