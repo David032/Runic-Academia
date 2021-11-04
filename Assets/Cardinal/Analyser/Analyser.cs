@@ -68,7 +68,6 @@ namespace Cardinal.Analyser
             ProfileCompletionEfficency();
             if (DungeonsCompletedCount != DungeonsCompleted())
             {
-                //[ADJ]Call the adjustor to make the change
                 DungeonsCompletedCount = DungeonsCompleted();
             }
 
@@ -288,6 +287,19 @@ namespace Cardinal.Analyser
             }
             return NumberCompleted;
         }
+        
+        /// <summary>
+        /// Determine if the player is completing the tasks that they've 
+        /// been assigned
+        /// </summary>
+        /// <returns></returns>
+
+        void TaskAnalysis() 
+        {
+            
+        
+        }
+        
         #endregion
 
         #region Calculation Functions
