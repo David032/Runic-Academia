@@ -45,6 +45,13 @@ namespace Cardinal.Generative
         Enemy,
         Resource
     }
+
+    public enum BuildState
+    {
+        Empty,
+        Building,
+        Built
+    }
     #endregion
 
     #region FieldFlags

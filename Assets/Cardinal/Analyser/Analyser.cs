@@ -65,11 +65,13 @@ namespace Cardinal.Analyser
         public void ReflectiveAnalysis() 
         {
             AnalyseLowPriority();
-            ProfileCompletionEfficency();
             if (DungeonsCompletedCount != DungeonsCompleted())
             {
                 DungeonsCompletedCount = DungeonsCompleted();
             }
+            ProfileCompletionEfficency();
+            ProfileEnemyKills();
+
 
         }
         public void ScheduledAnalysis() 
@@ -110,7 +112,6 @@ namespace Cardinal.Analyser
             }
 
             ProfileRoomRoutingNavigationBehaviour();
-            ProfileEnemyKills();
         }
         public void ImmediateAnalysis() 
         {
@@ -187,9 +188,10 @@ namespace Cardinal.Analyser
                     }
                 }
             }
-            if (NonMainRooms != 0)
+            if (NonMainRooms == 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.FreeSpirits,-300));
+                //[ADJ] player is not exploring - reduce complexity
             }
         }
         /// <summary>
@@ -236,7 +238,7 @@ namespace Cardinal.Analyser
             if (normalKills == 0 && bossKills != 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.Disruptors, 300));
-                //[ADJ] player is only fighting the boss - only fires after they've killed a boss
+                //[ADJ] player is only fighting the boss
             }
         }
         /// <summary>

@@ -43,7 +43,10 @@ namespace Cardinal.Generative.Dungeon
         public List<GameObject> GeneratedRooms;
         public List<GameObject> spawnedLoot;
         public List<GameObject> spawnedNodes;
-
+        public List<GameObject> spawnedEnemies;
+        public GameObject spawnedBoss;
+        [Header("Built Status")]
+        public BuildState State = BuildState.Empty;
         [Header("Internals")]
         GameObject SpawnRoom;
         GameObject BossRoom;
@@ -59,6 +62,7 @@ namespace Cardinal.Generative.Dungeon
 
         public IEnumerator LoadDungeon() 
         {
+            State = BuildState.Building;
             GenerateDungeon();
             GetComponent<NavMeshSurface>().BuildNavMesh();
             yield return new WaitForSeconds(2.5f);
@@ -67,6 +71,7 @@ namespace Cardinal.Generative.Dungeon
             SpreadObjects(ResourceNodes, ResourceNodeSpread, MarkerType.Resource);
             yield return new WaitForSeconds(2.5f);
             SpawnEnemies(EnemyList, EnemyAmount, MarkerType.Enemy);
+            State = BuildState.Built;
         }
 
         public void GenerateDungeon() 
@@ -820,6 +825,7 @@ namespace Cardinal.Generative.Dungeon
                 //LootToSpawn.transform.parent = holder.transform;
 
                 spawnedLoot.Add(LootToSpawn);
+                spawnedEnemies.Add(LootToSpawn);
             }
 
         }
@@ -859,6 +865,8 @@ namespace Cardinal.Generative.Dungeon
                 //Boss.transform.parent = null;
                 Boss.GetComponent<Health>().onEmpty.AddListener(delegate { BossRoom.GetComponentInChildren<HubAreaLoader>().OpenExit(); });
             }
+            spawnedEnemies.Add(Boss);
+            spawnedBoss = Boss;
 
         }
         #endregion
