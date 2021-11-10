@@ -238,7 +238,7 @@ namespace Cardinal.Analyser
             if (normalKills == 0 && bossKills != 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.Disruptors, 300));
-                //[ADJ] player is only fighting the boss
+                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseAction.Killed, ResponseSubject.Boss, ResponseModifier.Exclusivley);
             }
         }
         /// <summary>
@@ -329,6 +329,10 @@ namespace Cardinal.Analyser
         //Calculate player progress through dungeon
         float CalculateProgressThroughDungeon() 
         {
+            if (StateManager.Instance.GameState != GameState.Dungeon)
+            {
+                return 0;
+            }
             List<EventData> Events = GetAllEvents();
             float ProgressThroughDungeon = 0;
             float TotalRooms = 0;

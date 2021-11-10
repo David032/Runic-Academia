@@ -85,7 +85,14 @@ namespace Runic.SceneManagement
 
             GameObject PlayerHoldingLocation = GameObject.Find("PlayerStartPosition");
             Player.GetComponent<CharacterController>().enabled = false;
-            Player.transform.position = PlayerHoldingLocation.transform.position;
+            try
+            {
+                Player.transform.position = PlayerHoldingLocation.transform.position;
+            }
+            catch (System.Exception)
+            {
+                Player.transform.position = Vector3.zero;
+            }
             yield return new WaitForSeconds(1f);
             Player.GetComponent<CharacterController>().enabled = true;
             print("At end of loading dungeon:");

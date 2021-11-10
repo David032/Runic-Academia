@@ -24,12 +24,12 @@ namespace Cardinal.Adjustor
 
         IEnumerator IncreaseBossPower() 
         {
-            DungeonGenerator Generator = (DungeonGenerator)DungeonGenerator.Instance;
             if (StateManager.Instance.GameState != GameState.Dungeon)
             {
                 print("State was not dungeon! Returning");
                 yield break;
             }
+            DungeonGenerator Generator = (DungeonGenerator)DungeonGenerator.Instance;
             yield return new WaitUntil(() => Generator.State == Generative.BuildState.Built);
             if (Generator.spawnedBoss is null)
             {

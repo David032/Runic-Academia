@@ -11611,7 +11611,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Flag: 0
-  typeOfEntity: 4
+  typeOfEntity: 3
   Title: {fileID: 0}
   Health: {fileID: 9211162928044089426}
   Mana: {fileID: 0}
