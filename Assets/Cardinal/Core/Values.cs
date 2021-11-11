@@ -149,7 +149,9 @@ namespace Cardinal
         Achieved,
         Increase,
         Decrease,
-        Died
+        Died,
+        Exploring,
+        IsNotExploring
     }
     public enum ResponseValue
     {
@@ -178,10 +180,11 @@ namespace Cardinal
         Quest,
         Achievement
     }
-
     public enum ResponseModifier
     {
         Exclusivley,
+        All,
+        None,
     }
     #endregion
 }

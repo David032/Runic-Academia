@@ -191,7 +191,7 @@ namespace Cardinal.Analyser
             if (NonMainRooms == 0)
             {
                 ApplyCorrelation(new HexadCorrelation(HexadTypes.FreeSpirits,-300));
-                //[ADJ] player is not exploring - reduce complexity
+                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseAction.IsNotExploring, ResponseLocation.CurrentDungeon);
             }
         }
         /// <summary>
@@ -295,13 +295,12 @@ namespace Cardinal.Analyser
         /// been assigned
         /// </summary>
         /// <returns></returns>
-
         void TaskAnalysis() 
         {
-            
+            //For now, only look at what is assigned
+
         
         }
-        
         #endregion
 
         #region Calculation Functions

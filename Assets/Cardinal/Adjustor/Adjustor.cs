@@ -38,6 +38,12 @@ namespace Cardinal.Adjustor
         {
             EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionGoalData(actor,action,goal));
         }
+        public void Message(ResponseSubject actor,
+            ResponseAction action,ResponseModifier modifier, 
+            ResponseGoal goal)
+        {
+            EventBus.Trigger(EventNames.EngageAdjustor, new ActorActionModifierGoalData(actor, action,modifier, goal));
+        }
         public void Message(ResponseSubject actor, 
             ResponseAction action)
         {
@@ -64,7 +70,6 @@ namespace Cardinal.Adjustor
     }
 
     #region Visual Graph Node Starters
-
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Action-Location")]
@@ -92,7 +97,6 @@ namespace Cardinal.Adjustor
         }
     }
 
-
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Action-Subject")]
@@ -119,8 +123,7 @@ namespace Cardinal.Adjustor
             flow.SetValue(result, data);
         }
     }
-    
-    
+        
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Action-Goal")]
@@ -147,8 +150,32 @@ namespace Cardinal.Adjustor
             flow.SetValue(result, data);
         }
     }
-    
-    
+
+    [UnitTitle("On Adjustor Request")]
+    [UnitCategory("Events\\CardinalEvents")]
+    [UnitSubtitle("Actor-Action-Modifier-Goal")]
+    public class ActorActionModifierGoalRequest : EventUnit<ActorActionModifierGoalData>
+    {
+        [DoNotSerialize]// No need to serialize ports.
+        public ValueOutput result { get; private set; }// The event output data to return when the event is triggered.
+        protected override bool register => true;
+
+        // Adding an EventHook with the name of the event to the list of visual scripting events.
+        public override EventHook GetHook(GraphReference reference)
+        {
+            return new EventHook(EventNames.EngageAdjustor);
+        }
+        protected override void Definition()
+        {
+            base.Definition();
+            result = ValueOutput<ActorActionModifierGoalData>(nameof(result));
+        }
+        protected override void AssignArguments(Flow flow, ActorActionModifierGoalData data)
+        {
+            flow.SetValue(result, data);
+        }
+    }
+
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Action")]
@@ -175,8 +202,7 @@ namespace Cardinal.Adjustor
             flow.SetValue(result, data);
         }
     }
-    
-    
+  
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Value")]
@@ -203,8 +229,7 @@ namespace Cardinal.Adjustor
             flow.SetValue(result, data);
         }
     }
-    
-    
+       
     [UnitTitle("On Adjustor Request")]
     [UnitCategory("Events\\CardinalEvents")]
     [UnitSubtitle("Actor-Action-Subject-Modifier")]
@@ -301,6 +326,22 @@ namespace Cardinal.Adjustor
             this.actor = actor;
             this.action = action;
             Goal = goal;
+        }
+    }
+    [System.Serializable]
+    public class ActorActionModifierGoalData
+    {
+        public ResponseSubject actor;
+        public ResponseAction action;
+        public ResponseModifier modifier;
+        public ResponseGoal goal;
+
+        public ActorActionModifierGoalData(ResponseSubject actor, ResponseAction action, ResponseModifier modifier, ResponseGoal goal)
+        {
+            this.actor = actor;
+            this.action = action;
+            this.modifier = modifier;
+            this.goal = goal;
         }
     }
     [System.Serializable]
