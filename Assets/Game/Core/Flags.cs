@@ -53,10 +53,10 @@ namespace Runic
     }
     public enum ProgressCriteria
     {
-        DungeonCompletion,
-        RoomEntered,
-        EnemyKilled,
-        GatherItem
+        DungeonCompletion = 0,
+        RoomEntered = 1,
+        EnemyKilled = 2,
+        GatherItem = 3
     }
 }
 
