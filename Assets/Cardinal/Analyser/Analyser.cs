@@ -71,8 +71,7 @@ namespace Cardinal.Analyser
             }
             ProfileCompletionEfficency();
             ProfileEnemyKills();
-
-
+            ProfileRoomRoutingNavigationBehaviour();
         }
         public void ScheduledAnalysis() 
         {
@@ -110,8 +109,6 @@ namespace Cardinal.Analyser
                     ResponseValue.DungeonProgression, 
                     ResponseAction.Increase);
             }
-
-            ProfileRoomRoutingNavigationBehaviour();
         }
         public void ImmediateAnalysis() 
         {

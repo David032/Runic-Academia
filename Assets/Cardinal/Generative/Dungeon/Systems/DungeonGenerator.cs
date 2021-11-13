@@ -221,6 +221,7 @@ namespace Cardinal.Generative.Dungeon
                     print("Overlapped with spawn, removing!");
                 }
                 priorRoom = secondaryRoom;
+                secondaryRoom.GetComponent<Room>().Type = RoomType.SecondaryRoom;
                 SecondaryRooms.Add(secondaryRoom);
             }
 
