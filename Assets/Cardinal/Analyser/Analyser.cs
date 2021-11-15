@@ -5,6 +5,7 @@ using Cardinal.Appraiser;
 using System.Linq;
 using Cardinal.Generative.Dungeon;
 using Cardinal.Adjustor;
+using Runic.Tasks;
 
 namespace Cardinal.Analyser
 {
@@ -294,9 +295,17 @@ namespace Cardinal.Analyser
         /// <returns></returns>
         void TaskAnalysis() 
         {
+            TaskManager manager = TaskManager.Instance;
             //For now, only look at what is assigned
+            if (manager.ActiveEndeavours.Count == 0 && manager.HasCompletedEndeavours())
+            {
+                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseAction.Completed, ResponseModifier.All, ResponseGoal.Endeavour);
+            }
+            if (manager.ActiveJobs.Count == 0 && manager.HasCompletedJobs())
+            {
+                Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseAction.Completed, ResponseModifier.All, ResponseGoal.Job);
+            }
 
-        
         }
         #endregion
 

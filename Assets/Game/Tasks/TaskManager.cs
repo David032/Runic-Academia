@@ -188,7 +188,6 @@ namespace Runic.Tasks
             }
             return false;
         }
-
         public bool HasKillTasks(TypeOfEntity requiredType)
         {
             foreach (Job job in ActiveJobs)
@@ -214,7 +213,6 @@ namespace Runic.Tasks
             }
             return false;
         }
-
         public void IncrementProgressJobs(ProgressCriteria criteria) 
         {
             foreach (Job job in ActiveJobs.ToList())
@@ -234,6 +232,29 @@ namespace Runic.Tasks
                     }
                 }
             }
+        }
+
+        public bool HasCompletedEndeavours() 
+        {
+            foreach (Task item in CompletedTasks)
+            {
+                if (item is Endeavour)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool HasCompletedJobs()
+        {
+            foreach (Task item in CompletedTasks)
+            {
+                if (item is Job)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

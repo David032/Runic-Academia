@@ -176,7 +176,7 @@ namespace Cardinal
     public enum ResponseGoal
     {
         Endeavour,
-        Task,
+        Job,
         Quest,
         Achievement
     }
