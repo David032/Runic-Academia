@@ -8,6 +8,7 @@ namespace Cardinal.Appraiser
     {
         public string Name;
         public string Time;
+        ///The behaviour indicator to apply 
         public HexadCorrelation Correleation;
         public Priority EventPriority = Priority.Medium;
     }
@@ -19,7 +20,9 @@ namespace Cardinal.Appraiser
     [System.Serializable]
     public class HexadCorrelation 
     {
+        //Behaviour type
         public HexadTypes Type;
+        //Arbitary indicitive value
         public int Amount;
 
         public HexadCorrelation(HexadTypes CategoryType, int AmountToChangeBy) 

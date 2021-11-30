@@ -27,8 +27,11 @@ namespace Cardinal.Appraiser
     [System.Serializable]
     public class InventoryChangeData 
     {
+        //The change that's occuring
         public InventoryChange Change;
+        //What's changing hands
         public Item Item;
+        //How much is it work
         public int Amount;
 
         public InventoryChangeData(InventoryChange WhatSortOfChangeOccured, Item WhatChangedHands, int WhatWasItsValue) 
