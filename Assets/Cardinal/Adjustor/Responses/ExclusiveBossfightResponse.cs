@@ -24,7 +24,7 @@ namespace Cardinal.Adjustor
 
         IEnumerator IncreaseBossPower() 
         {
-            if (StateManager.Instance.GameState != GameState.Dungeon)
+            if (StateManager.Instance.GameState != GetTargetState(ResponseWindow))
             {
                 print("State was not dungeon! Returning");
                 yield break;

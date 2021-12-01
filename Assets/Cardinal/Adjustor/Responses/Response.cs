@@ -8,6 +8,23 @@ namespace Cardinal.Adjustor
     {
         public ResponseWindow ResponseWindow;
         public abstract void Execute();
+
+        public GameState GetTargetState(ResponseWindow window) 
+        {
+            switch (window)
+            {
+                case ResponseWindow.NextDungeonGeneration:
+                    return GameState.Dungeon;
+                case ResponseWindow.NextRespawn:
+                    return StateManager.Instance.GameState;
+                case ResponseWindow.NextReturnToHubArea:
+                    return GameState.Hub;
+                case ResponseWindow.Immediate:
+                    return StateManager.Instance.GameState;
+                default:
+                    return StateManager.Instance.GameState;
+            }
+        }
     }
 }
 

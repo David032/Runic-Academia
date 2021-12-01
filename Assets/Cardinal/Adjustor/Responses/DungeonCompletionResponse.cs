@@ -17,7 +17,7 @@ namespace Cardinal.Adjustor
         }
         public void AdjustDungeon() 
         {
-            if (StateManager.Instance.GameState != GameState.Hub)
+            if (StateManager.Instance.GameState != GetTargetState(ResponseWindow))
             {
                 print("State was not hub area! Returning");
                 return;

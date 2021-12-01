@@ -18,7 +18,7 @@ namespace Cardinal.Adjustor
 
         public void IncreaseDensityOfDungeon() 
         {
-            if (StateManager.Instance.GameState != GameState.Hub)
+            if (StateManager.Instance.GameState != GetTargetState(ResponseWindow))
             {
                 return;
             }

@@ -22,7 +22,7 @@ namespace Cardinal.Adjustor
         }
         void GenerateMoreEndeavours() 
         {
-            if (StateManager.Instance.GameState != GameState.Hub)
+            if (StateManager.Instance.GameState != GetTargetState(ResponseWindow))
             {
                 return;
             }

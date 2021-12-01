@@ -11,7 +11,7 @@ namespace Cardinal.Analyser
 {
     public class Analyser : CardinalSingleton<Analyser> 
     {
-        [Header("Profiled Values - Hexad")]//These shouldn't be public in final
+        [Header("Profiled Values - Hexad")]
         public float PhilanthropistValue;
         public float SocialiserValue;
         public float FreeSpiritValue;
@@ -86,6 +86,18 @@ namespace Cardinal.Analyser
             {
                 if (item is PlayerDeathEvent)
                 {
+                    KillDeathRatio = CalculateKillDeathRatio();
+
+                    if (KillDeathRatio <= 0.5)
+                    {
+                        Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseValue.KillDeathRatio, ResponseAction.Decrease);
+                    }
+                    else if (KillDeathRatio >= 1.5)
+                    {
+                        Adjustor.Adjustor.Instance.Message(ResponseSubject.Player, ResponseValue.KillDeathRatio, ResponseAction.Increase);
+                    }
+
+
                     if (KillDeathRatio != CalculateKillDeathRatio())
                     {
                         if (KillDeathRatio > CalculateKillDeathRatio())
@@ -96,7 +108,6 @@ namespace Cardinal.Analyser
                         {
                             //[ADJ] Enemy kills increasing
                         }
-                    KillDeathRatio = CalculateKillDeathRatio();
                     }                    
                 }
             }
