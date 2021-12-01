@@ -63,7 +63,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.Name = "Player reentered " + gameObject;
                     @event.Time = Time.realtimeSinceStartup.ToString();
                     @event.RoomType = Type;
-                    @event.IsFirstEntry = true;
+                    @event.IsFirstEntry = false;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.Players, 50);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
                     Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
@@ -74,7 +74,7 @@ namespace Cardinal.Generative.Dungeon
                     @event.Name = "Player reentered " + gameObject;
                     @event.Time = Time.realtimeSinceStartup.ToString();
                     @event.RoomType = Type;
-                    @event.IsFirstEntry = true;
+                    @event.IsFirstEntry = false;
                     @event.Correleation = new Appraiser.HexadCorrelation(HexadTypes.FreeSpirits, 100);
                     Analyser.Analyser.Instance.RegisterEvent(@event);
                     Runic.Tasks.TaskManager.Instance.IncrementProgressJobs(Runic.ProgressCriteria.RoomEntered);
