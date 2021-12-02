@@ -23,6 +23,7 @@ namespace Cardinal.AI.NPC
 
         private void Update()
         {
+            //This will NPE on transitioning between scenes but doesn't break anything
             if (playerTransform == null)
             {
                 playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
