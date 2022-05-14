@@ -15,14 +15,15 @@ MonoBehaviour:
   version: 5
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TerrainMaterial_916503672690166736
   m_Shader: {fileID: -6465566751694194690, guid: 70127249b2641354c9a6e991b9b46b70, type: 3}
-  m_ShaderKeywords: 
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -39,15 +40,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorBlend:
-        m_Texture: {fileID: 1797486014131806445, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
+        m_Texture: {fileID: -6389375720364161941, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorByHeight:
-        m_Texture: {fileID: -8698813773971775508, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
+        m_Texture: {fileID: -2921437188272224065, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _ColorByNormal:
-        m_Texture: {fileID: -8364264704599776770, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
+        m_Texture: {fileID: 439261167743324710, guid: 1c2c4592a3e8b0743883f12962e3ed6c, type: 2}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
