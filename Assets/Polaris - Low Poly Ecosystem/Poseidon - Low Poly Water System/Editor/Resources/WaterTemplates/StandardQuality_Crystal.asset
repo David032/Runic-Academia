@@ -267,7 +267,7 @@ MonoBehaviour:
   reflectionLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  reflectCustomSkybox: 0
+  reflectCustomSkybox: 1
   reflectionDistortionStrength: 50
   enableRefraction: 1
   refractionDistortionStrength: 50
