@@ -1,0 +1,3 @@
+[submodule "Assets/Cardinal"]
+	path = Assets/Cardinal
+	url = https://github.com/David032/Cardinal.git
