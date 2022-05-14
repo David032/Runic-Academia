@@ -97,12 +97,12 @@ MonoBehaviour:
     splatsModel: 0
     origin: {x: 0, y: 0, z: 0}
     tileSize: {x: 100, y: 100, z: 100}
-    tileCountX: 3
-    tileCountZ: 3
+    tileCountX: 2
+    tileCountZ: 2
     groupId: 0
-    terrainNamePrefix: HubArea
+    terrainNamePrefix: BasicTown
     dataDirectory: Assets/_TerrainData
-    setShaderGroupId: 0
+    setShaderGroupId: -1
   renderPipelines:
     universalRenderPipelinePackage: {fileID: 102900000, guid: 8bc88477f037e96478019bba8de301fd, type: 3}
   topographic:
