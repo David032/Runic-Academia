@@ -23,15 +23,15 @@ namespace Runic.SceneManagement
         public ResourceAvailability RequestedResourceNodeSpread = ResourceAvailability.Regular;
         public ResourceAvailability RequestedLootNodeSpread = ResourceAvailability.Regular;
         public ResourceAvailability RequestedEnemyAmount = ResourceAvailability.Regular;
-        public RoomList RequestedRoomList;
-        public RoomList RequestedStarterRooms;
-        public RoomList RequestedBossRooms;
-        public RoomList RequestedPuzzleRooms;
-        public RoomList RequestedSpecialRooms;
-        public LootableList RequestedResourceNodes;
-        public LootableList RequestedLootNodes;
-        public EnemyList RequestedEnemyList;
-        public EnemyList RequestedBossList;
+        public CardinalGameobjectList RequestedRoomList;
+        public CardinalGameobjectList RequestedStarterRooms;
+        public CardinalGameobjectList RequestedBossRooms;
+        public CardinalGameobjectList RequestedPuzzleRooms;
+        public CardinalGameobjectList RequestedSpecialRooms;
+        public CardinalGameobjectList RequestedResourceNodes;
+        public CardinalGameobjectList RequestedLootNodes;
+        public CardinalGameobjectList RequestedEnemyList;
+        public CardinalGameobjectList RequestedBossList;
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player")) 

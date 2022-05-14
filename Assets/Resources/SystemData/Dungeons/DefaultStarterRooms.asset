@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00424af72387fb04da9120f85f8fe056, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
   m_Name: DefaultStarterRooms
   m_EditorClassIdentifier: 
-  RoomsToUse:
+  Objects:
   - {fileID: 2819326594541008438, guid: 43ed3d22bd14f1749ac135ce3a96b954, type: 3}
   - {fileID: 832926296948040979, guid: 5031289c9b4e4e848a9db74af85dd832, type: 3}
   - {fileID: 2904490055247478389, guid: ed115470e84688b40b9093be4f89b875, type: 3}

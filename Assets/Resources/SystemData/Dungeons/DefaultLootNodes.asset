@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fadff79de904344d8c45a068256b6bc, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
   m_Name: DefaultLootNodes
   m_EditorClassIdentifier: 
-  LootNodes:
+  Objects:
   - {fileID: 1952571171156410325, guid: f47abf1106bfac748abefbb0797f9cb3, type: 3}
+  - {fileID: 5699741871913838239, guid: 0e7f82bc83ee71547af0cd6be178b29b, type: 3}
   - {fileID: 8489244864780193006, guid: 6c04911e61d63dc44ae22cfd0c87f827, type: 3}
   - {fileID: 4619672675700318658, guid: 9fbe5b435de57484d8872e54ea567565, type: 3}
-  - {fileID: 5699741871913838239, guid: 0e7f82bc83ee71547af0cd6be178b29b, type: 3}

@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
+  m_Name: CastleRoomsList
+  m_EditorClassIdentifier: 
+  Objects:
+  - {fileID: 986058290984799613, guid: 72cccaf0c18133245ab103b175929e5b, type: 3}
+  - {fileID: 4450031772547511711, guid: 8376be402f3d7d345a619b94e7d3537b, type: 3}
+  - {fileID: 8642439431583217477, guid: 6798f36dc0c107f4b8d85b84853c97e3, type: 3}
+  - {fileID: 2150300730602276739, guid: c37ebf3ca18b373469642ac9dc28a083, type: 3}
+  - {fileID: 4337984974077466786, guid: 487ced9d6112f3c4684fbca7bcfbe3b5, type: 3}
+  - {fileID: 123774649121424497, guid: 5dd0b70830b6c964184e09d0b18359fe, type: 3}
+  - {fileID: 679774221366200007, guid: b2e93629e3e38b44f8c8ad237d6b5277, type: 3}
+  - {fileID: 1016797273662338610, guid: 242128ec54cd1a145a818e92cb91966d, type: 3}
+  - {fileID: 8476794115755065584, guid: d92f091a873b4504ca9b499933eb8bd0, type: 3}
+  - {fileID: 1449155553149448054, guid: 22973e5b4d0e6274fb6b8e6242a6fb9e, type: 3}
+  - {fileID: 2310016643263120628, guid: 4068fa215cb6e2d439938802ef7dd5ba, type: 3}

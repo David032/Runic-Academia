@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
+  m_Name: DefaultPuzzleRooms
+  m_EditorClassIdentifier: 
+  Objects:
+  - {fileID: 5566850054358241306, guid: 47659fef38eb72f4bb4ef48eae45eec7, type: 3}
+  - {fileID: 5347527513819276579, guid: d54eefc30d224b9409d0a60f2b5c3926, type: 3}
+  - {fileID: 9069802418301497614, guid: 8f27e6c96654c424e8a681b720f716fd, type: 3}
+  - {fileID: 1494961313743702391, guid: 41347f94a08ca9a409e733d2a1f0d929, type: 3}

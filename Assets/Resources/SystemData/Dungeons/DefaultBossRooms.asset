@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00424af72387fb04da9120f85f8fe056, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
   m_Name: DefaultBossRooms
   m_EditorClassIdentifier: 
-  RoomsToUse:
+  Objects:
   - {fileID: 5937786903991233923, guid: 44caa0b11f2a5e84baab2d0f99040954, type: 3}
   - {fileID: 6077522869712432189, guid: a797a0087b101164598eb86a3d616217, type: 3}
   - {fileID: 2303367212377797698, guid: dc0d8ec86e6b16a4ca75a395ca789e6a, type: 3}

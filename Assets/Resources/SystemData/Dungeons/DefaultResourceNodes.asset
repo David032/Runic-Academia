@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2fadff79de904344d8c45a068256b6bc, type: 3}
+  m_Script: {fileID: 11500000, guid: ae0ad2549a3d15840a70665ed3e052f3, type: 3}
   m_Name: DefaultResourceNodes
   m_EditorClassIdentifier: 
-  LootNodes:
+  Objects:
   - {fileID: 6059385137436062233, guid: 8224cdbc3acf4554da761ed6e7a98f2a, type: 3}
   - {fileID: 7757985270957251520, guid: 98d141cfc4fc9dc42a5d6e3a8a63f033, type: 3}
   - {fileID: 8222422310812786289, guid: 1fbf13d54041f57488601505323da82e, type: 3}
