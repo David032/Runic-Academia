@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 namespace Runic.SceneManagement
 {
@@ -35,6 +36,8 @@ namespace Runic.SceneManagement
 
         private void OnTriggerEnter(Collider other)
         {
+            SafetyCheck();
+            MainCam.GetComponent<Camera>().cullingMask = LayersToRender;
             if (other.CompareTag("Player"))
             {
                 Analyser.Instance.ReflectiveAnalysis();
@@ -44,6 +47,9 @@ namespace Runic.SceneManagement
                         ResponseAction.Completed, 
                         ResponseLocation.CurrentDungeon);
                 }
+                VirtualCam.GetComponent<CinemachineVirtualCamera>()
+                    .GetCinemachineComponent<CinemachineFramingTransposer>()
+                    .m_CameraDistance = 10;
                 StartCoroutine(LoadHubArea());
             }
         }

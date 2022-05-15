@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.17276844, g: 0.21589246, b: 0.2978263, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -154,6 +154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DestroyOnLoad: 1
+  FORCEBUILD: 0
   DungeonSize: 16
   DungeonType: 1
   RequiresBoss: 1
@@ -162,16 +163,21 @@ MonoBehaviour:
   ResourceNodeSpread: 2
   LootNodeSpread: 2
   EnemyAmount: 2
-  RoomList: {fileID: 11400000, guid: 656bcc04ee56add498adad75a3d8b5fa, type: 2}
+  RoomList: {fileID: 0}
   StarterRooms: {fileID: 11400000, guid: e2e79cf79fe814542ad705bf1d49d0ee, type: 2}
   BossRooms: {fileID: 11400000, guid: c3ebcf55a7ac1bf488099976794965d2, type: 2}
-  PuzzleRooms: {fileID: 11400000, guid: 0a51342a0a9612749ae104610a8f9047, type: 2}
+  PuzzleRooms: {fileID: 0}
   SpecialRooms: {fileID: 11400000, guid: facff07bd766d4e43a5b5b39f0739852, type: 2}
   ResourceNodes: {fileID: 11400000, guid: 460909fad8f1be747976837a0b8c0788, type: 2}
   LootNodes: {fileID: 11400000, guid: b295a41876e6be3478c6cbb4fd9eaa8e, type: 2}
-  EnemyList: {fileID: 11400000, guid: 68ace4a35b1ce65428358a7a6f28a034, type: 2}
+  EnemyList: {fileID: 0}
   BossList: {fileID: 11400000, guid: 09daf1cc1b3f8334c95dee4fe67454d0, type: 2}
   GeneratedRooms: []
+  spawnedLoot: []
+  spawnedNodes: []
+  spawnedEnemies: []
+  spawnedBoss: {fileID: 0}
+  State: 0
 --- !u!114 &42656568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +218,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -226,6 +233,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1580492033}
   - component: {fileID: 1580492032}
+  - component: {fileID: 1580492034}
   m_Layer: 0
   m_Name: Directional Light
   m_TagString: Untagged
@@ -302,10 +310,31 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1580492031}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 275.33215, y: 52.134285, z: 244.26675}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!114 &1580492034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1580492031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}

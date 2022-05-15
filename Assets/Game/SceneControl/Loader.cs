@@ -10,6 +10,8 @@ namespace Runic.SceneManagement
         protected GameObject Player;
         protected GameObject MainCam;
         protected GameObject VirtualCam;
+        [SerializeField]
+        protected LayerMask LayersToRender;
 
         private void Start()
         {
@@ -18,7 +20,7 @@ namespace Runic.SceneManagement
             VirtualCam = GameObject.FindGameObjectWithTag("VirtualCamera");
         }
 
-        protected IEnumerator LoadPlayerIntoLoadingScene()
+        protected void SafetyCheck() 
         {
             if (Player is null)
             {
@@ -32,7 +34,11 @@ namespace Runic.SceneManagement
             {
                 VirtualCam = GameObject.FindGameObjectWithTag("VirtualCamera");
             }
+        }
 
+        protected IEnumerator LoadPlayerIntoLoadingScene()
+        {
+            SafetyCheck();
             print("At load  of loadign scene start:");
             for (int i = 0; i < SceneManager.sceneCount; i++)
             {

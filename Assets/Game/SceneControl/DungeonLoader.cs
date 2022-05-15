@@ -7,6 +7,7 @@ using Cardinal.Generative.Dungeon;
 using Cardinal.Appraiser;
 using Cardinal.Analyser;
 using Cardinal;
+using Cinemachine;
 
 namespace Runic.SceneManagement
 {
@@ -34,6 +35,8 @@ namespace Runic.SceneManagement
         public CardinalGameobjectList RequestedBossList;
         private void OnTriggerEnter(Collider other)
         {
+            SafetyCheck();
+            MainCam.GetComponent<Camera>().cullingMask = LayersToRender;
             if (other.CompareTag("Player")) 
             {
                 DungeonEnteredEvent @event = ScriptableObject.CreateInstance<DungeonEnteredEvent>();
@@ -50,6 +53,9 @@ namespace Runic.SceneManagement
                 @event.EnemyAmount = RequestedEnemyAmount;
                 Analyser.Instance.RegisterEvent(@event);
 
+                VirtualCam.GetComponent<CinemachineVirtualCamera>()
+                    .GetCinemachineComponent<CinemachineFramingTransposer>()
+                    .m_CameraDistance = 20;
                 StartCoroutine(TransitionToDungeon());
             }
         }
