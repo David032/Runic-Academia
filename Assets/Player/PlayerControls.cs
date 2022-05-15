@@ -49,7 +49,7 @@ public class PlayerControls : MonoBehaviour
     void Update()
     {
         characterAnimator.SetFloat("Speed_f", GetSpeed());
-        //Look(look);
+        Look(look);
         Move(move);
         Interact();
     }
