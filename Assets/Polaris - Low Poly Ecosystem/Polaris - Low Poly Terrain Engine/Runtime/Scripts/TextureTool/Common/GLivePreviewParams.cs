@@ -20,7 +20,6 @@ namespace Pinwheel.Griffin.TextureTool
             }
         }
 
-        [SerializeField]
         private GStylizedTerrain terrain;
         public GStylizedTerrain Terrain
         {

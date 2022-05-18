@@ -16,6 +16,7 @@ using AwesomeTechnologies.VegetationStudio;
 using Pinwheel.Griffin.VegetationStudioPro;
 #endif
 using UnityEditorInternal;
+using System.Reflection;
 
 namespace Pinwheel.Griffin
 {
@@ -49,7 +50,7 @@ namespace Pinwheel.Griffin
         public static Color midGrey = new Color32(128, 128, 128, 255);
         public static Color darkGrey = new Color32(64, 64, 64, 255);
         public static Color assetPreviewGrey = new Color32(82, 82, 82, 255);
-        public static Color linkColor = new Color(0, 0, 238, 255); //#0000EE
+        public static Color linkColor = new Color32(60, 150, 200, 255);
 
         public static Color boxBorderColor = EditorGUIUtility.isProSkin ? new Color32(36, 36, 36, 255) : new Color32(127, 127, 127, 255);
         public static Color boxHeaderBg = EditorGUIUtility.isProSkin ? new Color32(53, 53, 53, 255) : new Color32(182, 182, 182, 255);
@@ -117,6 +118,7 @@ namespace Pinwheel.Griffin
                     warningLabel.alignment = TextAnchor.MiddleLeft;
                     warningLabel.wordWrap = true;
                     warningLabel.fontStyle = FontStyle.Italic;
+                    warningLabel.richText = true;
                     warningLabel.normal.textColor = EditorGUIUtility.isProSkin ?
                         new Color(1, 0.7f, 0.3f, 1) :
                         new Color(1, 0.5f, 0.2f, 1);
@@ -609,6 +611,27 @@ namespace Pinwheel.Griffin
                 return projectName;
             }
 
+        }
+
+        public static string GetUserDisplayName()
+        {
+            try
+            {
+                Assembly assembly = Assembly.GetAssembly(typeof(UnityEditor.EditorWindow));
+                object uc = assembly.CreateInstance("UnityEditor.Connect.UnityConnect", false, BindingFlags.NonPublic | BindingFlags.Instance, null, null, null, null);
+                // Cache type of UnityConnect.
+                Type t = uc.GetType();
+                // Get user info object from UnityConnect.
+                var userInfo = t.GetProperty("userInfo").GetValue(uc, null);
+                // Retrieve user id from user info.
+                Type userInfoType = userInfo.GetType();
+                string displayName = userInfoType.GetProperty("displayName").GetValue(userInfo, null) as string;
+                return displayName;
+            }
+            catch
+            {
+                return string.Empty;
+            }
         }
 
         public static string GetProjectRelatedEditorPrefsKey(params string[] keyElements)
@@ -2460,6 +2483,51 @@ namespace Pinwheel.Griffin
             LayerMask tempMask = EditorGUILayout.MaskField(label, InternalEditorUtility.LayerMaskToConcatenatedLayersMask(mask), InternalEditorUtility.layers);
             mask = InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(tempMask);
             return mask;
+        }
+
+        private class AffLinkGUI
+        {
+            private static GUIStyle linkButtonStyle;
+            public static GUIStyle LinkButtonStyle
+            {
+                get
+                {
+                    if (linkButtonStyle == null)
+                    {
+                        linkButtonStyle = new GUIStyle(EditorStyles.miniLabel);
+                    }
+                    linkButtonStyle.wordWrap = false;
+                    linkButtonStyle.alignment = TextAnchor.MiddleLeft;
+                    linkButtonStyle.normal.textColor = linkColor;
+                    return linkButtonStyle;
+                }
+            }
+        }
+
+        public static void DrawAffLinks(string text, params string[] urls)
+        {
+            if (GEditorSettings.Instance.general.enableAffiliateLinks)
+            {
+                Rect r = EditorGUILayout.GetControlRect();
+                r = EditorGUI.IndentedRect(r);
+                EditorGUIUtility.AddCursorRect(r, MouseCursor.Link);
+                GUIContent content = new GUIContent(
+                    text + "→",
+                    "This button contains affiliate links and will bring you to the Unity Asset Store.\n" +
+                    "You won't have to pay an extra but I can earn a little more which can help me a lot.\n" +
+                    "Thanks!");
+
+                if (GUI.Button(r, content, AffLinkGUI.LinkButtonStyle))
+                {
+                    foreach (string s in urls)
+                    {
+                        if (!string.IsNullOrEmpty(s))
+                        {
+                            Application.OpenURL(s + "?aid=1100l3QbW&pubref=polaris-editor");
+                        }
+                    }
+                }
+            }
         }
     }
 }

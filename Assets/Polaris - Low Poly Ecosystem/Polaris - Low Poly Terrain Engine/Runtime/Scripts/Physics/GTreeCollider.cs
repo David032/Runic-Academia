@@ -213,6 +213,9 @@ namespace Pinwheel.Griffin.Physic
                         continue;
 
                     GTreeInstance tree = treeInstances[i];
+                    if (tree.prototypeIndex < 0 || tree.prototypeIndex >= prototypes.Count)
+                        continue;
+
                     GTreePrototype prototype = prototypes[tree.prototypeIndex];
                     if (prototype.prefab == null)
                         continue;

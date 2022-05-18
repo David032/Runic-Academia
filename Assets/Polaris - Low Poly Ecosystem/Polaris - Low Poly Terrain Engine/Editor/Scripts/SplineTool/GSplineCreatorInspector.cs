@@ -46,7 +46,7 @@ namespace Pinwheel.Griffin.SplineTool
             GCommon.RegisterBeginRenderSRP(OnBeginRenderSRP);
             SceneView.duringSceneGui += DuringSceneGUI;
 
-            SetupSplineLayer();
+            GLayerInitializer.SetupSplineLayer();
         }
 
         private void OnDisable()
@@ -113,16 +113,6 @@ namespace Pinwheel.Griffin.SplineTool
             {
                 GSplineCreator.MarkSplineChanged(instance);
                 GUtilities.MarkCurrentSceneDirty();
-            }
-        }
-
-        private void SetupSplineLayer()
-        {
-            int index = GEditorSettings.Instance.layers.splineLayerIndex;
-            string layer = GSplineCreator.SPLINE_LAYER;
-            if (GEditorSettings.Instance.layers.SetupLayer(index, layer))
-            {
-                Debug.Log($"POLARIS: Set layer {index} to {layer}. This layer is reserved for Spline tool to work!");
             }
         }
 

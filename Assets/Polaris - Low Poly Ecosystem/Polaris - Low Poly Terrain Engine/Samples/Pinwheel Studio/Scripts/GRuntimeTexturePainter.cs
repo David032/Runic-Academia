@@ -304,14 +304,6 @@ namespace Pinwheel.Griffin
 
             GTexturePainterArgs args = new GTexturePainterArgs();
             args.HitPoint = hit.point;
-            args.Collider = hit.collider;
-            args.Transform = hit.transform;
-            args.UV = hit.textureCoord;
-            args.TriangleIndex = hit.triangleIndex;
-            args.BarycentricCoord = hit.barycentricCoordinate;
-            args.Distance = hit.distance;
-            args.Normal = hit.normal;
-            args.LightMapCoord = hit.lightmapCoord;
 
             args.MouseEventType =
                 Input.GetMouseButtonDown(0) ? GPainterMouseEventType.Down :

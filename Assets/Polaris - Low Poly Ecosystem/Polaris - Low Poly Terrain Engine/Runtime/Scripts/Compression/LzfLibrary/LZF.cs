@@ -57,7 +57,7 @@ namespace Lzf
         /// <summary>
         /// Hashtable, thac can be allocated only once
         /// </summary>
-        private readonly long[] HashTable = new long[HSIZE];
+        private static long[] HashTable;
 
         private const uint HLOG = 14;
         private const uint HSIZE = (1 << 14);
@@ -75,7 +75,14 @@ namespace Lzf
         /// <returns>The size of the compressed archive in the output buffer</returns>
         public int Compress(byte[] input, int inputLength, byte[] output, int outputLength)
         {
-            Array.Clear(HashTable, 0, (int)HSIZE);
+            if (HashTable == null)
+            {
+                HashTable = new long[HSIZE];
+            }
+            else
+            {
+                Array.Clear(HashTable, 0, (int)HSIZE);
+            }
 
             long hslot;
             uint iidx = 0;
@@ -256,7 +263,10 @@ namespace Lzf
             return (int)oidx;
         }
 
-
+        public static void CleanUp()
+        {
+            HashTable = null;
+        }
     }
 }
 

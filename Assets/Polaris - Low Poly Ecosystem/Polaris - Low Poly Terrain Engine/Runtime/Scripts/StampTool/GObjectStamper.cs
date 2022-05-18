@@ -338,6 +338,8 @@ namespace Pinwheel.Griffin.StampTool
                 GPrototypeInstanceInfo info = instanceInfo[i];
                 if (cullResult[i] == false)
                     continue;
+                if (info.prototypeIndex < 0 || info.prototypeIndex >= layer.Prototypes.Count)
+                    continue;
 
                 GameObject prototype = layer.Prototypes[info.prototypeIndex];
                 GameObject go = GSpawner.Spawn(t, prototype, Vector3.zero);

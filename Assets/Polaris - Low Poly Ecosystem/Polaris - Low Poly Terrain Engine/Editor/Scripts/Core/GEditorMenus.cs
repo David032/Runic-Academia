@@ -289,6 +289,22 @@ namespace Pinwheel.Griffin
             Undo.RegisterCreatedObjectUndo(navHelperGO, "Creating Navigation Helper");
         }
 
+#if !VISTA
+        [MenuItem("GameObject/3D Object/Polaris/Tools/Vista - Procedural Terrain Generator", false, 10)]
+        public static void ShowVistaStorePage(MenuCommand menuCmd)
+        {
+            if (EditorUtility.DisplayDialog(
+                "About Vista",
+                "Vista is an advanced toolset for procedural terrain generation, which perfectly compatible with Polaris 2021\n" +
+                "Vista is now 50% OFF for Polaris 2021 user!",
+                "Show me more",
+                "Close"))
+            {
+                Application.OpenURL("https://assetstore.unity.com/packages/tools/terrain/vista-advanced-terrain-graph-editor-210496?aid=1100l3QbW&pubref=polaris-editor");
+            }
+        }
+#endif
+
         public static bool ValidateShowUnityTerrainConverter(MenuCommand menuCmd)
         {
             if (menuCmd == null)
@@ -451,20 +467,6 @@ namespace Pinwheel.Griffin
         {
             GAnalytics.Record(GAnalytics.LINK_EXPLORE_ASSET);
             GAssetExplorer.ShowRockPropsLink();
-        }
-
-        [MenuItem("Window/Polaris/Explore/Collections/Water Assets")]
-        public static void ShowStylizedWaterLink()
-        {
-            GAnalytics.Record(GAnalytics.LINK_EXPLORE_ASSET);
-            GAssetExplorer.ShowRockPropsLink();
-        }
-
-        [MenuItem("Window/Polaris/Explore/Collections/Sky - Ambient Assets")]
-        public static void ShowStylizedSkyAmbientLink()
-        {
-            GAnalytics.Record(GAnalytics.LINK_EXPLORE_ASSET);
-            GAssetExplorer.ShowSkyAmbientLink();
         }
 
         [MenuItem("Window/Polaris/Explore/Collections/Character Assets")]

@@ -25,8 +25,13 @@ namespace Pinwheel.Griffin
         {
             DrawInstruction();
             DrawPrototypesListGUI();
-            DrawAddPrototypeGUI(); 
-            
+            DrawAddPrototypeGUI();
+
+            GEditorCommon.DrawAffLinks(
+                "These lively vegetation assets can bring your project to life",
+                "https://assetstore.unity.com/packages/3d/vegetation/trees/polygon-nature-low-poly-3d-art-by-synty-120152",
+                "https://assetstore.unity.com/lists/stylized-vegetation-120082");
+
             GEditorCommon.Separator();
             DrawConvertAssetGUI();
         }

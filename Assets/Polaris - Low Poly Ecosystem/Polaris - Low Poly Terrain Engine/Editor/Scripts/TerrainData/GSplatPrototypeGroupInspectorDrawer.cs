@@ -29,6 +29,11 @@ namespace Pinwheel.Griffin
                 SetShadingDirty();
                 EditorUtility.SetDirty(instance);
             }
+
+            GEditorCommon.DrawAffLinks(
+                "Explore the high quality textures for stunning low poly scenes",
+                "https://assetstore.unity.com/packages/2d/textures-materials/600-super-texture-collection-197591",
+                "https://assetstore.unity.com/lists/stylized-texture-18967160722750");
         }
 
         private void DrawPrototypesListGUI()

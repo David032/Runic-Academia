@@ -21,7 +21,7 @@ namespace Pinwheel.Griffin.MicroSplat.GriffinExtension
 
         public static string GetPublisherName()
         {
-            return "Pinwheel Studio";
+            return "Jason Booth";
         }
 
         public static string GetDescription()

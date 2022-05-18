@@ -37,6 +37,8 @@ namespace Pinwheel.Griffin
         public static bool isUrpSupportInstalled = false;
         public static bool isVegetationStudioProExtensionInstalled = false;
         public static bool isMicroSplatIntegrationInstalled = false;
+        public static bool isWorldStreamer2Installed = false;
+        public static bool isVistaInstalled = false;
 
         //Unity packages
         public static bool isShaderGraphInstalled = false;
@@ -63,6 +65,8 @@ namespace Pinwheel.Griffin
             isUrpSupportInstalled = false;
             isVegetationStudioProExtensionInstalled = false;
             isMicroSplatIntegrationInstalled = false;
+            isWorldStreamer2Installed = false;
+            isVistaInstalled = false;
 
 #if AMPLIFY_SHADER_EDITOR
             isASEInstalled = true;
@@ -80,6 +84,12 @@ namespace Pinwheel.Griffin
             isJupiterInstalled = true;
 #else
             isJupiterInstalled = false;
+#endif
+
+#if VISTA
+            isVistaInstalled = true;
+#else
+            isVistaInstalled = false;
 #endif
 
 #if __MICROSPLAT_POLARIS__
@@ -114,6 +124,12 @@ namespace Pinwheel.Griffin
                    t.Namespace.Equals("Pinwheel.Griffin.VegetationStudioPro"))
                 {
                     isVegetationStudioProExtensionInstalled = true;
+                }
+
+                if (t.Namespace != null &&
+                    t.Namespace.Equals("WorldStreamer2"))
+                {
+                    isWorldStreamer2Installed = true;
                 }
             }
         }

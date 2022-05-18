@@ -6,7 +6,6 @@ namespace Pinwheel.Griffin.TextureTool
     [System.Serializable]
     public struct GHeightMapFromMeshGeneratorParams
     {
-        [SerializeField]
         private Mesh srcMesh;
         public Mesh SrcMesh
         {

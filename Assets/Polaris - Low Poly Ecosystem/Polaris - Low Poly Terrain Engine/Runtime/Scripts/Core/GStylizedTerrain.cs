@@ -138,6 +138,20 @@ namespace Pinwheel.Griffin
             set
             {
                 topNeighbor = value;
+                if (topNeighbor != null)
+                {
+                    topTerrainData = topNeighbor.TerrainData;
+                }
+            }
+        }
+
+        [SerializeField]
+        private GTerrainData topTerrainData;
+        public GTerrainData TopTerrainData
+        {
+            get
+            {
+                return topTerrainData;
             }
         }
 
@@ -152,6 +166,20 @@ namespace Pinwheel.Griffin
             set
             {
                 bottomNeighbor = value;
+                if (bottomNeighbor != null)
+                {
+                    bottomTerrainData = bottomNeighbor.TerrainData;
+                }
+            }
+        }
+
+        [SerializeField]
+        private GTerrainData bottomTerrainData;
+        public GTerrainData BottomTerrainData
+        {
+            get
+            {
+                return bottomTerrainData;
             }
         }
 
@@ -166,6 +194,20 @@ namespace Pinwheel.Griffin
             set
             {
                 leftNeighbor = value;
+                if (leftNeighbor != null)
+                {
+                    leftTerrainData = leftNeighbor.TerrainData;
+                }
+            }
+        }
+
+        [SerializeField]
+        private GTerrainData leftTerrainData;
+        public GTerrainData LeftTerrainData
+        {
+            get
+            {
+                return leftTerrainData;
             }
         }
 
@@ -180,74 +222,20 @@ namespace Pinwheel.Griffin
             set
             {
                 rightNeighbor = value;
+                if (rightNeighbor != null)
+                {
+                    rightTerrainData = rightNeighbor.TerrainData;
+                }
             }
         }
 
-        public GStylizedTerrain BottomLeftNeighbor
+        [SerializeField]
+        private GTerrainData rightTerrainData;
+        public GTerrainData RightTerrainData
         {
             get
             {
-                GStylizedTerrain t = null;
-                if (BottomNeighbor != null)
-                {
-                    t = BottomNeighbor.LeftNeighbor;
-                }
-                if (t == null && LeftNeighbor != null)
-                {
-                    t = LeftNeighbor.BottomNeighbor;
-                }
-                return t;
-            }
-        }
-
-        public GStylizedTerrain TopLeftNeighbor
-        {
-            get
-            {
-                GStylizedTerrain t = null;
-                if (TopNeighbor != null)
-                {
-                    t = TopNeighbor.LeftNeighbor;
-                }
-                if (t == null && LeftNeighbor != null)
-                {
-                    t = LeftNeighbor.TopNeighbor;
-                }
-                return t;
-            }
-        }
-
-        public GStylizedTerrain TopRightNeighbor
-        {
-            get
-            {
-                GStylizedTerrain t = null;
-                if (TopNeighbor != null)
-                {
-                    t = TopNeighbor.RightNeighbor;
-                }
-                if (t == null && RightNeighbor != null)
-                {
-                    t = RightNeighbor.TopNeighbor;
-                }
-                return t;
-            }
-        }
-
-        public GStylizedTerrain BottomRightNeighbor
-        {
-            get
-            {
-                GStylizedTerrain t = null;
-                if (BottomNeighbor != null)
-                {
-                    t = BottomNeighbor.RightNeighbor;
-                }
-                if (t == null && RightNeighbor != null)
-                {
-                    t = RightNeighbor.BottomNeighbor;
-                }
-                return t;
+                return rightTerrainData;
             }
         }
 
@@ -431,7 +419,8 @@ namespace Pinwheel.Griffin
         private void OnEnable()
         {
             ActiveTerrainSet.Add(this);
-            GStylizedTerrain.ConnectAdjacentTiles();
+            //GStylizedTerrain.ConnectAdjacentTiles();
+            ConnectNeighbor();
             GCommon.RegisterBeginRender(OnBeginCameraRendering);
             GCommon.RegisterBeginRenderSRP(OnBeginCameraRenderingSRP);
             GCommon.RegisterEndRender(OnEndCameraRendering);
@@ -443,8 +432,6 @@ namespace Pinwheel.Griffin
             if (TerrainData != null)
             {
                 TerrainData.Dirty += OnTerrainDataDirty;
-                TerrainData.SetDirty(GTerrainData.DirtyFlags.Shading);
-
                 TerrainData.GrassPatchChanged += OnGrassPatchChanged;
                 TerrainData.GrassPatchGridSizeChanged += OnGrassPatchGridSizeChanged;
                 TerrainData.TreeChanged += OnTreeChanged;
@@ -454,6 +441,7 @@ namespace Pinwheel.Griffin
             if (TerrainData != null)
             {
                 TerrainData.Shading.UpdateMaterials();
+                OnShadingDirty();
             }
 
             if (TerrainData != null && TerrainData.Geometry.StorageMode == GGeometry.GStorageMode.GenerateOnEnable)
@@ -462,13 +450,14 @@ namespace Pinwheel.Griffin
                 OnTerrainDataDirty(GTerrainData.DirtyFlags.GeometryTimeSliced);
                 TerrainData.Geometry.ClearDirtyRegions();
             }
+
         }
 
         private void OnDisable()
         {
             ReleaseTemporaryTextures();
             ActiveTerrainSet.Remove(this);
-            GStylizedTerrain.ConnectAdjacentTiles();
+            //GStylizedTerrain.ConnectAdjacentTiles();
             CleanUpChunks();
 
             GCommon.UnregisterBeginRender(OnBeginCameraRendering);
@@ -710,11 +699,11 @@ namespace Pinwheel.Griffin
 #if GRIFFIN_EDITOR_COROUTINES
                 EditorCoroutineUtility.StartCoroutine(GenerateChunksTimeSliced(chunksToUpdate), this);
 #else
-                    int lodCount = TerrainData.Geometry.LODCount;
-                    for (int lod = 0; lod < lodCount; ++lod)
-                    {
-                        GenerateChunks(chunksToUpdate, lod);
-                    }
+                int lodCount = TerrainData.Geometry.LODCount;
+                for (int lod = 0; lod < lodCount; ++lod)
+                {
+                    GenerateChunks(chunksToUpdate, lod);
+                }
 #endif
             }
 #endif
@@ -1120,36 +1109,37 @@ namespace Pinwheel.Griffin
             }
 
             //left - top - right - bottom
-            if (LeftNeighbor != null && LeftNeighbor.gameObject.activeInHierarchy && LeftNeighbor.TerrainData != null)
+            //if (LeftNeighbor != null && LeftNeighbor.gameObject.activeInHierarchy && LeftNeighbor.TerrainData != null)
+            if (LeftTerrainData!=null)
             {
-                descriptors[3] = new GTextureNativeDataDescriptor<Color32>(LeftNeighbor.TerrainData.Geometry.HeightMap);
+                descriptors[3] = new GTextureNativeDataDescriptor<Color32>(LeftTerrainData.Geometry.HeightMap);
             }
             else
             {
                 descriptors[3] = new GTextureNativeDataDescriptor<Color32>(null);
             }
 
-            if (TopNeighbor != null && TopNeighbor.gameObject.activeInHierarchy && TopNeighbor.TerrainData != null)
+            if (TopTerrainData != null)
             {
-                descriptors[7] = new GTextureNativeDataDescriptor<Color32>(TopNeighbor.TerrainData.Geometry.HeightMap);
+                descriptors[7] = new GTextureNativeDataDescriptor<Color32>(TopTerrainData.Geometry.HeightMap);
             }
             else
             {
                 descriptors[7] = new GTextureNativeDataDescriptor<Color32>(null);
             }
 
-            if (RightNeighbor != null && RightNeighbor.gameObject.activeInHierarchy && RightNeighbor.TerrainData != null)
+            if (RightTerrainData != null)
             {
-                descriptors[5] = new GTextureNativeDataDescriptor<Color32>(RightNeighbor.TerrainData.Geometry.HeightMap);
+                descriptors[5] = new GTextureNativeDataDescriptor<Color32>(RightTerrainData.Geometry.HeightMap);
             }
             else
             {
                 descriptors[5] = new GTextureNativeDataDescriptor<Color32>(null);
             }
 
-            if (BottomNeighbor != null && BottomNeighbor.gameObject.activeInHierarchy && BottomNeighbor.TerrainData != null)
+            if (BottomTerrainData != null)
             {
-                descriptors[1] = new GTextureNativeDataDescriptor<Color32>(BottomNeighbor.TerrainData.Geometry.HeightMap);
+                descriptors[1] = new GTextureNativeDataDescriptor<Color32>(BottomTerrainData.Geometry.HeightMap);
             }
             else
             {
@@ -2358,6 +2348,21 @@ namespace Pinwheel.Griffin
             Vector3 position = transform.position;
             Matrix4x4 rectToWorld = Matrix4x4.TRS(position, rotation, worldSize);
             return rectToWorld;
+        }
+
+        public void ResetNeighboring()
+        {
+            leftNeighbor = null;
+            leftTerrainData = null;
+
+            topNeighbor = null;
+            topTerrainData = null;
+
+            rightNeighbor = null;
+            rightTerrainData = null;
+
+            bottomNeighbor = null;
+            bottomTerrainData = null;
         }
     }
 }

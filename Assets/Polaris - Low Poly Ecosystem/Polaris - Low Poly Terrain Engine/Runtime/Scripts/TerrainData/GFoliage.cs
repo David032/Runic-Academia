@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Unity.Collections;
 using Pinwheel.Griffin.Rendering;
+using Pinwheel.Griffin.Compression;
 
 namespace Pinwheel.Griffin
 {
@@ -143,7 +144,7 @@ namespace Pinwheel.Griffin
             set
             {
                 int oldValue = patchGridSize;
-                int newValue = Mathf.Clamp(value, 2, 20);
+                int newValue = Mathf.Clamp(value, 1, 20);
 
                 patchGridSize = newValue;
                 if (oldValue != newValue)
@@ -468,6 +469,7 @@ namespace Pinwheel.Griffin
             {
                 GrassPatches[i].Serialize();
             }
+            GCompressor.CleanUp();
         }
 
         public void OnAfterDeserialize()
@@ -476,6 +478,7 @@ namespace Pinwheel.Griffin
             {
                 GrassPatches[i].Deserialize();
             }
+            GCompressor.CleanUp();
         }
 
         public void Internal_UpgradeGrassSerializeVersion()

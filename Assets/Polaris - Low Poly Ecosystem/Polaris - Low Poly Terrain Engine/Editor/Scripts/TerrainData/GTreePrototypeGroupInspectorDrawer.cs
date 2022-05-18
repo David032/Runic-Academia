@@ -32,6 +32,11 @@ namespace Pinwheel.Griffin
                 EditorUtility.SetDirty(instance);
             }
 
+            GEditorCommon.DrawAffLinks(
+                "These vivid vegetations can breath life into your project",
+                "https://assetstore.unity.com/packages/3d/vegetation/trees/polygon-nature-low-poly-3d-art-by-synty-120152",
+                "https://assetstore.unity.com/lists/stylized-vegetation-120082");
+
             GEditorCommon.Separator();
             DrawConvertAssetGUI();
         }

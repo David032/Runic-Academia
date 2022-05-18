@@ -7,7 +7,6 @@ namespace Pinwheel.Griffin.TextureTool
     [System.Serializable]
     public struct GFoliageDistributionMapGeneratorParams
     {
-        [SerializeField]
         private GStylizedTerrain terrain;
         public GStylizedTerrain Terrain
         {
@@ -85,7 +84,6 @@ namespace Pinwheel.Griffin.TextureTool
             }
         }
 
-        [SerializeField]
         private Texture2D brushMask;
         public Texture2D BrushMask
         {

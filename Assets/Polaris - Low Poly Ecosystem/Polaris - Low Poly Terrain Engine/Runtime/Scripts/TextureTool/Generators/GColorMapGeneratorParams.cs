@@ -6,7 +6,6 @@ namespace Pinwheel.Griffin.TextureTool
     [System.Serializable]
     public struct GColorMapGeneratorParams
     {
-        [SerializeField]
         private GStylizedTerrain terrain;
         public GStylizedTerrain Terrain
         {

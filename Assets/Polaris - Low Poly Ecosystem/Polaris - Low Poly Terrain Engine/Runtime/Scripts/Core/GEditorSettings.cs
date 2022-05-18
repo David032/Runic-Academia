@@ -7,6 +7,7 @@ using UnityEditor;
 using Pinwheel.Griffin.Rendering;
 using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
+using System.Threading.Tasks;
 
 namespace Pinwheel.Griffin
 {
@@ -30,29 +31,59 @@ namespace Pinwheel.Griffin
             }
         }
 
-        public GeneralSettings general;
-        public LivePreviewSettings livePreview;
-        public PaintToolsSettings paintTools;
-        public SplineToolsSettings splineTools;
-        public BillboardToolsSettings billboardTools;
-        public StampToolsSettings stampTools;
-        public WizardToolsSettings wizardTools;
-        public RenderPipelinesSettings renderPipelines;
-        public TopographicSettings topographic;
-        public ErosionToolsSettings erosionTools;
-        public LayerSettings layers;
+        public GeneralSettings general = new GeneralSettings();
+        public LivePreviewSettings livePreview = new LivePreviewSettings();
+        public PaintToolsSettings paintTools = new PaintToolsSettings();
+        public SplineToolsSettings splineTools = new SplineToolsSettings();
+        public BillboardToolsSettings billboardTools = new BillboardToolsSettings();
+        public StampToolsSettings stampTools = new StampToolsSettings();
+        public WizardToolsSettings wizardTools = new WizardToolsSettings();
+        public RenderPipelinesSettings renderPipelines = new RenderPipelinesSettings();
+        public TopographicSettings topographic = new TopographicSettings();
+        public ErosionToolsSettings erosionTools = new ErosionToolsSettings();
+        public LayerSettings layers = new LayerSettings();
+        public DemoAssetSettings demoAssets = new DemoAssetSettings();
 
         #region Serialization Callbacks
         public void OnBeforeSerialize()
         {
-            //Some hack to clean up billboard meshes
-            GBillboardUtilities.CleanUp();
         }
 
         public void OnAfterDeserialize()
         {
+
         }
         #endregion
+
+        private void OnEnable()
+        {
+#if UNITY_EDITOR
+            SetupLayersAsync();
+            EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+#endif
+        }
+
+        private void OnDisable()
+        {
+#if UNITY_EDITOR
+            EditorApplication.playModeStateChanged -= OnPlayModeStateChanged;
+#endif
+        }
+
+#if UNITY_EDITOR
+        private void OnPlayModeStateChanged(PlayModeStateChange obj)
+        {
+            //Some hack to clean up billboard meshes
+            GBillboardUtilities.CleanUp();
+        }
+#endif 
+
+        private async void SetupLayersAsync()
+        {
+            await Task.Delay(1000);
+            GLayerInitializer.SetupRaycastLayer();
+            GLayerInitializer.SetupSplineLayer();
+        }
     }
 
     public partial class GEditorSettings : ScriptableObject
@@ -60,9 +91,10 @@ namespace Pinwheel.Griffin
         [System.Serializable]
         public class GeneralSettings
         {
-            public bool enableAnalytics;
-            public bool debugMode;
-            public bool showGeometryChunkInHierarchy;
+            public bool enableAnalytics = true;
+            public bool enableAffiliateLinks = true;
+            public bool debugMode = false;
+            public bool showGeometryChunkInHierarchy = true;
         }
 
         [System.Serializable]
@@ -118,7 +150,7 @@ namespace Pinwheel.Griffin
             public LayerMask raycastLayers;
             public bool showTransformGizmos;
             public LivePreviewToggle livePreview;
-            
+
             [System.Serializable]
             public struct LivePreviewToggle
             {
@@ -245,6 +277,12 @@ namespace Pinwheel.Griffin
                 EditorUtility.SetDirty(tagManager);
                 return success;
             }
+        }
+
+        [System.Serializable]
+        public class DemoAssetSettings
+        {
+            public Material[] demoMaterials;
         }
     }
 }

@@ -30,22 +30,12 @@ namespace Pinwheel.Griffin
                 terrain.TerrainData.Shading.UpdateMaterials();
 
             SceneView.duringSceneGui += DuringSceneGUI;
-            SetupRaycastLayer();
+            GLayerInitializer.SetupRaycastLayer();
         }
 
         private void OnDisable()
         {
             SceneView.duringSceneGui -= DuringSceneGUI;
-        }
-
-        private void SetupRaycastLayer()
-        {
-            int index = GEditorSettings.Instance.layers.raycastLayerIndex;
-            string layer = GStylizedTerrain.RAYCAST_LAYER;
-            if (GEditorSettings.Instance.layers.SetupLayer(index, layer))
-            {
-                Debug.Log($"POLARIS: Set layer {index} to {layer}. This layer is reserved for the terrain to work!");
-            }
         }
 
         public override void OnInspectorGUI()
@@ -74,6 +64,9 @@ namespace Pinwheel.Griffin
             DrawNeighboringGUI();
             InjectGUI(injectGuiIndex++);
             DrawStatisticsGUI();
+            InjectGUI(injectGuiIndex++);
+            DrawStreamingGUI();
+            DrawProceduralTerrainGUI();
             InjectGUI(injectGuiIndex++);
             if (EditorGUI.EndChangeCheck())
             {
@@ -447,6 +440,18 @@ namespace Pinwheel.Griffin
                 {
                     data.SetDirty(GTerrainData.DirtyFlags.Shading);
                 }
+#if !GRIFFIN_ASE
+                GEditorCommon.DrawAffLinks(
+                    "Edit terrain shader with Amplify Shader Editor",
+                    "https://assetstore.unity.com/packages/tools/visual-scripting/amplify-shader-editor-68570");
+#endif
+#if !__MICROSPLAT_POLARIS__
+                GEditorCommon.DrawAffLinks(
+                    "Better terrain shader with MicroSplat",
+                    "https://assetstore.unity.com/packages/tools/terrain/microsplat-96478",
+                    "https://assetstore.unity.com/packages/tools/terrain/microsplat-polaris-integration-166851",
+                    "https://assetstore.unity.com/packages/tools/terrain/microsplat-ultimate-bundle-180948");
+#endif
             }, menu);
         }
 
@@ -594,6 +599,7 @@ namespace Pinwheel.Griffin
                 if (EditorGUI.EndChangeCheck())
                 {
                     data.SetDirty(GTerrainData.DirtyFlags.Rendering);
+                    EditorUtility.SetDirty(GRuntimeSettings.Instance);
                     if (settings.EnableInstancing)
                     {
                         GAnalytics.Record(GAnalytics.ENABLE_INSTANCING, true);
@@ -603,6 +609,11 @@ namespace Pinwheel.Griffin
                 GEditorCommon.Header(GRenderingGUI.HEADER_TOPOGRAPHIC);
                 GEditorSettings.Instance.topographic.enable = EditorGUILayout.Toggle(GRenderingGUI.ENABLE_TOPOGRAPHIC, GEditorSettings.Instance.topographic.enable);
 
+#if !GRIFFIN_VEGETATION_STUDIO_PRO
+                GEditorCommon.DrawAffLinks(
+                    "Better vegetation spawning & rendering with Vegetation Studio Pro",
+                    "https://assetstore.unity.com/packages/tools/terrain/vegetation-studio-pro-131835");
+#endif
             }, menu);
         }
 
@@ -635,6 +646,7 @@ namespace Pinwheel.Griffin
             public static readonly GUIContent VECTOR_FIELD_MAP_RESOLUTION = new GUIContent("Vector Field Map Resolution", "Size of the vector field map in pixel");
             public static readonly GUIContent BEND_SENSITIVE = new GUIContent("Bend Sensitive", "How fast the grass bend down when the player passes by");
             public static readonly GUIContent RESTORE_SENSITIVE = new GUIContent("Restore Sensive", "How fast the grass get back to its initial shape when the player goes away");
+
             public static readonly GUIContent GRASS_INSTANCE_COUNT = new GUIContent("Instance Count", "Total grass instance of this terrain");
         }
 
@@ -755,6 +767,12 @@ namespace Pinwheel.Griffin
                         GAnalytics.Record(GAnalytics.ENABLE_INTERACTIVE_GRASS, true);
                     }
                 }
+
+                GEditorCommon.DrawAffLinks(
+                    "Find the best vegetation assets for your project",
+                    "https://assetstore.unity.com/packages/3d/vegetation/trees/polygon-nature-low-poly-3d-art-by-synty-120152",
+                    "https://assetstore.unity.com/lists/stylized-vegetation-120082",
+                    "https://assetstore.unity.com/lists/stylized-rock-props-120083");
             },
             menu,
             headerWarning);
@@ -1060,15 +1078,31 @@ namespace Pinwheel.Griffin
                 false,
                 () => { GStylizedTerrain.ConnectAdjacentTiles(); });
 
+
             isNeighboringFoldoutExpanded = GEditorCommon.Foldout(GNeighboringGUI.LABEL, false, GNeighboringGUI.ID, () =>
              {
                  EditorGUI.BeginChangeCheck();
                  terrain.AutoConnect = EditorGUILayout.Toggle(GNeighboringGUI.AUTO_CONNECT, terrain.AutoConnect);
                  terrain.GroupId = EditorGUILayout.DelayedIntField(GNeighboringGUI.GROUP_ID, terrain.GroupId);
                  terrain.TopNeighbor = EditorGUILayout.ObjectField(GNeighboringGUI.TOP_NEIGHBOR, terrain.TopNeighbor, typeof(GStylizedTerrain), true) as GStylizedTerrain;
+                 GUI.enabled = false;
+                 EditorGUILayout.ObjectField(" ", terrain.TopTerrainData, typeof(GTerrainData), false);
+                 GUI.enabled = true;
+
                  terrain.BottomNeighbor = EditorGUILayout.ObjectField(GNeighboringGUI.BOTTOM_NEIGHBOR, terrain.BottomNeighbor, typeof(GStylizedTerrain), true) as GStylizedTerrain;
+                 GUI.enabled = false;
+                 EditorGUILayout.ObjectField(" ", terrain.BottomTerrainData, typeof(GTerrainData), false);
+                 GUI.enabled = true;
+
                  terrain.LeftNeighbor = EditorGUILayout.ObjectField(GNeighboringGUI.LEFT_NEIGHBOR, terrain.LeftNeighbor, typeof(GStylizedTerrain), true) as GStylizedTerrain;
+                 GUI.enabled = false;
+                 EditorGUILayout.ObjectField(" ", terrain.LeftTerrainData, typeof(GTerrainData), false);
+                 GUI.enabled = true;
+
                  terrain.RightNeighbor = EditorGUILayout.ObjectField(GNeighboringGUI.RIGHT_NEIGHBOR, terrain.RightNeighbor, typeof(GStylizedTerrain), true) as GStylizedTerrain;
+                 GUI.enabled = false;
+                 EditorGUILayout.ObjectField(" ", terrain.RightTerrainData, typeof(GTerrainData), false);
+                 GUI.enabled = true;
 
                  if (EditorGUI.EndChangeCheck())
                  {
@@ -1139,6 +1173,46 @@ namespace Pinwheel.Griffin
                 GEditorCommon.Header(GStatsGUI.HEADER_NOTE);
                 EditorGUILayout.LabelField(GStatsGUI.NOTE, GEditorCommon.WordWrapItalicLabel);
             });
+        }
+
+        private class GStreamingGUI
+        {
+            public static readonly string LABEL = "Streaming";
+            public static readonly string ID = "terrain-streaming";
+        }
+
+        private void DrawStreamingGUI()
+        {
+            if (!GPackageInitializer.isWorldStreamer2Installed)
+            {
+                GEditorCommon.Foldout(GStreamingGUI.LABEL, false, GStreamingGUI.ID, () =>
+                {
+                    GEditorCommon.DrawAffLinks(
+                        "Enable level streaming with World Streamer 2",
+                        "https://assetstore.unity.com/packages/tools/terrain/world-streamer-2-176482");
+                });
+            }
+        }
+
+        private class GProcTerrainGUI
+        {
+            public static readonly string LABEL = "Procedural Terrain";
+            public static readonly string ID = "procedural-terrain";
+        }
+
+        private void DrawProceduralTerrainGUI()
+        {
+            if (!GPackageInitializer.isVistaInstalled)
+            {
+                GEditorCommon.Foldout(GProcTerrainGUI.LABEL, true, GProcTerrainGUI.ID, () =>
+                {
+                    EditorGUILayout.LabelField("Vista is an advanced toolset for procedural terrain creation that works perfectly with Polaris.");
+                    EditorGUILayout.LabelField("<b>SPECIAL OFFER:</b> Vista is now <b>50% OFF</b> for Polaris 2021 user.", GEditorCommon.WarningLabel);
+                    GEditorCommon.DrawAffLinks(
+                        "Generate beautiful terrain with Vista",
+                        "https://assetstore.unity.com/packages/tools/terrain/vista-advanced-terrain-graph-editor-210496");
+                });
+            }
         }
 
         public override bool RequiresConstantRepaint()
@@ -1235,10 +1309,7 @@ namespace Pinwheel.Griffin
         {
             terrain.AutoConnect = true;
             terrain.GroupId = 0;
-            terrain.TopNeighbor = null;
-            terrain.BottomNeighbor = null;
-            terrain.LeftNeighbor = null;
-            terrain.RightNeighbor = null;
+            terrain.ResetNeighboring();
         }
 
         private void InjectGUI(int order)

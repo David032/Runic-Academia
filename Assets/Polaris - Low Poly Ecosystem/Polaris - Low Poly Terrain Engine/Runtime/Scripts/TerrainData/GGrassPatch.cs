@@ -105,6 +105,8 @@ namespace Pinwheel.Griffin
         }
 
         [SerializeField]
+        private int instanceCountSerializeData;
+        [SerializeField]
         private byte[] prototypeIndexSerializeData;
         [SerializeField]
         private byte[] positionSerializeData;
@@ -210,46 +212,59 @@ namespace Pinwheel.Griffin
 
         internal void Serialize()
         {
-            int[] protoIndices = new int[Instances.Count];
-            float[] positions = new float[Instances.Count * 3];
-            float[] rotations = new float[Instances.Count * 4];
-            float[] scales = new float[Instances.Count * 3];
-            for (int i = 0; i < Instances.Count; ++i)
+            int count = Instances.Count;
+            int[] protoIndices = new int[count];
+            float[] positions = new float[count * 3];
+            float[] rotations = new float[count * 4];
+            float[] scales = new float[count * 3];
+            for (int i = 0; i < count; ++i)
             {
                 GGrassInstance grass = Instances[i];
-                protoIndices[i] = grass.PrototypeIndex;
+                protoIndices[i] = grass.prototypeIndex;
 
-                positions[i * 3 + 0] = grass.Position.x;
-                positions[i * 3 + 1] = grass.Position.y;
-                positions[i * 3 + 2] = grass.Position.z;
+                positions[i * 3 + 0] = grass.position.x;
+                positions[i * 3 + 1] = grass.position.y;
+                positions[i * 3 + 2] = grass.position.z;
 
-                rotations[i * 4 + 0] = grass.Rotation.x;
-                rotations[i * 4 + 1] = grass.Rotation.y;
-                rotations[i * 4 + 2] = grass.Rotation.z;
-                rotations[i * 4 + 3] = grass.Rotation.w;
+                rotations[i * 4 + 0] = grass.rotation.x;
+                rotations[i * 4 + 1] = grass.rotation.y;
+                rotations[i * 4 + 2] = grass.rotation.z;
+                rotations[i * 4 + 3] = grass.rotation.w;
 
-                scales[i * 3 + 0] = grass.Scale.x;
-                scales[i * 3 + 1] = grass.Scale.y;
-                scales[i * 3 + 2] = grass.Scale.z;
+                scales[i * 3 + 0] = grass.scale.x;
+                scales[i * 3 + 1] = grass.scale.y;
+                scales[i * 3 + 2] = grass.scale.z;
             }
 
-            prototypeIndexSerializeData = new byte[Buffer.ByteLength(protoIndices)];
+            if (prototypeIndexSerializeData == null || prototypeIndexSerializeData.Length != Buffer.ByteLength(protoIndices))
+            {
+                prototypeIndexSerializeData = new byte[Buffer.ByteLength(protoIndices)];
+            }
             Buffer.BlockCopy(protoIndices, 0, prototypeIndexSerializeData, 0, prototypeIndexSerializeData.Length);
             prototypeIndexSerializeData = GCompressor.Compress(prototypeIndexSerializeData);
 
-            positionSerializeData = new byte[Buffer.ByteLength(positions)];
+            if (positionSerializeData == null || positionSerializeData.Length != Buffer.ByteLength(positions))
+            {
+                positionSerializeData = new byte[Buffer.ByteLength(positions)];
+            }
             Buffer.BlockCopy(positions, 0, positionSerializeData, 0, positionSerializeData.Length);
             positionSerializeData = GCompressor.Compress(positionSerializeData);
 
-            rotationSerializeData = new byte[Buffer.ByteLength(rotations)];
+            if (rotationSerializeData == null || rotationSerializeData.Length != Buffer.ByteLength(rotations))
+            {
+                rotationSerializeData = new byte[Buffer.ByteLength(rotations)];
+            }
             Buffer.BlockCopy(rotations, 0, rotationSerializeData, 0, rotationSerializeData.Length);
             rotationSerializeData = GCompressor.Compress(rotationSerializeData);
 
-            scaleSerializeData = new byte[Buffer.ByteLength(scales)];
+            if (scaleSerializeData == null || scaleSerializeData.Length != Buffer.ByteLength(scales))
+            {
+                scaleSerializeData = new byte[Buffer.ByteLength(scales)];
+            }
             Buffer.BlockCopy(scales, 0, scaleSerializeData, 0, scaleSerializeData.Length);
             scaleSerializeData = GCompressor.Compress(scaleSerializeData);
 
-            GCompressor.CleanUp();
+            instanceCountSerializeData = count;
         }
 
         internal void Deserialize()
@@ -259,10 +274,10 @@ namespace Pinwheel.Griffin
                 rotationSerializeData != null &&
                 scaleSerializeData != null)
             {
-                prototypeIndexSerializeData = GCompressor.Decompress(prototypeIndexSerializeData);
-                positionSerializeData = GCompressor.Decompress(positionSerializeData);
-                rotationSerializeData = GCompressor.Decompress(rotationSerializeData);
-                scaleSerializeData = GCompressor.Decompress(scaleSerializeData);
+                prototypeIndexSerializeData = GCompressor.Decompress(prototypeIndexSerializeData, sizeof(int) * instanceCountSerializeData);
+                positionSerializeData = GCompressor.Decompress(positionSerializeData, sizeof(float) * 3 * instanceCountSerializeData);
+                rotationSerializeData = GCompressor.Decompress(rotationSerializeData, sizeof(float) * 4 * instanceCountSerializeData);
+                scaleSerializeData = GCompressor.Decompress(scaleSerializeData, sizeof(float) * 3 * instanceCountSerializeData);
 
                 int[] indices = new int[prototypeIndexSerializeData.Length / sizeof(int)];
                 float[] positions = new float[positionSerializeData.Length / sizeof(float)];
@@ -274,27 +289,26 @@ namespace Pinwheel.Griffin
                 Buffer.BlockCopy(rotationSerializeData, 0, rotations, 0, rotationSerializeData.Length);
                 Buffer.BlockCopy(scaleSerializeData, 0, scales, 0, scaleSerializeData.Length);
 
+                int instanceCount = indices.Length;
                 Instances.Clear();
-                for (int i = 0; i < indices.Length; ++i)
+                for (int i = 0; i < instanceCount; ++i)
                 {
                     GGrassInstance grass = GGrassInstance.Create(indices[i]);
-                    grass.Position = new Vector3(
+                    grass.position = new Vector3(
                         positions[i * 3 + 0],
                         positions[i * 3 + 1],
                         positions[i * 3 + 2]);
-                    grass.Rotation = new Quaternion(
+                    grass.rotation = new Quaternion(
                         rotations[i * 4 + 0],
                         rotations[i * 4 + 1],
                         rotations[i * 4 + 2],
                         rotations[i * 4 + 3]);
-                    grass.Scale = new Vector3(
+                    grass.scale = new Vector3(
                         scales[i * 3 + 0],
                         scales[i * 3 + 1],
                         scales[i * 3 + 2]);
                     Instances.Add(grass);
                 }
-
-                GCompressor.CleanUp();
             }
         }
 

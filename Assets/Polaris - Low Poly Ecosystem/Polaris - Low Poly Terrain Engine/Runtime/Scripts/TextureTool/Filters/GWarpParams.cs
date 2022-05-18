@@ -6,7 +6,6 @@ namespace Pinwheel.Griffin.TextureTool
     [System.Serializable]
     public struct GWarpParams
     {
-        [SerializeField]
         private Texture2D mask;
         public Texture2D Mask
         {

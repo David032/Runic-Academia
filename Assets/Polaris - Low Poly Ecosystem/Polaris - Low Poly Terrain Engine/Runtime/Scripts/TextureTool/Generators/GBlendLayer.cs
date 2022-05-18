@@ -20,7 +20,6 @@ namespace Pinwheel.Griffin.TextureTool
             }
         }
 
-        [SerializeField]
         private Texture2D texture;
         public Texture2D Texture
         {
@@ -90,7 +89,6 @@ namespace Pinwheel.Griffin.TextureTool
             }
         }
 
-        [SerializeField]
         private Texture2D lerpMask;
         public Texture2D LerpMask
         {

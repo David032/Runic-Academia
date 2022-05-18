@@ -1,3 +1,50 @@
+V2021.1.12
+FIXES
+- Fix "Loaded object state has been modifiied during domain backup" error on entering play mode.
+
+===
+V2021.1.11
+IMPROVEMENTS
+- Minor editor changes
+
+===
+V2021.1.10
+IMPROVEMENTS
+- Cache neighbor terrain data after connecting for better seams matching.
+FIXES
+- Fix Object Stamper bug
+
+===
+V2021.1.9
+FIXES
+- Fix "Out of bounds" error on grass de-serializing.
+- Delay layers setup.
+- Minor fix for Unity 2021.2+.
+
+===
+V2021.1.8
+FIXES
+- Minor "Null reference" fix for the Editor Settings.
+
+===
+V2021.1.7
+IMPROVEMENTS
+- Optimizing grass serialization.
+- Optimizing data compression.
+- Init mandatory layers (raycast layer, spline layer) at startup.
+- Prevent unnecessary serialization of Texture Creator.
+FIXES
+- Fix Cull Bias not saved on scene load.
+- Minor fix for URP Upgrader on demo assets.
+
+===
+V2021.1.6
+IMPROVEMENTS
+- Adding URP Upgrader for demo assets.s
+FIXES
+- Fix a minor Paint Tools bug related to "lightmap coord".
+
+===
 V2021.1.5
 FIXES
 - Fix Spline Modifiers bugs in URP.
@@ -5,7 +52,7 @@ FIXES
 ===
 V2021.1.4
 FIXES
-- Fix Spline Modifiers bugs in URP.
+- Minor compilation error fix.
 
 ===
 V2021.1.3

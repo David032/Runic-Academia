@@ -27,6 +27,12 @@ namespace Pinwheel.Griffin.PaintTool
             {
                 EditorUtility.SetDirty(instance);
             }
+
+            GEditorCommon.DrawAffLinks(
+                "These rocks, props and models can help your scene to be more compelling",
+                "https://assetstore.unity.com/packages/3d/props/low-poly-ultimate-pack-54733",
+                "https://assetstore.unity.com/lists/stylized-rock-props-120083");
+
             GEditorCommon.Separator();
             DrawConvertAssetGUI();
         }

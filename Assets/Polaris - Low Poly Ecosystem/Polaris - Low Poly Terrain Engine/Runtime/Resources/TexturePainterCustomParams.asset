@@ -42,10 +42,10 @@ MonoBehaviour:
   noise:
     type: 0
     origin: {x: 0, y: 0}
-    frequency: 5
+    frequency: 14.73
     laccunarity: 2.21
     persistent: 0.3
-    octaves: 2
+    octaves: 4
     seed: 9.5
     useWorldSpace: 1
   mask:

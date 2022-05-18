@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   general:
     enableAnalytics: 1
+    enableAffiliateLinks: 1
     debugMode: 0
-    showGeometryChunkInHierarchy: 0
+    showGeometryChunkInHierarchy: 1
   livePreview:
     triangleMeshes:
     - {fileID: 4300000, guid: b0c1d9f1f71dac242bf1e740df1d5daf, type: 3}
@@ -93,21 +94,23 @@ MonoBehaviour:
     showTerrainMask: 0
   wizardTools:
     lightingModel: 0
-    texturingModel: 0
-    splatsModel: 0
+    texturingModel: 2
+    splatsModel: 1
     origin: {x: 0, y: 0, z: 0}
-    tileSize: {x: 100, y: 100, z: 100}
-    tileCountX: 2
-    tileCountZ: 2
+    tileSize: {x: 500, y: 500, z: 500}
+    tileCountX: 3
+    tileCountZ: 3
     groupId: 0
-    terrainNamePrefix: BasicTown
+    terrainNamePrefix: Terrain
     dataDirectory: Assets/_TerrainData
     setShaderGroupId: -1
   renderPipelines:
-    universalRenderPipelinePackage: {fileID: 102900000, guid: 8bc88477f037e96478019bba8de301fd, type: 3}
+    universalRenderPipelinePackage: {fileID: 102900000, guid: 8bc88477f037e96478019bba8de301fd,
+      type: 3}
   topographic:
     enable: 0
-    topographicMaterial: {fileID: 2100000, guid: f1271be60ed7edf4f86c5d532eeb2bf3, type: 2}
+    topographicMaterial: {fileID: 2100000, guid: f1271be60ed7edf4f86c5d532eeb2bf3,
+      type: 2}
   erosionTools:
     livePreviewMode: 0
     dataView: 2
@@ -117,3 +120,23 @@ MonoBehaviour:
   layers:
     raycastLayerIndex: 30
     splineLayerIndex: 31
+  demoAssets:
+    demoMaterials:
+    - {fileID: 2100000, guid: 735795f0372b8ed49aea89baa817642d, type: 2}
+    - {fileID: 2100000, guid: 6f0e4c3dd6e1bbc45aec4d7514a897d0, type: 2}
+    - {fileID: 2100000, guid: f2dbbe3190b796d40a0de9fb6b7473b9, type: 2}
+    - {fileID: 2100000, guid: a324a9e7defbd0c44b27d4bb0a07de9d, type: 2}
+    - {fileID: 2100000, guid: 58b50d1c1e3226346af664b510a6317a, type: 2}
+    - {fileID: 2100000, guid: 08bc31ddd4e8b0e4fad8f22e1f97c611, type: 2}
+    - {fileID: 2100000, guid: f060003264469674aad81ac4c67a59e9, type: 2}
+    - {fileID: 2100000, guid: 918c39926d6ac6b459c226df83376a98, type: 2}
+    - {fileID: 2100000, guid: 734ed51a95631de45bcbdbb13da48839, type: 2}
+    - {fileID: 2100000, guid: dccd4f45664843347b6140f5ade5d559, type: 2}
+    - {fileID: 2100000, guid: 7136b5e7cb6d2da4285f19308a5d484b, type: 2}
+    - {fileID: 2100000, guid: 1d5951a2a69fd634bab222c0c5ac3eaa, type: 2}
+    - {fileID: 2100000, guid: f303d8cae092c5b4498c70815c61cf7e, type: 2}
+    - {fileID: 2100000, guid: 4da735dab769da044b577f44995d83a6, type: 2}
+    - {fileID: 2100000, guid: 40be8d162497a4a4ca220bbaf3d032bc, type: 2}
+    - {fileID: 2100000, guid: 76a744d72fa84474397198c81fa41777, type: 2}
+    - {fileID: 2100000, guid: f4003bec18117a34b85209e63e111c03, type: 2}
+    - {fileID: 2100000, guid: ce4677e7d6bc9264a8ba53c46f51ade6, type: 2}

@@ -3,7 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
-
+#if UNITY_2021_2_OR_NEWER
+using UnityEditor.SceneManagement;
+#else
+using UnityEditor.Experimental.SceneManagement;
+#endif
 #endif
 using Unity.Collections;
 using Unity.Mathematics;
@@ -816,7 +820,7 @@ namespace Pinwheel.Griffin
         public static bool IsPrefabCamera(Camera cam)
         {
 #if UNITY_EDITOR
-            UnityEditor.SceneManagement.PrefabStage prefabStage = UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage();
+            PrefabStage prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
             if (prefabStage != null)
             {
                 if (prefabStage.scene == cam.scene)

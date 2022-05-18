@@ -26,16 +26,16 @@ namespace Pinwheel.Griffin
             }
         }
 
-        public GeometryDefaultSettings geometryDefault;
-        public ShadingDefaultSettings shadingDefault;
-        public RenderingDefaultSettings renderingDefault;
-        public FoliageDefaultSettings foliageDefault;
-        public MaskDefaultSettings maskDefault;
-        public GeometryGenerationSettings geometryGeneration;
-        public TerrainRenderingSettings terrainRendering;
-        public FoliageRenderingSettings foliageRendering;
-        public InternalShaderSettings internalShaders;
-        public DefaultTexturesSettings defaultTextures;
+        public GeometryDefaultSettings geometryDefault = new GeometryDefaultSettings();
+        public ShadingDefaultSettings shadingDefault = new ShadingDefaultSettings();
+        public RenderingDefaultSettings renderingDefault = new RenderingDefaultSettings();
+        public FoliageDefaultSettings foliageDefault = new FoliageDefaultSettings();
+        public MaskDefaultSettings maskDefault = new MaskDefaultSettings();
+        public GeometryGenerationSettings geometryGeneration = new GeometryGenerationSettings();
+        public TerrainRenderingSettings terrainRendering = new TerrainRenderingSettings();
+        public FoliageRenderingSettings foliageRendering = new FoliageRenderingSettings();
+        public InternalShaderSettings internalShaders = new InternalShaderSettings();
+        public DefaultTexturesSettings defaultTextures = new DefaultTexturesSettings();
 
         public bool isEditingGeometry;
         public bool isEditingFoliage;
@@ -92,13 +92,13 @@ namespace Pinwheel.Griffin
         {
             public bool terrainCastShadow;
             public bool terrainReceiveShadow;
-            
+
             public bool drawTrees;
             public bool enableInstancing;
             public float billboardStart;
             public float treeDistance;
             public float treeCullBias;
-            
+
             public bool drawGrasses;
             public float grassDistance;
             public int grassCellToProcessPerFrame;
@@ -132,7 +132,7 @@ namespace Pinwheel.Griffin
         public class GeometryGenerationSettings
         {
             public int triangulateIteration;
-            public AnimationCurve lodTransition = AnimationCurve.EaseInOut(0,1,1,0);
+            public AnimationCurve lodTransition = AnimationCurve.EaseInOut(0, 1, 1, 0);
         }
 
         [System.Serializable]

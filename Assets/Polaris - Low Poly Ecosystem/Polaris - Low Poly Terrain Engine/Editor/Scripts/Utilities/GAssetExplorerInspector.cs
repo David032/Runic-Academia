@@ -171,20 +171,6 @@ namespace Pinwheel.Griffin
                 }
 
                 r = EditorGUILayout.GetControlRect();
-                if (GUI.Button(r, "Water"))
-                {
-                    GAnalytics.Record(GAnalytics.ASSET_EXPLORER_LINK_CLICK);
-                    GAssetExplorer.ShowWaterLink();
-                }
-
-                r = EditorGUILayout.GetControlRect();
-                if (GUI.Button(r, "Sky & Ambient"))
-                {
-                    GAnalytics.Record(GAnalytics.ASSET_EXPLORER_LINK_CLICK);
-                    GAssetExplorer.ShowSkyAmbientLink();
-                }
-
-                r = EditorGUILayout.GetControlRect();
                 if (GUI.Button(r, "Character"))
                 {
                     GAnalytics.Record(GAnalytics.ASSET_EXPLORER_LINK_CLICK);

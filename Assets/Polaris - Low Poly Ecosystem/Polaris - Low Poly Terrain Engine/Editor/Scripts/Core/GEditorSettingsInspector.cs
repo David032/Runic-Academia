@@ -27,6 +27,7 @@ namespace Pinwheel.Griffin
             DrawRenderPipelinesSettings();
             DrawTopographicSettings();
             DrawLayersSettings();
+            DrawDemoAssetSettings();
 
             EditorUtility.SetDirty(instance);
         }
@@ -39,6 +40,7 @@ namespace Pinwheel.Griffin
             GEditorCommon.Foldout(label, false, id, () =>
             {
                 instance.general.enableAnalytics = EditorGUILayout.Toggle("Allow Anonymous Editor Analytic", instance.general.enableAnalytics);
+                instance.general.enableAffiliateLinks = EditorGUILayout.Toggle("Allow Affiliate Links", instance.general.enableAffiliateLinks);
                 instance.general.debugMode = EditorGUILayout.Toggle("Debug Mode", instance.general.debugMode);
                 EditorGUI.BeginChangeCheck();
                 instance.general.showGeometryChunkInHierarchy = EditorGUILayout.Toggle("Show Geometry Chunks In Hierarchy", instance.general.showGeometryChunkInHierarchy);
@@ -209,6 +211,19 @@ namespace Pinwheel.Griffin
             {
                 instance.layers.raycastLayerIndex = EditorGUILayout.IntSlider("Raycast Layer Index", instance.layers.raycastLayerIndex, 8, 31);
                 instance.layers.splineLayerIndex = EditorGUILayout.IntSlider("Spline Layer Index", instance.layers.splineLayerIndex, 8, 31);
+            });
+        }
+
+        public void DrawDemoAssetSettings()
+        {
+            string label = "Demo Assets";
+            string id = "editor-settings-demo-assets";
+
+            GEditorCommon.Foldout(label, false, id, () =>
+            {
+                SerializedProperty demoMaterialsProp = serializedObject.FindProperty(nameof(instance.demoAssets)).FindPropertyRelative(nameof(instance.demoAssets.demoMaterials));
+                EditorGUILayout.PropertyField(demoMaterialsProp, true);
+                serializedObject.ApplyModifiedProperties();
             });
         }
     }
